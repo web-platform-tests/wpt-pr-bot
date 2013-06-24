@@ -1,0 +1,13 @@
+{
+  "name": "ganesh",
+  "version": "0.0.0",
+  "description": "A collection of helper tools for GitHub code review.",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "dependencies": {
+      "request": "*"
+  },
+  "author": "Tobie Langel"
+}
