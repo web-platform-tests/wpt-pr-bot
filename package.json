@@ -4,10 +4,16 @@
   "description": "A collection of helper tools for GitHub code review.",
   "main": "index.js",
   "scripts": {
-    "test": "npm test"
+    "test": "npm test",
+    "start": "node index.js"
   },
   "dependencies": {
-      "request": "*"
+    "request": "*",
+    "express": "3.2.4"
   },
-  "author": "Tobie Langel"
+  "author": "Tobie Langel",
+  "subdomain": "ganesh",
+  "engines": {
+    "node": "0.8.x"
+  }
 }
