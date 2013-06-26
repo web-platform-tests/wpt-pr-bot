@@ -19,8 +19,8 @@ app.configure('production', function(){
     app.use(express.errorHandler());
 });
 
-app.post('/', function (req, res, next) {
-    console.log(req)
+app.post('/github-hook-pull-requests', function (req, res, next) {
+    console.log(req.body)
 });
 
 var port = process.env.PORT || 5000;
