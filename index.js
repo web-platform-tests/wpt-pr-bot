@@ -20,7 +20,15 @@ app.configure('production', function(){
 });
 
 app.post('/github-hook-pull-requests', function (req, res, next) {
-    console.log(req.body)
+    var body = req.body;
+    if (body && body.pull_request) {
+        if (body.action == "opened" || body.action == "synchronize") {
+            label.setLabelsOnIssue(body.number, function(err) {
+                if (err) return console.log(err);
+            });
+        }
+    }
+    res.send('');
 });
 
 var port = process.env.PORT || 5000;
