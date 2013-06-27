@@ -11,7 +11,8 @@
     "request": "*",
     "express": "3.2.4",
     "handlebars": "*",
-    "nodemailer": "*"
+    "nodemailer": "*",
+    "ent": "*"
   },
   "author": "Tobie Langel",
   "subdomain": "ganesh",
