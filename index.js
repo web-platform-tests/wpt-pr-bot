@@ -1,9 +1,20 @@
 var t0 = Date.now();
 
 var express = require("express"),
-    label = require('./lib/label');
+    label = require('./lib/label'),
+    notify = require('./lib/notify');
 
 var app = module.exports = express();
+
+function logArgs() {
+    var output = [new Date().toISOString()];
+    for (var i = 0; i < arguments.length; i++) {
+        output.push(JSON.stringify(arguments[i]));
+    }
+    process.nextTick(function() {
+        console.log(output.join(' '));
+    });
+}
 
 // Configuration
 app.configure(function(){
@@ -32,10 +43,19 @@ app.configure('production', function(){
 
 app.post('/github-hook-pull-requests', function (req, res, next) {
     var body = JSON.parse(req.body);
+    logArgs(req.headers)
     if (body && body.pull_request) {
-        if (body.action == "opened" || body.action == "synchronize") {
-            label.setLabelsOnIssue(body.number, function(err) {
-                if (err) return console.log(err);
+        if (body.action == "opened" || body.action == "synchronize" || body.action == "reopened") {
+            label.setLabelsOnIssue(body.number, function(err, labels) {
+                if (err) return logArgs(err);
+                body.labels = labels;
+                notify.notifyPullRequest(body, logArgs);
+            });
+        } else {
+            label.getLabels(body.number, function(err, labels) {
+                if (err) return logArgs(err);
+                body.labels = labels;
+                notify.notifyPullRequest(body, logArgs);
             });
         }
     }

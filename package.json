@@ -1,6 +1,6 @@
 {
   "name": "ganesh",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "description": "A collection of helper tools for GitHub code review.",
   "main": "index.js",
   "scripts": {
@@ -9,7 +9,9 @@
   },
   "dependencies": {
     "request": "*",
-    "express": "3.2.4"
+    "express": "3.2.4",
+    "handlebars": "*",
+    "nodemailer": "*"
   },
   "author": "Tobie Langel",
   "subdomain": "ganesh",

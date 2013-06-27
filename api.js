@@ -10,7 +10,7 @@ var hooks = [{
     "config": {
         "url": "http://ganesh.jit.su/github-hook-pull-requests",
         "content_type": "json",
-        "secret": process.env.GITHUB_HOOK_SECRET
+        "secret": process.env.GITHUB_SECRET
     }
 }];
 function setHooks(hooks, callback) {
@@ -22,10 +22,10 @@ function setHooks(hooks, callback) {
     });
 }
 
-if (process.env.GITHUB_HOOK_SECRET) {
+if (process.env.GITHUB_SECRET) {
     setHooks(hooks, console.log)
 } else {
-    console.log("You must provide a GITHUB_HOOK_SECRET env variable to set GitHub hooks.")
+    console.log("You must provide a GITHUB_SECRET env variable to set GitHub hooks.")
     github.get('/repos/:owner/:repo/hooks', console.log);
 }
 
