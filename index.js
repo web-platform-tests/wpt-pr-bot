@@ -7,8 +7,9 @@ var express = require("express"),
 var app = module.exports = express();
 
 function logArgs() {
+    var args = arguments;
     process.nextTick(function() {
-        console.log(new Date().toISOString(), Array.prototype.slice.call(arguments, 0));
+        console.log.apply(console, args);
     });
 }
 
