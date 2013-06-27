@@ -66,6 +66,8 @@ app.post('/github-hook-pull-requests', function (req, res, next) {
                 });
             }
         }
+    } else {
+        logArgs("Unverified request", req);
     }
     res.send('');
 });
