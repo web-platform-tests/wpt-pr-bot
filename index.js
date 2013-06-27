@@ -16,6 +16,13 @@ function logArgs() {
     });
 }
 
+function requestComesFromGitHub(req) {
+    var crypto = require('crypto');
+    var hash = crypto.createHmac('sha1', process.env.GITHUB_SECRET).update(req.body).digest('hex');
+    var hubSig = req.headers["x-hub-signature"].replace('sha1=', '');
+    return hash === hubSig;
+}
+
 // Configuration
 app.configure(function(){
     app.use(function(req, res, next) {
@@ -43,7 +50,7 @@ app.configure('production', function(){
 
 app.post('/github-hook-pull-requests', function (req, res, next) {
     var body = JSON.parse(req.body);
-    logArgs(req.headers)
+    logArgs("requestComesFromGitHub", requestComesFromGitHub(req))
     if (body && body.pull_request) {
         if (body.action == "opened" || body.action == "synchronize" || body.action == "reopened") {
             label.setLabelsOnIssue(body.number, function(err, labels) {
