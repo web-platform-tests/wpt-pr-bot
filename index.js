@@ -7,12 +7,8 @@ var express = require("express"),
 var app = module.exports = express();
 
 function logArgs() {
-    var output = [new Date().toISOString()];
-    for (var i = 0; i < arguments.length; i++) {
-        output.push(JSON.stringify(arguments[i]));
-    }
     process.nextTick(function() {
-        console.log(output.join(' '));
+        console.log(new Date().toISOString(), Array.prototype.slice.call(arguments, 0));
     });
 }
 
@@ -67,7 +63,7 @@ app.post('/github-hook-pull-requests', function (req, res, next) {
             }
         }
     } else {
-        logArgs("Unverified request", req.ip, req.originalUrl, req.headers);
+        logArgs("Unverified request", req);
     }
     res.send('');
 });
