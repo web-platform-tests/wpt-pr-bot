@@ -49,21 +49,22 @@ app.configure('production', function(){
 });
 
 app.post('/github-hook-pull-requests', function (req, res, next) {
-    var body = JSON.parse(req.body);
-    logArgs("requestComesFromGitHub", requestComesFromGitHub(req));
-    if (body && body.pull_request) {
-        if (body.action == "opened" || body.action == "synchronize" || body.action == "reopened") {
-            label.setLabelsOnIssue(body.number, function(err, labels) {
-                if (err) return logArgs(err);
-                body.labels = labels;
-                notify.notifyPullRequest(body, logArgs);
-            });
-        } else {
-            label.getLabels(body.number, function(err, labels) {
-                if (err) return logArgs(err);
-                body.labels = labels;
-                notify.notifyPullRequest(body, logArgs);
-            });
+    if (process.env.NODE_ENV != 'production' || requestComesFromGitHub(req)) {
+        var body = JSON.parse(req.body);
+        if (body && body.pull_request) {
+            if (body.action == "opened" || body.action == "synchronize" || body.action == "reopened") {
+                label.setLabelsOnIssue(body.number, function(err, labels) {
+                    if (err) return logArgs(err);
+                    body.labels = labels;
+                    notify.notifyPullRequest(body, logArgs);
+                });
+            } else {
+                label.getLabels(body.number, function(err, labels) {
+                    if (err) return logArgs(err);
+                    body.labels = labels;
+                    notify.notifyPullRequest(body, logArgs);
+                });
+            }
         }
     }
     res.send('');
