@@ -1,6 +1,6 @@
 {
   "name": "ganesh",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "A collection of helper tools for GitHub code review.",
   "main": "index.js",
   "scripts": {

@@ -67,7 +67,7 @@ app.post('/github-hook-pull-requests', function (req, res, next) {
             }
         }
     } else {
-        logArgs("Unverified request", req);
+        logArgs("Unverified request", req.ip, req.originalUrl, req.headers);
     }
     res.send('');
 });
