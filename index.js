@@ -62,6 +62,8 @@ app.post('/github-hook-pull-requests', function (req, res, next) {
                     notify.notifyPullRequest(body, logArgs);
                 });
             }
+        } else if (body && body.comment) {
+            notify.notifyComment(body, logArgs);
         }
     } else {
         logArgs("Unverified request", req);
