@@ -5,10 +5,12 @@ var hooks = [{
     "active": true,
     "events": [
        "pull_request",
+       "issues",
+       "issue_comment",
        "pull_request_review_comment"
     ],
     "config": {
-        "url": "http://ganesh.jit.su/github-hook-pull-requests",
+        "url": "http://ganesh.jit.su/github-hook",
         "content_type": "json",
         "secret": process.env.GITHUB_SECRET
     }

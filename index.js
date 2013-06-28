@@ -45,7 +45,7 @@ app.configure('production', function(){
     app.use(express.errorHandler());
 });
 
-app.post('/github-hook-pull-requests', function (req, res, next) {
+app.post('/github-hook', function (req, res, next) {
     if (process.env.NODE_ENV != 'production' || requestComesFromGitHub(req)) {
         var body = JSON.parse(req.body);
         if (body && body.pull_request) {
