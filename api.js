@@ -1,3 +1,4 @@
+"use strict";
 var github = require('./lib/github');
 
 if (process.env.GITHUB_SECRET) {
