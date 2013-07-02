@@ -50,20 +50,18 @@ app.post('/github-hook', function (req, res, next) {
         var body = JSON.parse(req.body);
         if (body && body.pull_request) {
             if (body.action == "opened" || body.action == "synchronize") {
-                label.setLabelsOnIssue(body.number, function(err, labels) {
-                    if (err) return logArgs(err);
+                label.setLabelsOnIssue(body.number).then(function(labels) {
                     body.labels = labels;
-                    notify.notifyPullRequest(body, logArgs);
-                });
+                    return notify.notifyPullRequest(body);
+                }).then(logArgs).catch(logArgs);
             } else {
-                label.getLabels(body.number, function(err, labels) {
-                    if (err) return logArgs(err);
+                label.getLabels(body.number).then(function(labels) {
                     body.labels = labels;
-                    notify.notifyPullRequest(body, logArgs);
-                });
+                    return notify.notifyPullRequest(body);
+                }).then(logArgs).catch(logArgs);
             }
         } else if (body && body.comment) {
-            notify.notifyComment(body, logArgs);
+            notify.notifyComment(body).then(logArgs).catch(logArgs);
         }
     } else {
         logArgs("Unverified request", req);
