@@ -16,6 +16,10 @@ suite('clarifyLabel', function() {
         assert.equal("old-tests", notify.clarifyLabel("old-tests"));
     });
     
+    test('clarifyLabel returns null for "wg:"-prefixed labels', function() {
+        assert.equal(null, notify.clarifyLabel("wg:foo"));
+    });
+	
     test('clarifyLabel suffixes any other string with "-tests"', function() {
         assert.equal("xxx-tests", notify.clarifyLabel("xxx"));
         assert.equal("123-tests", notify.clarifyLabel("123"));
