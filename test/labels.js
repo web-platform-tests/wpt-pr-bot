@@ -7,7 +7,7 @@ suite('Test github labels abstraction', function() {
     });
 
     test('getLabelsFromSpecs must return dap and webrtc for mediacapture-streams files', function(done) {
-	label.getLabelsFromSpecs(["mediacapture-streams"]).then(function (labels) { assert.deepEqual(["wg:dap", "wg:webrtc", "mediacapture-streams"], labels[0].value); done()}).fail(done);
+	label.getLabelsFromSpecs(["mediacapture-streams"]).then(function (labels) { assert.deepEqual(["wg-dap", "wg-webrtc", "mediacapture-streams"], labels[0].value); done()}).fail(done);
     });
 	
 	if (process.env.GITHUB_TOKEN) {
