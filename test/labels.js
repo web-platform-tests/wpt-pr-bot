@@ -24,4 +24,10 @@ suite('Test github labels abstraction', function() {
     test('getLabelsFromFiles must return "infra" for content identified as such', function() {
         assert.equal("infra", label.getLabelsFromFiles([{filename: ".gitignore"}])[0]);
     });
+    
+    test('findExtraLabels returns the newly added labels only', function() {
+        assert.deepEqual(["foo", "bar"], label.findExtraLabels(["baz"], ["foo", "bar", "baz"]));
+        assert.deepEqual([], label.findExtraLabels(["baz"], ["baz"]));
+        assert.deepEqual([], label.findExtraLabels(["baz"], []));
+    });
 });
