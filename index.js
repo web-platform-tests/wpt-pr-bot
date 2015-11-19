@@ -2,7 +2,7 @@
 var t0 = Date.now();
 
 var express = require("express"),
-    bf = require("bf"),
+    bl = require("bl"),
     label = require('./lib/label'),
     notify = require('./lib/notify'),
     checkRequest = require('./lib/check-request');
