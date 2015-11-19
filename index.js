@@ -17,8 +17,11 @@ function logArgs() {
 }
 
 app.post('/github-hook', function (req, res, next) {
-    if (process.env.NODE_ENV != 'production' || checkRequest(req.body, req.headers["x-hub-signature"], process.env.GITHUB_SECRET)) {
-		req.pipe(bl(function (err, body) {
+	req.pipe(bl(function (err, body) {
+    	if (err) {
+        	logArgs(err.message);
+		} else if (process.env.NODE_ENV != 'production' || checkRequest(body, req.headers["x-hub-signature"], process.env.GITHUB_SECRET)) {
+		    res.send(new Date().toISOString());
 	        body = JSON.parse(body);
 	        if (body && body.pull_request) {
 	            if (body.action == "opened" || body.action == "synchronize") {
@@ -35,11 +38,11 @@ app.post('/github-hook', function (req, res, next) {
 	        } else if (body && body.comment) {
 	            notify.notifyComment(body).then(logArgs).catch(logArgs);
 	        }
-		}));
-    } else {
-        logArgs("Unverified request", req);
-    }
-    res.send(new Date().toISOString());
+	    } else {
+	        logArgs("Unverified request", req);
+	    }
+	}));
+
 });
 
 var port = process.env.PORT || 5000;
