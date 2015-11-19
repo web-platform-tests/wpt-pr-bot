@@ -22,30 +22,18 @@ function requestComesFromGitHub(req) {
 }
 
 // Configuration
-app.configure(function(){
-    app.use(function(req, res, next) {
-        var data = '';
-        req.setEncoding('utf8');
-        req.on('data', function(chunk) {
-           data += chunk;
-        });
-
-        req.on('end', function() {
-            req.body = data;
-            next();
-        });
+app.use(function(req, res, next) {
+    var data = '';
+    req.setEncoding('utf8');
+    req.on('data', function(chunk) {
+       data += chunk;
     });
-    app.use(app.router);
-});
 
-app.configure('development', function(){
-    app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+    req.on('end', function() {
+        req.body = data;
+        next();
+    });
 });
-
-app.configure('production', function(){
-    app.use(express.errorHandler());
-});
-
 app.post('/github-hook', function (req, res, next) {
     if (process.env.NODE_ENV != 'production' || requestComesFromGitHub(req)) {
         var body = JSON.parse(req.body);
