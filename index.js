@@ -35,7 +35,7 @@ app.post('/github-hook', function (req, res, next) {
 	        } else if (body && body.comment) {
 	            notify.notifyComment(body).then(logArgs).catch(logArgs);
 	        }
-		});
+		}));
     } else {
         logArgs("Unverified request", req);
     }
