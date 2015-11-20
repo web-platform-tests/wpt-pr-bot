@@ -28,7 +28,7 @@ app.post('/github-hook', function (req, res, next) {
 	            if (body.action == "opened" || body.action == "synchronize") {
 	                metadata(body.number).then(function(metadata) {
 						logArgs(metadata);
-						return labelModel.post(current.number, metadata.labels).then(function() {
+						return labelModel.post(body.number, metadata.labels).then(function() {
 							return notify.notifyPullRequest(body, metadata);
 						});
 					}).then(logArgs).catch(logArgs);
@@ -38,8 +38,8 @@ app.post('/github-hook', function (req, res, next) {
 						return notify.notifyPullRequest(body, metadata);
 					}).then(logArgs).catch(logArgs);
 	            }
-	        } else if (body && body.comment) {
-                metadata(body.number).then(function(metadata) {
+	        } else if (body && body.comment && (body.issue || body.pull_request)) {
+                metadata((body.issue || body.pull_request).number).then(function(metadata) {
 					logArgs(metadata);
 					return notify.notifyComment(body, metadata);
 				}).then(logArgs).catch(logArgs);
