@@ -2,10 +2,6 @@ var assert = require('assert'),
     label = require('../lib/label');
 
 suite('Test github labels abstraction', function() {
-    test('getLabelsFromFiles must return root dir of filename as label', function() {
-        assert.equal("foo", label.getLabelsFromFiles([{filename: "foo/bar/baz"}])[0]);
-    });
-
     test('getLabelsFromSpecs must return dap and webrtc for mediacapture-streams files', function(done) {
 		label.getLabelsFromSpecs(["mediacapture-streams"]).then(function (labels) {
 			assert.deepEqual(["wg-dap", "wg-webrtc", "mediacapture-streams"], labels[0].value);
@@ -22,15 +18,6 @@ suite('Test github labels abstraction', function() {
 	    });	
 	}
 
-    
-    test('getLabelsFromFiles must return correct shortname of spec for directories which used to be spelled incorrectly', function() {
-        assert.equal("shadow-dom", label.getLabelsFromFiles([{filename: "ShadowDOM"}])[0]);
-    });
-    
-    test('getLabelsFromFiles must return "infra" for content identified as such', function() {
-        assert.equal("infra", label.getLabelsFromFiles([{filename: ".gitignore"}])[0]);
-    });
-    
     test('findExtraLabels returns the newly added labels only', function() {
         assert.deepEqual(["foo", "bar"], label.findExtraLabels(["baz"], ["foo", "bar", "baz"]));
         assert.deepEqual([], label.findExtraLabels(["baz"], ["baz"]));
