@@ -4,6 +4,7 @@ var t0 = Date.now();
 var express = require("express"),
     bl = require("bl"),
     label = require('./lib/label'),
+    label = require('./lib/label-model'),
     notify = require('./lib/notify'),
     checkRequest = require('./lib/check-request');
 
@@ -30,7 +31,7 @@ app.post('/github-hook', function (req, res, next) {
 	                    return notify.notifyPullRequest(body);
 	                }).then(logArgs).catch(logArgs);
 	            } else {
-	                label.getLabels(body.number).then(function(labels) {
+	                labelModel.get(body.number).then(function(labels) {
 	                    body.labels = labels;
 	                    return notify.notifyPullRequest(body);
 	                }).then(logArgs).catch(logArgs);
