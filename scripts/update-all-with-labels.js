@@ -1,4 +1,5 @@
-var label = require("../lib/label");
+var labelModel = require("../lib/label-model");
+var metadata = require("../lib/metadata");
 var github = require("../lib/github");
 var funk = require("../lib/funk");
 var q = require("q");
@@ -12,7 +13,9 @@ function setLabelsOnIssues(state) {
 		function run(pull_requests) {
 			var current = pull_requests.shift();
 			if (current) {
-				label.setLabelsOnIssue(current.number).then(function(data) {
+            	metadata(current.number).then(function(metadata) {
+					return labelModel.post(current.number, metadata.labels);
+				}).then(function(data) {
 					console.log("#" + current.number, data)
 					output.push(data);
 					return run(pull_requests);

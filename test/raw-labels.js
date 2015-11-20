@@ -1,5 +1,5 @@
 var assert = require('assert'),
-    rawLabels = require('../lib/raw-labels');
+    rawLabels = require('../lib/metadata/raw-labels');
 
 suite('Test github raw labels abstraction', function() {
     test('fromFiles must return root dir of filename as label', function() {

@@ -3,8 +3,8 @@ var t0 = Date.now();
 
 var express = require("express"),
     bl = require("bl"),
-    label = require('./lib/label'),
     labelModel = require('./lib/label-model'),
+    metadata = require('./lib/metadata'),
     notify = require('./lib/notify'),
     checkRequest = require('./lib/check-request');
 
@@ -26,18 +26,23 @@ app.post('/github-hook', function (req, res, next) {
 	        body = JSON.parse(body);
 	        if (body && body.pull_request) {
 	            if (body.action == "opened" || body.action == "synchronize") {
-	                label.setLabelsOnIssue(body.number).then(function(labels) {
-	                    body.labels = labels;
-	                    return notify.notifyPullRequest(body);
-	                }).then(logArgs).catch(logArgs);
+	                metadata(body.number).then(function(metadata) {
+						logArgs(metadata);
+						return labelModel.post(metadata.number, metadata.labels).then(function() {
+							return notify.notifyPullRequest(body, metadata);
+						});
+					}).then(logArgs).catch(logArgs);
 	            } else {
-	                labelModel.get(body.number).then(function(labels) {
-	                    body.labels = labels;
-	                    return notify.notifyPullRequest(body);
-	                }).then(logArgs).catch(logArgs);
+	                metadata(body.number).then(function(metadata) {
+						logArgs(metadata);
+						return notify.notifyPullRequest(body, metadata);
+					}).then(logArgs).catch(logArgs);
 	            }
 	        } else if (body && body.comment) {
-	            notify.notifyComment(body).then(logArgs).catch(logArgs);
+                metadata(body.number).then(function(metadata) {
+					logArgs(metadata);
+					return notify.notifyComment(body, metadata);
+				}).then(logArgs).catch(logArgs);
 	        }
 	    } else {
 	        logArgs("Unverified request", req);
