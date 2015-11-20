@@ -17,10 +17,4 @@ suite('Test github labels abstraction', function() {
 			}).fail(done);
 	    });	
 	}
-
-    test('findExtraLabels returns the newly added labels only', function() {
-        assert.deepEqual(["foo", "bar"], label.findExtraLabels(["baz"], ["foo", "bar", "baz"]));
-        assert.deepEqual([], label.findExtraLabels(["baz"], ["baz"]));
-        assert.deepEqual([], label.findExtraLabels(["baz"], []));
-    });
 });
