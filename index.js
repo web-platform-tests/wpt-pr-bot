@@ -6,6 +6,7 @@ var express = require("express"),
     labelModel = require('./lib/label-model'),
     metadata = require('./lib/metadata'),
     notify = require('./lib/notify'),
+    reviewers = require('./lib/reviewers'),
     checkRequest = require('./lib/check-request');
 
 var app = module.exports = express();
@@ -29,6 +30,12 @@ app.post('/github-hook', function (req, res, next) {
 	                metadata(body.number).then(function(metadata) {
 						logArgs(metadata);
 						return labelModel.post(body.number, metadata.labels).then(function() {
+							if (body.action == "opened") {
+								return reviewers(body.number, metadata).then(function(comment) {
+									logArgs(comment);
+									return notify.notifyPullRequest(body, metadata);
+								});
+							}
 							return notify.notifyPullRequest(body, metadata);
 						});
 					}).then(logArgs).catch(logArgs);
