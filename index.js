@@ -26,6 +26,7 @@ app.post('/github-hook', function (req, res, next) {
 		    res.send(new Date().toISOString());
 	        body = JSON.parse(body);
 	        if (body && body.pull_request) {
+				console.log(body.number, body.action)
 	            if (body.action == "opened" || body.action == "synchronize") {
 	                metadata(body.number).then(function(metadata) {
 						logArgs(metadata);
