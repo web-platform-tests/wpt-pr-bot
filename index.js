@@ -31,7 +31,7 @@ app.post('/github-hook', function (req, res, next) {
 	                metadata(body.number).then(function(metadata) {
 						logArgs(metadata);
 						return labelModel.post(body.number, metadata.labels).then(function() {
-							if (body.action == "synchronize") {
+							if (body.action == "opened") {
 								return reviewers(body.number, metadata).then(function(comment) {
 									logArgs(comment);
 									return notify.notifyPullRequest(body, metadata);
