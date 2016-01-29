@@ -2,19 +2,19 @@ var assert = require('assert'),
     reviewers = require('../lib/reviewers');
 
 suite('Test reviewers', function() {
-    test('With one spec', function() {
-		assert.equal("@w3c/html-reviewers", reviewers.join(["html-reviewers"]))
+    test('With one reviewer', function() {
+		assert.equal("@foo", reviewers.join(["@foo"]))
     });
 	
-    test('With no spec', function() {
+    test('With no reviewers', function() {
 		assert.equal("", reviewers.join([]))
     });
 	
-    test('With two specs', function() {
-		assert.equal("@w3c/html-reviewers and @w3c/dap-reviewers", reviewers.join(["html-reviewers", "dap-reviewers"]))
+    test('With two reviewers', function() {
+		assert.equal("@foo and @bar", reviewers.join(["@foo", "@bar"]))
     });
 	
-    test('With three specs', function() {
-		assert.equal("@w3c/html-reviewers, @w3c/css-reviewers, and @w3c/dap-reviewers", reviewers.join(["html-reviewers", "css-reviewers",  "dap-reviewers"]))
+    test('With three reviewers', function() {
+		assert.equal("@foo, @bar, and @baz", reviewers.join(["@foo", "@bar", "@baz"]))
     });
 });
