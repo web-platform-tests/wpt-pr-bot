@@ -14,7 +14,11 @@ suite('Test raw labels', function() {
         assert.equal("infra", rawLabels([".gitignore"])[0]);
     });
     
-    test('rawLabels must return vlaue of sub directory for css specs', function() {
+    test('rawLabels must return "infra" for rootdir files', function() {
+        assert.equal("infra", rawLabels(["some-file-in-root-dir.html"])[0]);
+    });
+    
+    test('rawLabels must return value of sub directory for css specs', function() {
         assert.equal("css-align-3", rawLabels(["css/css-align-3"])[0]);
     });
 });
