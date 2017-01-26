@@ -36,6 +36,10 @@ app.post('/github-hook', function (req, res, next) {
 									logArgs(comment);
 									return notify.notifyPullRequest(body, metadata);
 								});
+							} else if (!metadata.isSafe) {
+                                return github.post('/repos/:owner/:repo/issues/:number/comments', { body: "w3c-test:unmirror" }, { number: body.number }).then(function() {
+        							return notify.notifyPullRequest(body, metadata);
+                                });
 							}
 							return notify.notifyPullRequest(body, metadata);
 						});
