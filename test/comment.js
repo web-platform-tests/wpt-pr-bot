@@ -1,5 +1,5 @@
 var assert = require('assert'),
-    reviewers = require('../lib/reviewers');
+    reviewers = require('../lib/comment');
 
 suite('Test reviewers', function() {
     test('With one reviewer', function() {
