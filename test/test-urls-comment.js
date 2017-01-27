@@ -2,7 +2,7 @@ var assert = require('assert'),
     testUrlComment = require('../lib/test-urls-comment');
     
     var UNSAFE = "**This PR contains files which aren't whitelisted. Proceed with caution.**";
-    var SAFE_INTRO = "These tests will be available shortly on [w3c-test.org](https://w3c-test.org/submissions/1234).";
+    var SAFE_INTRO = "These tests will be available shortly on [w3c-test.org](https://w3c-test.org/submissions/1234/).";
     var SAFE_OUTRO = "w3c-test:do-not-mirror *([What's this?](https://github.com/w3c/web-platform-tests/blob/master/README.md#publication))*";
 
 suite('Test testUrlComments', function() {
