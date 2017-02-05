@@ -25,6 +25,7 @@ app.post('/github-hook', function (req, res, next) {
         	logArgs(err.message);
 		} else if (process.env.NODE_ENV != 'production' || checkRequest(body, req.headers["x-hub-signature"], process.env.GITHUB_SECRET)) {
 		    res.send(new Date().toISOString());
+	        logArgs(body);
 	        body = JSON.parse(body);
 	        if (body && body.pull_request) {
                 var n = body.pull_request.number;
