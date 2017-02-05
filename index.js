@@ -26,18 +26,19 @@ app.post('/github-hook', function (req, res, next) {
 		    res.send(new Date().toISOString());
 	        body = JSON.parse(body);
 	        if (body && body.pull_request) {
-				console.log(body.number, body.action)
+                var n = body.pull_request.number;
+				console.log(n, body.action)
 	            if (body.action == "opened" || body.action == "synchronize") {
-	                metadata(body.number).then(function(metadata) {
+	                metadata(n).then(function(metadata) {
 						logArgs(metadata);
-						return labelModel.post(body.number, metadata.labels).then(function() {
+						return labelModel.post(n, metadata.labels).then(function() {
 							if (body.action == "opened") {
-								return comment(body.number, metadata).then(function(comment) {
+								return comment(n, metadata).then(function(comment) {
 									logArgs(comment);
 									return notify.notifyPullRequest(body, metadata);
 								});
 							} else if (!metadata.isSafe) {
-                                return github.post('/repos/:owner/:repo/issues/:number/comments', { body: "w3c-test:unmirror" }, { number: body.number }).then(function() {
+                                return github.post('/repos/:owner/:repo/issues/:number/comments', { body: "w3c-test:unmirror" }, { number: n }).then(function() {
         							return notify.notifyPullRequest(body, metadata);
                                 });
 							}
@@ -45,13 +46,14 @@ app.post('/github-hook', function (req, res, next) {
 						});
 					}).then(logArgs).catch(logArgs);
 	            } else {
-	                metadata(body.number).then(function(metadata) {
+	                metadata(n).then(function(metadata) {
 						logArgs(metadata);
 						return notify.notifyPullRequest(body, metadata);
 					}).then(logArgs).catch(logArgs);
 	            }
 	        } else if (body && body.comment && (body.issue || body.pull_request)) {
-                metadata((body.issue || body.pull_request).number).then(function(metadata) {
+                var n = (body.issue || body.pull_request).number;
+                metadata(n).then(function(metadata) {
 					logArgs(metadata);
 					return notify.notifyComment(body, metadata);
 				}).then(logArgs).catch(logArgs);
