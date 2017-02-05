@@ -36,19 +36,11 @@ app.post('/github-hook', function (req, res, next) {
 						logArgs(metadata);
 						return labelModel.post(n, metadata.labels).then(function() {
 							if (body.action == "opened") {
-								return comment(n, metadata).then(function(comment) {
-									logArgs(comment);
-									return notify.notifyPullRequest(body, metadata);
-								});
-							} else if (!metadata.isSafe) {
-                                return github.post('/repos/:owner/:repo/issues/:number/comments', {
-                                    body: require("./lib/test-urls-comment").UNSAFE_MESSAGE
-                                }, { number: n }).then(function() {
-        							return notify.notifyPullRequest(body, metadata);
-                                });
+								return comment(n, metadata).then(logArgs);
 							}
+						}).then(function() {
 							return notify.notifyPullRequest(body, metadata);
-						});
+                        });
 					}).then(logArgs).catch(logArgs);
 	            } else {
 	                metadata(n, u).then(function(metadata) {
@@ -62,17 +54,17 @@ app.post('/github-hook', function (req, res, next) {
                 var u = (data.user && data.user.login) || null;
                 metadata(n, u).then(function(metadata) {
 					logArgs(metadata);
-                    github.get('/repos/:owner/:repo/issues/:number/comments', { number: n }).then(function(comments) {
+                    return github.get('/repos/:owner/:repo/issues/:number/comments', { number: n }).then(function(comments) {
                         var commented = comments.some(function(comment) {
                             return comment.user.login == "wpt-pr-bot"
                         });
                         console.log("Commented on PR " + n + "?", commented);
                         if (body.issue.pull_request && !commented) {
-							return comment(n, metadata).then(function(comment) {
-								logArgs(comment);
-            					return notify.notifyComment(body, metadata);
-							});
+    						return labelModel.post(n, metadata.labels).then(function() {
+    							return comment(n, metadata).then(logArgs);
+    						});
                         }
+                    }).then(function() {
     					return notify.notifyComment(body, metadata);
                     });
 				}).then(logArgs).catch(logArgs);
