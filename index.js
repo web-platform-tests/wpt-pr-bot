@@ -27,9 +27,10 @@ app.post('/github-hook', function (req, res, next) {
 	        body = JSON.parse(body);
 	        if (body && body.pull_request) {
                 var n = body.pull_request.number;
+                var u = (body.pull_request.user && body.pull_request.user.login) || null;
 				console.log(n, body.action)
 	            if (body.action == "opened" || body.action == "synchronize") {
-	                metadata(n).then(function(metadata) {
+	                metadata(n, u).then(function(metadata) {
 						logArgs(metadata);
 						return labelModel.post(n, metadata.labels).then(function() {
 							if (body.action == "opened") {
@@ -48,14 +49,16 @@ app.post('/github-hook', function (req, res, next) {
 						});
 					}).then(logArgs).catch(logArgs);
 	            } else {
-	                metadata(n).then(function(metadata) {
+	                metadata(n, u).then(function(metadata) {
 						logArgs(metadata);
 						return notify.notifyPullRequest(body, metadata);
 					}).then(logArgs).catch(logArgs);
 	            }
 	        } else if (body && body.comment && (body.issue || body.pull_request)) {
-                var n = (body.issue || body.pull_request).number;
-                metadata(n).then(function(metadata) {
+                var data = (body.issue || body.pull_request);
+                var n = data.number;
+                var u = (data.user && data.user.login) || null;
+                metadata(n, u).then(function(metadata) {
 					logArgs(metadata);
 					return notify.notifyComment(body, metadata);
 				}).then(logArgs).catch(logArgs);
