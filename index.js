@@ -65,6 +65,7 @@ app.post('/github-hook', function (req, res, next) {
                         var commented = comments.some(function(comment) {
                             return comment.user.login == "wpt-pr-bot"
                         }).length > 0;
+                        console.log("Commented?", commented);
                         if (body.pull_request && !commented) {
 							return comment(n, metadata).then(function(comment) {
 								logArgs(comment);
