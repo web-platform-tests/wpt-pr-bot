@@ -3,22 +3,30 @@ var assert = require('assert'),
 
 suite('Test raw labels', function() {
     test('rawLabels must return root dir of filename as label', function() {
-        assert.equal("foo", rawLabels(["foo/bar/baz"])[0]);
+        assert.deepEqual(["foo"], rawLabels(["foo/bar/baz"]));
     });
     
     test('rawLabels must return correct shortname of spec for directories which used to be spelled incorrectly', function() {
-        assert.equal("shadow-dom", rawLabels(["ShadowDOM"])[0]);
+        assert.deepEqual(["shadow-dom"], rawLabels(["ShadowDOM/file.html"]));
     });
     
     test('rawLabels must return "infra" for content identified as such', function() {
-        assert.equal("infra", rawLabels([".gitignore"])[0]);
+        assert.deepEqual(["infra"], rawLabels([".gitignore"]));
     });
     
     test('rawLabels must return "infra" for rootdir files', function() {
-        assert.equal("infra", rawLabels(["some-file-in-root-dir.html"])[0]);
+        assert.deepEqual(["infra"], rawLabels(["some-file-in-root-dir.html"]));
     });
     
     test('rawLabels must return value of sub directory for css specs', function() {
-        assert.equal("css-align-3", rawLabels(["css/css-align-3"])[0]);
+        assert.deepEqual(["css-align-3"], rawLabels(["css/css-align-3/some-weird/path.html"]));
+    });
+    
+    test('rawLabels must never return an empty string', function() {
+        assert.deepEqual([], rawLabels([""]));
+    });
+    
+    test('rawLabels must not return duplicates', function() {
+        assert.deepEqual(["html"], rawLabels(["html/some/path/to/file.html", "html/some/other/path/to/file.html"]));
     });
 });
