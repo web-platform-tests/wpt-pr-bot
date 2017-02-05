@@ -12,6 +12,9 @@ suite('test-urls', function() {
             "foo/bar.js",
             "foo/bar.css",
             "main.css",
+        ], [
+            "foo",
+            ""
         ]));
     });
     
@@ -21,6 +24,9 @@ suite('test-urls', function() {
             "foo/bar.css",
             "main.css",
             "main.HTML"
+        ], [
+            "foo",
+            ""
         ]));
     });
     
@@ -36,6 +42,23 @@ suite('test-urls', function() {
             "main.css",
             "some/path/file.html",
             "main.HTM"
+        ], [
+            "foo",
+            "some",
+            ""
+        ]));
+    });
+    
+    test('only support files must defer to paths', function() {
+        assert.deepEqual([
+            "https://w3c-test.org/submissions/2989/foo/"
+        ], testUrls(2989, [
+            "foo/bar.js",
+            "foo/bar.css",
+            "main.css"
+        ], [
+            "foo",
+            ""
         ]));
     });
 });
