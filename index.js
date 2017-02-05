@@ -60,7 +60,18 @@ app.post('/github-hook', function (req, res, next) {
                 var u = (data.user && data.user.login) || null;
                 metadata(n, u).then(function(metadata) {
 					logArgs(metadata);
-					return notify.notifyComment(body, metadata);
+                    github.get('/repos/:owner/:repo/issues/:number/comments', { number: n }).then(function(comments) {
+                        var commented = comments.some(function(comment) {
+                            return comment.user.login == "wpt-pr-bot"
+                        }).length > 0;
+                        if (body.pull_request && !commented) {
+							return comment(n, metadata).then(function(comment) {
+								logArgs(comment);
+            					return notify.notifyComment(body, metadata);
+							});
+                        }
+    					return notify.notifyComment(body, metadata);
+                    });
 				}).then(logArgs).catch(logArgs);
 	        }
 	    } else {
