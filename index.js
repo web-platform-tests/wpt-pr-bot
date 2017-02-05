@@ -7,6 +7,7 @@ var express = require("express"),
     metadata = require('./lib/metadata'),
     notify = require('./lib/notify'),
     comment = require('./lib/comment'),
+    github = require('./lib/github'),
     checkRequest = require('./lib/check-request');
 
 var app = module.exports = express();
