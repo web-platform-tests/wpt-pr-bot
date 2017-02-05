@@ -48,7 +48,7 @@ app.post('/github-hook', function (req, res, next) {
 						return notify.notifyPullRequest(body, metadata);
 					}).then(logArgs).catch(logArgs);
 	            }
-	        } else if (body && body.comment && (body.issue || body.pull_request)) {
+	        } else if (body && body.comment && body.action == "created" && (body.issue || body.pull_request)) {
                 var data = (body.issue || body.pull_request);
                 var n = data.number;
                 var u = (data.user && data.user.login) || null;
