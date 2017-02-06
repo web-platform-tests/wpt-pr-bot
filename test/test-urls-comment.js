@@ -1,7 +1,7 @@
 var assert = require('assert'),
     testUrlComment = require('../lib/test-urls-comment');
     
-    var NOT_COLLABORATOR = "These tests will be available on [w3c-test.org](https://w3c-test.org/submissions/1234/) as soon as they are [approved](https://github.com/w3c/web-platform-tests/blob/master/README.md#publication) by a repository collaborator.";
+    var NOT_COLLABORATOR = "These tests will be available on [w3c-test.org](https://w3c-test.org/submissions/1234/) shortly after they are [approved](https://github.com/w3c/web-platform-tests/blob/master/README.md#publication) by a repository collaborator.";
     var COLLABORATOR = "These tests will be available shortly on [w3c-test.org](https://w3c-test.org/submissions/1234/).";
 
 suite('Test testUrlComments', function() {
