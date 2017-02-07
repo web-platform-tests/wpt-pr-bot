@@ -59,7 +59,7 @@ app.post('/github-hook', function (req, res, next) {
                             return comment.user.login == "wpt-pr-bot"
                         });
                         console.log("Commented on PR " + n + "?", commented);
-                        if (body.issue.pull_request && !commented) {
+                        if (body.issue.pull_request && !body.issue.pull_request.merged && !commented) {
     						return labelModel.post(n, metadata.labels).then(function() {
     							return comment(n, metadata).then(logArgs);
     						});
