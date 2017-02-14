@@ -26,7 +26,6 @@ app.post('/github-hook', function (req, res, next) {
 		} else if (process.env.NODE_ENV != 'production' || checkRequest(body, req.headers["x-hub-signature"], process.env.GITHUB_SECRET)) {
 		    res.send(new Date().toISOString());
 	        body = JSON.parse(body);
-	        logArgs(body);
 	        if (body && body.pull_request) {
                 var n = body.pull_request.number;
                 var u = (body.pull_request.user && body.pull_request.user.login) || null;
