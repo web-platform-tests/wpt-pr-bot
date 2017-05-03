@@ -35,6 +35,7 @@ app.post('/github-hook', function (req, res, next) {
                 
                 if (body.action == "edited" && body.sender && body.sender.login != WPT_PR_BOT) {
 	                metadata(n, u).then(function(metadata) {
+                        logArgs(metadata);
                         return rmReviewable(n, metadata).then(logArgs).catch(logArgs);
                     });
                 } else if (body.action == "opened" || body.action == "synchronize") {
