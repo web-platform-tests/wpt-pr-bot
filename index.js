@@ -9,7 +9,8 @@ var express = require("express"),
     comment = require('./lib/comment'),
     rmReviewable = require('./lib/rm-reviewable'),
     github = require('./lib/github'),
-    checkRequest = require('./lib/check-request');
+    checkRequest = require('./lib/check-request'),
+    WPT_PR_BOT = "wpt-pr-bot";
 
 var app = module.exports = express();
 
@@ -31,7 +32,12 @@ app.post('/github-hook', function (req, res, next) {
                 var n = body.pull_request.number;
                 var u = (body.pull_request.user && body.pull_request.user.login) || null;
 				console.log(n, body.action)
-	            if (body.action == "opened" || body.action == "synchronize") {
+                
+                if (body.action == "edited" && body.sender && body.sender.login != WPT_PR_BOT) {
+	                metadata(n, u).then(function(metadata) {
+                        return rmReviewable(n, metadata).then(logArgs).catch(logArgs);
+                    });
+                } else if (body.action == "opened" || body.action == "synchronize") {
 	                metadata(n, u).then(function(metadata) {
 						logArgs(metadata);
 						return labelModel.post(n, metadata.labels).then(function() {
@@ -58,7 +64,7 @@ app.post('/github-hook', function (req, res, next) {
 					logArgs(metadata);
                     return github.get('/repos/:owner/:repo/issues/:number/comments', { number: n }).then(function(comments) {
                         var commented = comments.some(function(comment) {
-                            return comment.user.login == "wpt-pr-bot"
+                            return comment.user.login == WPT_PR_BOT;
                         });
                         console.log("Commented on PR " + n + "?", commented);
                         if (body.issue.pull_request && !body.issue.pull_request.merged && !commented) {
