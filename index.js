@@ -7,6 +7,7 @@ var express = require("express"),
     metadata = require('./lib/metadata'),
     notify = require('./lib/notify'),
     comment = require('./lib/comment'),
+    rmReviewable = require('./lib/rm-reviewable'),
     github = require('./lib/github'),
     checkRequest = require('./lib/check-request');
 
@@ -35,7 +36,9 @@ app.post('/github-hook', function (req, res, next) {
 						logArgs(metadata);
 						return labelModel.post(n, metadata.labels).then(function() {
 							if (body.action == "opened") {
-								return comment(n, metadata).then(logArgs);
+								return comment(n, metadata).then(function() {
+                                    return rmReviewable(n, metadata);
+                                }).then(logArgs);
 							}
 						}).then(function() {
 							return notify.notifyPullRequest(body, metadata);
@@ -60,7 +63,9 @@ app.post('/github-hook', function (req, res, next) {
                         console.log("Commented on PR " + n + "?", commented);
                         if (body.issue.pull_request && !body.issue.pull_request.merged && !commented) {
     						return labelModel.post(n, metadata.labels).then(function() {
-    							return comment(n, metadata).then(logArgs);
+    							return comment(n, metadata).then(function() {
+                                    return rmReviewable(n, metadata);
+                                }).then(logArgs);
     						});
                         }
                     }).then(function() {
