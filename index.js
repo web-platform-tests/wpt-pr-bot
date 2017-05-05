@@ -30,15 +30,16 @@ app.post('/github-hook', function (req, res, next) {
 	        if (body && body.pull_request) {
                 var n = body.pull_request.number;
                 var u = (body.pull_request.user && body.pull_request.user.login) || null;
+                var content = body.pull_request.body || "";
 				console.log(n, body.action)
                 
                 if (body.action == "edited" && body.sender && body.sender.login != WPT_PR_BOT) {
-	                metadata(n, u).then(function(metadata) {
+	                metadata(n, u, content).then(function(metadata) {
                         logArgs(metadata);
                         return rmReviewable(n, metadata).then(logArgs).catch(logArgs);
                     });
                 } else if (body.action == "opened" || body.action == "synchronize") {
-	                metadata(n, u).then(function(metadata) {
+	                metadata(n, u, content).then(function(metadata) {
 						logArgs(metadata);
 						return labelModel.post(n, metadata.labels).then(function() {
 							if (body.action == "opened") {
@@ -49,13 +50,14 @@ app.post('/github-hook', function (req, res, next) {
 						});
 					}).then(logArgs).catch(logArgs);
 	            } else {
-	                metadata(n, u).then(logArgs, logArgs);
+	                metadata(n, u, content).then(logArgs, logArgs);
 	            }
 	        } else if (body && body.comment && body.action == "created" && (body.issue || body.pull_request)) {
                 var data = (body.issue || body.pull_request);
                 var n = data.number;
                 var u = (data.user && data.user.login) || null;
-                metadata(n, u).then(function(metadata) {
+                var content = data.body || "";
+                metadata(n, u, content).then(function(metadata) {
 					logArgs(metadata);
                     return github.get('/repos/:owner/:repo/issues/:number/comments', { number: n }).then(function(comments) {
                         var commented = comments.some(function(comment) {
