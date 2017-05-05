@@ -13,11 +13,11 @@ suite('decode OWNERS', function() {
 
 suite('parse OWNERS', function() {
     test('trim content & remove line breaks', function() {
-        assert.deepEqual(findOwners.parse("    @ahandle   \n\n  \n @anotherhandle \n  \n \n"), ["@ahandle", "@anotherhandle"]);
+        assert.deepEqual(findOwners.parse("    @ahandle   \n\n  \n @anotherhandle \n  \n \n"), ["ahandle", "anotherhandle"]);
     });
     
     test('remove comments', function() {
-        assert.deepEqual(findOwners.parse("  # this is a comment \n @ahandle   \n\n // this is also a comment  \n @anotherhandle \n  \n \n"), ["@ahandle", "@anotherhandle"]);
+        assert.deepEqual(findOwners.parse("  # this is a comment \n @ahandle   \n\n // this is also a comment  \n @anotherhandle \n  \n \n"), ["ahandle", "anotherhandle"]);
     });
     
     test("Don't be over greedy removing comments", function() {
@@ -25,6 +25,6 @@ suite('parse OWNERS', function() {
     });
     
     test("Remove dups", function() {
-        assert.deepEqual(findOwners.parse("    @ahandle   \n\n  \n @anotherhandle \n  @ahandle \n \n"), ["@ahandle", "@anotherhandle"]);
+        assert.deepEqual(findOwners.parse("    @ahandle   \n\n  \n @anotherhandle \n  @ahandle \n \n"), ["ahandle", "anotherhandle"]);
     });
 });
