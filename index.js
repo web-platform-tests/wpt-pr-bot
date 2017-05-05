@@ -5,7 +5,6 @@ var express = require("express"),
     bl = require("bl"),
     labelModel = require('./lib/label-model'),
     metadata = require('./lib/metadata'),
-    notify = require('./lib/notify'),
     comment = require('./lib/comment'),
     rmReviewable = require('./lib/rm-reviewable'),
     github = require('./lib/github'),
@@ -47,15 +46,10 @@ app.post('/github-hook', function (req, res, next) {
                                     return rmReviewable(n, metadata);
                                 }).then(logArgs);
 							}
-						}).then(function() {
-							return notify.notifyPullRequest(body, metadata);
-                        });
+						});
 					}).then(logArgs).catch(logArgs);
 	            } else {
-	                metadata(n, u).then(function(metadata) {
-						logArgs(metadata);
-						return notify.notifyPullRequest(body, metadata);
-					}).then(logArgs).catch(logArgs);
+	                metadata(n, u).then(logArgs, logArgs);
 	            }
 	        } else if (body && body.comment && body.action == "created" && (body.issue || body.pull_request)) {
                 var data = (body.issue || body.pull_request);
@@ -75,8 +69,6 @@ app.post('/github-hook', function (req, res, next) {
                                 }).then(logArgs);
     						});
                         }
-                    }).then(function() {
-    					return notify.notifyComment(body, metadata);
                     });
 				}).then(logArgs).catch(logArgs);
 	        }
