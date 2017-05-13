@@ -1,5 +1,5 @@
 var assert = require('assert'),
-    getReviewers = require('../lib/get-reviewers');
+    getReviewers = require('../lib/metadata/get-reviewers');
 
 suite('Test get-reviewers', function() {
     test('getReviewers for simple, initial case', function() {
