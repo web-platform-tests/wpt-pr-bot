@@ -9,7 +9,8 @@ var express = require("express"),
     rmReviewable = require('./lib/rm-reviewable'),
     github = require('./lib/github'),
     checkRequest = require('./lib/check-request'),
-    WPT_PR_BOT = "wpt-pr-bot";
+    isProcessed = require('./lib/is-processed');
+
 
 var app = module.exports = express();
 
@@ -57,28 +58,25 @@ app.post('/github-hook', function (req, res, next) {
                 var n = data.number;
                 var u = (data.user && data.user.login) || null;
                 var content = data.body || "";
-                metadata(n, u, content).then(function(metadata) {
-					logArgs(metadata);
-                    return github.get('/repos/:owner/:repo/issues/:number/comments', { number: n }).then(function(comments) {
-                        var commented = comments.some(function(comment) {
-                            return comment.user.login == WPT_PR_BOT;
-                        });
-                        console.log("Commented on PR " + n + "?", commented);
-                        if (body.issue.pull_request && !body.issue.pull_request.merged && !commented) {
-    						return labelModel.post(n, metadata.labels).then(function() {
-    							return comment(n, metadata).then(function() {
+                isProcessed(n).then(function(processed) {
+                    if (processed) {
+                        console.log("#" + n + " has already been processed.");
+                    } else if (body.issue.pull_request && !body.issue.pull_request.merged) {
+                        metadata(n, u, content).then(function(metadata) {
+                            logArgs(metadata);
+                            return labelModel.post(n, metadata.labels).then(function() {
+                                return comment(n, metadata).then(function() {
                                     return rmReviewable(n, metadata);
                                 }).then(logArgs);
-    						});
-                        }
-                    });
-				}).then(logArgs).catch(logArgs);
-	        }
-	    } else {
-	        logArgs("Unverified request", req);
-	    }
-	}));
-
+                            });
+                        }).then(logArgs).catch(logArgs);
+                    }
+                });
+            }
+        } else {
+            logArgs("Unverified request", req);
+        }
+    }));
 });
 
 var port = process.env.PORT || 5000;
