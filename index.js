@@ -34,7 +34,7 @@ app.post('/github-hook', function (req, res, next) {
                 var content = body.pull_request.body || "";
 				console.log(n, body.action)
                 
-                if (body.action == "edited" && body.sender && body.sender.login != WPT_PR_BOT) {
+                if (body.action == "edited" && body.sender && body.sender.login != "wpt-pr-bot") {
 	                metadata(n, u, content).then(function(metadata) {
                         logArgs(metadata);
                         return rmReviewable(n, metadata).then(logArgs).catch(logArgs);
