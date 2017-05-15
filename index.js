@@ -21,58 +21,67 @@ function logArgs() {
     });
 }
 
+function funkLogMsg(num, msg) {
+    return function() { logArgs("#" + num + ": " + msg); };
+}
+
+function funkLogErr(num, msg) {
+    return function(err) { logArgs("#" + num + ": " + msg + "\n", err); };
+}
+
+function removeReviewableBanner(n, metadata) {
+    return rmReviewable(n, metadata).then(
+        funkLogMsg(n, "Removed Reviewable banner."),
+        funkLogErr(n, "Error when attempting to remove Reviewable banner.")
+    );
+}
+
 app.post('/github-hook', function (req, res, next) {
 	req.pipe(bl(function (err, body) {
     	if (err) {
         	logArgs(err.message);
 		} else if (process.env.NODE_ENV != 'production' || checkRequest(body, req.headers["x-hub-signature"], process.env.GITHUB_SECRET)) {
 		    res.send(new Date().toISOString());
-	        body = JSON.parse(body);
-	        if (body && body.pull_request) {
-                var n = body.pull_request.number;
-                var u = (body.pull_request.user && body.pull_request.user.login) || null;
-                var content = body.pull_request.body || "";
-				console.log(n, body.action)
-                
-                if (body.action == "edited" && body.sender && body.sender.login != "wpt-pr-bot") {
-	                metadata(n, u, content).then(function(metadata) {
-                        logArgs(metadata);
-                        return rmReviewable(n, metadata).then(logArgs).catch(logArgs);
-                    });
-                } else if (body.action == "opened" || body.action == "synchronize") {
-	                metadata(n, u, content).then(function(metadata) {
-						logArgs(metadata);
-						return labelModel.post(n, metadata.labels).then(function() {
-							if (body.action == "opened") {
-								return comment(n, metadata).then(function() {
-                                    return rmReviewable(n, metadata);
-                                }).then(logArgs);
-							}
-						});
-					}).then(logArgs).catch(logArgs);
-	            } else {
-	                metadata(n, u, content).then(logArgs, logArgs);
-	            }
-	        } else if (body && body.comment && body.action == "created" && (body.issue || body.pull_request)) {
-                var data = (body.issue || body.pull_request);
-                var n = data.number;
-                var u = (data.user && data.user.login) || null;
-                var content = data.body || "";
-                isProcessed(n).then(function(processed) {
-                    if (processed) {
-                        console.log("#" + n + " has already been processed.");
-                    } else if (body.issue.pull_request && !body.issue.pull_request.merged) {
-                        metadata(n, u, content).then(function(metadata) {
-                            logArgs(metadata);
-                            return labelModel.post(n, metadata.labels).then(function() {
-                                return comment(n, metadata).then(function() {
-                                    return rmReviewable(n, metadata);
-                                }).then(logArgs);
-                            });
-                        }).then(logArgs).catch(logArgs);
-                    }
-                });
+            
+            // FILTER ALL THE THINGS
+            try {
+    	        body = JSON.parse(body);
+            } catch(e) {
+                return;
             }
+            if (!body) return;
+            if (body.sender && body.sender.login == "wpt-pr-bot") return;
+            if (!body.pull_request) return;
+            if (!body.pull_request.merged) return;
+            // END FILTERNG //
+            
+            var action = body.action;
+            var n = body.pull_request.number;
+            var u = (body.pull_request.user && body.pull_request.user.login) || null;
+            var content = body.pull_request.body || "";
+            
+            
+            if (!body.comment && action == "edited") {
+                logArgs("#" + n, "pull request edited");
+	            metadata(n, u, content).then(function(metadata) {
+                    return removeReviewableBanner(n, metadata);
+                });
+            } else if (action == "opened" || action == "synchronize" || (body.comment && action == "created")) {
+                metadata(n, u, content).then(function(metadata) {
+                    logArgs(metadata);
+                    return labelModel.post(number, metadata.labels).then(
+                        funkLogMsg(n, "Added missing LABELS if any."),
+                        funkLogErr(n, "Something went wrong while adding missing LABELS.")
+                    ).then(function() {
+                        return comment(n, metadata);
+                    }).then(
+                        funkLogMsg(n, "Added missing REVIEWERS if any."),
+                        funkLogErr(n, "Something went wrong while adding missing REVIEWERS.")
+                    ).then(function() {
+                        return removeReviewableBanner(n, metadata);
+                    })
+                }).catch(funkLogErr(n, "THIS SHOULDN'T EVER HAPPEN"));
+	        }
         } else {
             logArgs("Unverified request", req);
         }
