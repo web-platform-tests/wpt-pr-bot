@@ -36,6 +36,8 @@ function removeReviewableBanner(n, metadata) {
     );
 }
 
+var currentlyRunning = {};
+
 app.post('/github-hook', function (req, res, next) {
 	req.pipe(bl(function (err, body) {
     	if (err) {
@@ -67,7 +69,13 @@ app.post('/github-hook', function (req, res, next) {
                     return removeReviewableBanner(n, metadata);
                 });
             } else if (action == "opened" || action == "synchronize" || (body.comment && action == "created")) {
+                if (n in currentlyRunning) {
+                    logArgs("#" + n + " is already being processed.");
+                    return;
+                }
+                currentlyRunning[n] = true;
                 logArgs("#" + n, body.comment ? "comment" : "pull request", action);
+                
                 metadata(n, u, content).then(function(metadata) {
                     logArgs(metadata);
                     return labelModel.post(n, metadata.labels).then(
@@ -80,8 +88,13 @@ app.post('/github-hook', function (req, res, next) {
                         funkLogErr(n, "Something went wrong while adding missing REVIEWERS.")
                     ).then(function() {
                         return removeReviewableBanner(n, metadata);
-                    })
-                }).catch(funkLogErr(n, "THIS SHOULDN'T EVER HAPPEN"));
+                    });
+                }).then(function() {
+                    delete currentlyRunning[n];
+                }, function(err) {
+                    delete currentlyRunning[n];
+                    funkLogErr(n, "THIS SHOULDN'T EVER HAPPEN")(err);
+                });
 	        }
         } else {
             logArgs("Unverified request", req);
