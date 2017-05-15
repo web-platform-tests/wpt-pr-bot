@@ -67,6 +67,7 @@ app.post('/github-hook', function (req, res, next) {
                     return removeReviewableBanner(n, metadata);
                 });
             } else if (action == "opened" || action == "synchronize" || (body.comment && action == "created")) {
+                logArgs("#" + n, body.comment ? "comment" : "pull request", action);
                 metadata(n, u, content).then(function(metadata) {
                     logArgs(metadata);
                     return labelModel.post(n, metadata.labels).then(
