@@ -69,7 +69,7 @@ app.post('/github-hook', function (req, res, next) {
             } else if (action == "opened" || action == "synchronize" || (body.comment && action == "created")) {
                 metadata(n, u, content).then(function(metadata) {
                     logArgs(metadata);
-                    return labelModel.post(number, metadata.labels).then(
+                    return labelModel.post(n, metadata.labels).then(
                         funkLogMsg(n, "Added missing LABELS if any."),
                         funkLogErr(n, "Something went wrong while adding missing LABELS.")
                     ).then(function() {
