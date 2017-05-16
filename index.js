@@ -9,8 +9,14 @@ var express = require("express"),
     rmReviewable = require('./lib/rm-reviewable'),
     github = require('./lib/github'),
     checkRequest = require('./lib/check-request'),
-    isProcessed = require('./lib/is-processed');
-
+    isProcessed = require('./lib/is-processed'),
+    q = require('q');
+    
+function promise(value) {
+    var deferred = q.defer();
+    deferred.resolve(value);
+    return deferred.promise;
+}
 
 var app = module.exports = express();
 
@@ -34,6 +40,13 @@ function removeReviewableBanner(n, metadata) {
         funkLogMsg(n, "Removed Reviewable banner."),
         funkLogErr(n, "Error when attempting to remove Reviewable banner.")
     );
+}
+
+function getPullRequest(n, body) {
+    if (body.pull_request) {
+        return promise(body.pull_request);
+    }
+    return github.get("/repos/:owner/:repo/pulls/:number", { number: n })
 }
 
 var currentlyRunning = {};
@@ -76,7 +89,7 @@ app.post('/github-hook', function (req, res, next) {
                 currentlyRunning[n] = true;
                 logArgs("#" + n, isComment ? "comment" : "pull request", action);
                 
-                github.get("/repos/:owner/:repo/pulls/:number", { number: n }).then(function(pull_request) {
+                getPullRequest(n, body).then(function(pull_request) {
                     if (pull_request.merged) return;
                     return metadata(n, u, content).then(function(metadata) {
                         logArgs(metadata);
