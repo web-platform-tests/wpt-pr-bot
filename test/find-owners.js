@@ -20,11 +20,15 @@ suite('parse OWNERS', function() {
         assert.deepEqual(findOwners.parse("  # this is a comment \n @ahandle   \n\n // this is also a comment  \n @anotherhandle \n  \n \n"), ["ahandle", "anotherhandle"]);
     });
     
-    test("Don't be over greedy removing comments", function() {
-        assert.deepEqual(findOwners.parse("  / this is not a comment"), ["/ this is not a comment"]);
-    });
-    
     test("Remove dups", function() {
         assert.deepEqual(findOwners.parse("    @ahandle   \n\n  \n @anotherhandle \n  @ahandle \n \n"), ["ahandle", "anotherhandle"]);
+    });
+    
+    test("Remove handles which contain whitespace", function() {
+        assert.deepEqual(findOwners.parse("@anotherhandle \n  @ahan dle \n \n"), ["anotherhandle"]);
+    });
+    
+    test("Lowecase all the things", function() {
+        assert.deepEqual(findOwners.parse("@ahandle   \n\n  \n @AnotherHandle"), ["ahandle", "anotherhandle"]);
     });
 });
