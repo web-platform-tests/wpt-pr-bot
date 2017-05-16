@@ -53,41 +53,44 @@ app.post('/github-hook', function (req, res, next) {
             }
             if (!body) return;
             if (body.sender && body.sender.login == "wpt-pr-bot") return;
-            if (!body.pull_request) return;
-            if (body.pull_request.merged) return;
+            if (!body.pull_request && (body.issue && !body.issue.pull_request)) return;
             // END FILTERNG //
             
             var action = body.action;
-            var n = body.pull_request.number;
-            var u = (body.pull_request.user && body.pull_request.user.login) || null;
-            var content = body.pull_request.body || "";
-            
-            
-            if (!body.comment && action == "edited") {
+            var isComment = !!body.comment;
+            var issue = body.pull_request || body.issue;
+            var n = issue.number;
+            var u = (issue.user && issue.user.login) || null;
+            var content = issue.body || "";
+            if (!isComment && action == "edited") {
+                if (body.pull_request.merged) return; // we know .pullrequest is available because it's not a comment.
                 logArgs("#" + n, "pull request edited");
 	            metadata(n, u, content).then(function(metadata) {
                     return removeReviewableBanner(n, metadata);
                 });
-            } else if (action == "opened" || action == "synchronize" || (body.comment && action == "created")) {
+            } else if (action == "opened" || action == "synchronize" || (isComment && action == "created")) {
                 if (n in currentlyRunning) {
                     logArgs("#" + n + " is already being processed.");
                     return;
                 }
                 currentlyRunning[n] = true;
-                logArgs("#" + n, body.comment ? "comment" : "pull request", action);
+                logArgs("#" + n, isComment ? "comment" : "pull request", action);
                 
-                metadata(n, u, content).then(function(metadata) {
-                    logArgs(metadata);
-                    return labelModel.post(n, metadata.labels).then(
-                        funkLogMsg(n, "Added missing LABELS if any."),
-                        funkLogErr(n, "Something went wrong while adding missing LABELS.")
-                    ).then(function() {
-                        return comment(n, metadata);
-                    }).then(
-                        funkLogMsg(n, "Added missing REVIEWERS if any."),
-                        funkLogErr(n, "Something went wrong while adding missing REVIEWERS.")
-                    ).then(function() {
-                        return removeReviewableBanner(n, metadata);
+                github.get("/repos/:owner/:repo/pulls/:number", { number: n }).then(function(pull_request) {
+                    if (pull_request.merged) return;
+                    return metadata(n, u, content).then(function(metadata) {
+                        logArgs(metadata);
+                        return labelModel.post(n, metadata.labels).then(
+                            funkLogMsg(n, "Added missing LABELS if any."),
+                            funkLogErr(n, "Something went wrong while adding missing LABELS.")
+                        ).then(function() {
+                            return comment(n, metadata);
+                        }).then(
+                            funkLogMsg(n, "Added missing REVIEWERS if any."),
+                            funkLogErr(n, "Something went wrong while adding missing REVIEWERS.")
+                        ).then(function() {
+                            return removeReviewableBanner(n, metadata);
+                        });
                     });
                 }).then(function() {
                     delete currentlyRunning[n];
@@ -95,7 +98,9 @@ app.post('/github-hook', function (req, res, next) {
                     delete currentlyRunning[n];
                     funkLogErr(n, "THIS SHOULDN'T EVER HAPPEN")(err);
                 });
-	        }
+            } else {
+                logArgs("#" + n + ": not handled.", "action:", action, "isComment:", isComment);
+            }
         } else {
             logArgs("Unverified request", req);
         }
