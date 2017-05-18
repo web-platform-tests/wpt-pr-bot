@@ -18,6 +18,12 @@ function promise(value) {
     return deferred.promise;
 }
 
+function waitFor(ms) {
+    var deferred = q.defer();
+    setTimeout(function() { deferred.resolve(); }, ms);
+    return deferred.promise;
+}
+
 var app = module.exports = express();
 
 function logArgs() {
@@ -89,7 +95,9 @@ app.post('/github-hook', function (req, res, next) {
                 currentlyRunning[n] = true;
                 logArgs("#" + n, isComment ? "comment" : "pull request", action);
                 
-                getPullRequest(n, body).then(function(pull_request) {
+                waitFor(5 * 1000).then(function() { // Avoid race condition
+                    return getPullRequest(n, body);
+                }).then(function(pull_request) {
                     if (pull_request.merged) return;
                     return metadata(n, u, content).then(function(metadata) {
                         logArgs(metadata);
