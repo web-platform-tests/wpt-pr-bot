@@ -20,6 +20,6 @@
   "author": "Tobie Langel",
   "subdomain": "ganesh",
   "engines": {
-    "node": "4.2.x"
+    "node": "4.8.4"
   }
 }
