@@ -17,6 +17,7 @@
   "devDependencies": {
     "mocha": "1.21.4"
   },
+  "license": "Apache-2.0",
   "author": "Tobie Langel",
   "subdomain": "ganesh",
   "engines": {
