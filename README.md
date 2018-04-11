@@ -1,7 +1,7 @@
-Ganesh
+wpt-pr-bot
 ======
 
-A helper bot for web platform tests.
+A helper bot for web-platform-tests.
 
 ***
 
