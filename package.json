@@ -1,7 +1,7 @@
 {
-  "name": "ganesh",
-  "version": "0.3.6",
-  "description": "A collection of helper tools for GitHub code review.",
+  "name": "wpt-pr-bot",
+  "version": "0.4.0",
+  "description": "A helper bot for web-platform-tests.",
   "main": "index.js",
   "scripts": {
     "test": "mocha -u tdd ./test/*.js",
