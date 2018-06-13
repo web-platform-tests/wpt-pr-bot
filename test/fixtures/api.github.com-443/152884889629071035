@@ -1,0 +1,33 @@
+GET /repos/web-platform-tests/wpt/contents/resources/META.yml
+accept: application/vnd.github.black-cat-preview+json
+host: api.github.com
+
+HTTP/1.1 200 OK
+server: GitHub.com
+date: Wed, 13 Jun 2018 00:14:56 GMT
+content-type: application/json; charset=utf-8
+content-length: 937
+connection: close
+status: 200 OK
+x-ratelimit-limit: 5000
+x-ratelimit-remaining: 4946
+x-ratelimit-reset: 1528849766
+cache-control: private, max-age=60, s-maxage=60
+vary: Accept, Authorization, Cookie, X-GitHub-OTP
+etag: "32d71a4597412a821c47385a38269fddd97b595a"
+last-modified: Tue, 12 Jun 2018 22:42:42 GMT
+x-oauth-scopes: 
+x-accepted-oauth-scopes: 
+x-github-media-type: github.v3; param=black-cat-preview; format=json
+access-control-expose-headers: ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+access-control-allow-origin: *
+strict-transport-security: max-age=31536000; includeSubdomains; preload
+x-frame-options: deny
+x-content-type-options: nosniff
+x-xss-protection: 1; mode=block
+referrer-policy: origin-when-cross-origin, strict-origin-when-cross-origin
+content-security-policy: default-src 'none'
+x-runtime-rack: 0.063157
+x-github-request-id: B728:35CA:1BA5F:45ACB:5B2061FF
+
+{"name":"META.yml","path":"resources/META.yml","sha":"32d71a4597412a821c47385a38269fddd97b595a","size":55,"url":"https://api.github.com/repos/web-platform-tests/wpt/contents/resources/META.yml?ref=master","html_url":"https://github.com/web-platform-tests/wpt/blob/master/resources/META.yml","git_url":"https://api.github.com/repos/web-platform-tests/wpt/git/blobs/32d71a4597412a821c47385a38269fddd97b595a","download_url":"https://raw.githubusercontent.com/web-platform-tests/wpt/master/resources/META.yml","type":"file","content":"c3VnZ2VzdGVkX3Jldmlld2VyczoKICAtIGpncmFoYW0KICAtIGdzbmVkZGVy\ncwogIC0gYXlnCg==\n","encoding":"base64","_links":{"self":"https://api.github.com/repos/web-platform-tests/wpt/contents/resources/META.yml?ref=master","git":"https://api.github.com/repos/web-platform-tests/wpt/git/blobs/32d71a4597412a821c47385a38269fddd97b595a","html":"https://github.com/web-platform-tests/wpt/blob/master/resources/META.yml"}}

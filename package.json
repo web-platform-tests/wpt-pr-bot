@@ -4,7 +4,7 @@
   "description": "A helper bot for web-platform-tests.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha -u tdd ./test/*.js",
+    "test": "mocha -u tdd ./test/setup.js ./test/*.js",
     "start": "node index.js"
   },
   "dependencies": {
@@ -16,7 +16,8 @@
     "request": "2.48.0"
   },
   "devDependencies": {
-    "mocha": "1.21.4"
+    "mocha": "1.21.4",
+    "replay": "^2.3.0"
   },
   "license": "Apache-2.0",
   "author": "Tobie Langel",
