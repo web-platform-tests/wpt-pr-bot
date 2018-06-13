@@ -28,3 +28,37 @@ suite('parse META', function() {
         assert.deepEqual(findOwners.parse("suggested_reviewers:\n  - me\n  - me"), ["me", "me"]);
     });
 });
+
+suite('integration', function() {
+    test('directory contains file', function() {
+        return findOwners(['resources'])
+          .then(function(reviewers) {
+              reviewers.sort();
+
+              assert.deepEqual(reviewers, ['ayg', 'gsnedders', 'jgraham']);
+          });
+    });
+
+    test('parent directory contains file', function() {
+        return findOwners(['2dcontext/scroll'])
+          .then(function(reviewers) {
+              reviewers.sort();
+
+              assert.deepEqual(reviewers, [
+                  'AmeliaBR', 'annevk', 'fserb', 'jdashg', 'kenrussell'
+              ])
+          });
+    });
+
+    test('consolidation of multiple directories', function() {
+        return findOwners(['resources', '2dcontext'])
+          .then(function(reviewers) {
+              reviewers.sort();
+
+              assert.deepEqual(reviewers, [
+                  'AmeliaBR', 'annevk', 'ayg', 'fserb', 'gsnedders',
+                  'jdashg', 'jgraham', 'kenrussell'
+              ]);
+          });
+    });
+});
