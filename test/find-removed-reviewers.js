@@ -6,8 +6,6 @@ suite('integration', function() {
     test('directory contains file', function() {
         return findRemovedReviewers(number)
           .then(function(reviewers) {
-              reviewers.sort();
-
               assert.deepEqual(reviewers, [ 'zcorpan' ]);
           });
     });
