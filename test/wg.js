@@ -20,8 +20,8 @@ suite('wg', function() {
 
     test('wg returns groups only once', function() {
         assert.deepEqual(["html", "webapps"], wg({
-			foo: { deliveredBy: [{ shortname: "html" }, { shortname: "webapps" }] },
-			bar: { deliveredBy: [{ shortname: "webapps" }] }
-		}));
+            foo: { deliveredBy: [{ shortname: "html" }, { shortname: "webapps" }] },
+            bar: { deliveredBy: [{ shortname: "webapps" }] }
+        }));
     });
 });
