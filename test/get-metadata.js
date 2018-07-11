@@ -11,7 +11,6 @@ suite('getMetadata', function() {
             filenamesIgnoreRemoved: [ 'WebIDL/interfaces.html', 'interfaces/WebIDL.idl' ],
             paths: [ 'WebIDL', 'interfaces' ],
             labels: [ 'WebIDL', 'interfaces', 'wg-webplatform' ],
-            rawLabels: [ 'WebIDL', 'interfaces' ],
             isRoot: false,
             isReviewable: false,
             specs: {
