@@ -11,7 +11,7 @@ var express = require("express"),
     checkRequest = require('./lib/check-request'),
     isProcessed = require('./lib/is-processed'),
     q = require('q');
-    
+
 function promise(value) {
     var deferred = q.defer();
     deferred.resolve(value);
@@ -63,7 +63,7 @@ app.post('/github-hook', function (req, res, next) {
         	logArgs(err.message);
 		} else if (process.env.NODE_ENV != 'production' || checkRequest(body, req.headers["x-hub-signature"], process.env.GITHUB_SECRET)) {
 		    res.send(new Date().toISOString());
-            
+
             // FILTER ALL THE THINGS
             try {
     	        body = JSON.parse(body);
@@ -74,7 +74,7 @@ app.post('/github-hook', function (req, res, next) {
             if (body.sender && body.sender.login == "wpt-pr-bot") return;
             if (!body.pull_request && (body.issue && !body.issue.pull_request)) return;
             // END FILTERNG //
-            
+
             var action = body.action;
             var isComment = !!body.comment;
             var issue = body.pull_request || body.issue;
@@ -94,7 +94,7 @@ app.post('/github-hook', function (req, res, next) {
                 }
                 currentlyRunning[n] = true;
                 logArgs("#" + n, isComment ? "comment" : "pull request", action);
-                
+
                 waitFor(5 * 1000).then(function() { // Avoid race condition
                     return getPullRequest(n, body);
                 }).then(function(pull_request) {
