@@ -1,0 +1,27 @@
+GET /repos/web-platform-tests/wpt/collaborators/yuki3
+accept: application/vnd.github.black-cat-preview+json
+host: api.github.com
+
+HTTP/1.1 204 No Content
+server: GitHub.com
+date: Wed, 11 Jul 2018 22:50:52 GMT
+content-type: application/octet-stream
+connection: close
+status: 204 No Content
+x-ratelimit-limit: 5000
+x-ratelimit-remaining: 4983
+x-ratelimit-reset: 1531350384
+x-oauth-scopes: public_repo, read:user, repo:status, user:email
+x-accepted-oauth-scopes: 
+x-github-media-type: github.v3; param=black-cat-preview; format=json
+access-control-expose-headers: ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+access-control-allow-origin: *
+strict-transport-security: max-age=31536000; includeSubdomains; preload
+x-frame-options: deny
+x-content-type-options: nosniff
+x-xss-protection: 1; mode=block
+referrer-policy: origin-when-cross-origin, strict-origin-when-cross-origin
+content-security-policy: default-src 'none'
+x-runtime-rack: 0.060034
+x-github-request-id: 7BA1:395B:685CF2C:D5721EF:5B4689CC
+

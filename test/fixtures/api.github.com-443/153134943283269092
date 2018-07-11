@@ -1,0 +1,33 @@
+GET /repos/web-platform-tests/wpt/contents/WebIDL/META.yml
+accept: application/vnd.github.black-cat-preview+json
+host: api.github.com
+
+HTTP/1.1 200 OK
+server: GitHub.com
+date: Wed, 11 Jul 2018 22:50:32 GMT
+content-type: application/json; charset=utf-8
+content-length: 927
+connection: close
+status: 200 OK
+x-ratelimit-limit: 5000
+x-ratelimit-remaining: 4986
+x-ratelimit-reset: 1531350384
+cache-control: private, max-age=60, s-maxage=60
+vary: Accept, Authorization, Cookie, X-GitHub-OTP
+etag: "033a3eb2d7cfbe4060e815d12f298f1728384780"
+last-modified: Wed, 11 Jul 2018 19:10:20 GMT
+x-oauth-scopes: public_repo, read:user, repo:status, user:email
+x-accepted-oauth-scopes: 
+x-github-media-type: github.v3; param=black-cat-preview; format=json
+access-control-expose-headers: ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+access-control-allow-origin: *
+strict-transport-security: max-age=31536000; includeSubdomains; preload
+x-frame-options: deny
+x-content-type-options: nosniff
+x-xss-protection: 1; mode=block
+referrer-policy: origin-when-cross-origin, strict-origin-when-cross-origin
+content-security-policy: default-src 'none'
+x-runtime-rack: 0.069734
+x-github-request-id: 79C0:395A:4C42BD5:AD679B7:5B4689B8
+
+{"name":"META.yml","path":"WebIDL/META.yml","sha":"033a3eb2d7cfbe4060e815d12f298f1728384780","size":63,"url":"https://api.github.com/repos/web-platform-tests/wpt/contents/WebIDL/META.yml?ref=master","html_url":"https://github.com/web-platform-tests/wpt/blob/master/WebIDL/META.yml","git_url":"https://api.github.com/repos/web-platform-tests/wpt/git/blobs/033a3eb2d7cfbe4060e815d12f298f1728384780","download_url":"https://raw.githubusercontent.com/web-platform-tests/wpt/master/WebIDL/META.yml","type":"file","content":"c3VnZ2VzdGVkX3Jldmlld2VyczoKICAtIGRvbWVuaWMKICAtIGplbnNsCiAg\nLSB0b2JpZQogIC0geXVraTMK\n","encoding":"base64","_links":{"self":"https://api.github.com/repos/web-platform-tests/wpt/contents/WebIDL/META.yml?ref=master","git":"https://api.github.com/repos/web-platform-tests/wpt/git/blobs/033a3eb2d7cfbe4060e815d12f298f1728384780","html":"https://github.com/web-platform-tests/wpt/blob/master/WebIDL/META.yml"}}

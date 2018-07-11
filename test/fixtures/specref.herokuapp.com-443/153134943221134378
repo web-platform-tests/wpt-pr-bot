@@ -1,0 +1,19 @@
+GET /bibrefs?refs=WebIDL,interfaces
+host: specref.herokuapp.com
+
+HTTP/1.1 200 OK
+server: Cowboy
+connection: close
+x-powered-by: Express
+access-control-allow-origin: *
+expires: Thu, 12 Jul 2018 22:50:32 GMT
+cache-control: public, max-age=86400
+x-content-type-options: nosniff
+content-type: application/json; charset=utf-8
+content-length: 634
+etag: W/"27a-VtPdHXjeR10+buXHsOy48w"
+vary: Accept-Encoding
+date: Wed, 11 Jul 2018 22:50:32 GMT
+via: 1.1 vegur
+
+{"WebIDL":{"authors":["Cameron McCormack","Boris Zbarsky","Tobie Langel"],"href":"https://heycam.github.io/webidl/","title":"Web IDL","status":"ED","publisher":"W3C","edDraft":"https://heycam.github.io/webidl/","deliveredBy":[{"url":"https://www.w3.org/WebPlatform/WG/","shortname":"webplatform"}],"versions":["WebIDL-20161215","WebIDL-20160915","WebIDL-20160308","WebIDL-20150804","WebIDL-20120419","WebIDL-20120207","WebIDL-20110927","WebIDL-20110712","WebIDL-20101021","WebIDL-20081219","WebIDL-20080829","WebIDL-20080410","WebIDL-20071017"],"repository":"https://github.com/heycam/webidl","id":"WebIDL","date":"15 December 2016"}}

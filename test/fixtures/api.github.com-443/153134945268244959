@@ -1,0 +1,32 @@
+GET /repos/web-platform-tests/wpt/collaborators/yuki3/permission
+accept: application/vnd.github.black-cat-preview+json
+host: api.github.com
+
+HTTP/1.1 200 OK
+server: GitHub.com
+date: Wed, 11 Jul 2018 22:50:52 GMT
+content-type: application/json; charset=utf-8
+content-length: 902
+connection: close
+status: 200 OK
+x-ratelimit-limit: 5000
+x-ratelimit-remaining: 4982
+x-ratelimit-reset: 1531350384
+cache-control: private, max-age=60, s-maxage=60
+vary: Accept, Authorization, Cookie, X-GitHub-OTP
+etag: "b90377bd0b346ddac4265bc1af715c00"
+x-oauth-scopes: public_repo, read:user, repo:status, user:email
+x-accepted-oauth-scopes: 
+x-github-media-type: github.v3; param=black-cat-preview; format=json
+access-control-expose-headers: ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+access-control-allow-origin: *
+strict-transport-security: max-age=31536000; includeSubdomains; preload
+x-frame-options: deny
+x-content-type-options: nosniff
+x-xss-protection: 1; mode=block
+referrer-policy: origin-when-cross-origin, strict-origin-when-cross-origin
+content-security-policy: default-src 'none'
+x-runtime-rack: 0.053512
+x-github-request-id: C923:395A:4C42FFB:AD68496:5B4689CC
+
+{"permission":"write","user":{"login":"yuki3","id":13570184,"node_id":"MDQ6VXNlcjEzNTcwMTg0","avatar_url":"https://avatars2.githubusercontent.com/u/13570184?v=4","gravatar_id":"","url":"https://api.github.com/users/yuki3","html_url":"https://github.com/yuki3","followers_url":"https://api.github.com/users/yuki3/followers","following_url":"https://api.github.com/users/yuki3/following{/other_user}","gists_url":"https://api.github.com/users/yuki3/gists{/gist_id}","starred_url":"https://api.github.com/users/yuki3/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/yuki3/subscriptions","organizations_url":"https://api.github.com/users/yuki3/orgs","repos_url":"https://api.github.com/users/yuki3/repos","events_url":"https://api.github.com/users/yuki3/events{/privacy}","received_events_url":"https://api.github.com/users/yuki3/received_events","type":"User","site_admin":false}}
