@@ -1,0 +1,32 @@
+GET /repos/web-platform-tests/wpt/collaborators/tobie/permission
+accept: application/vnd.github.black-cat-preview+json
+host: api.github.com
+
+HTTP/1.1 200 OK
+server: GitHub.com
+date: Wed, 11 Jul 2018 22:50:53 GMT
+content-type: application/json; charset=utf-8
+content-length: 890
+connection: close
+status: 200 OK
+x-ratelimit-limit: 5000
+x-ratelimit-remaining: 4980
+x-ratelimit-reset: 1531350384
+cache-control: private, max-age=60, s-maxage=60
+vary: Accept, Authorization, Cookie, X-GitHub-OTP
+etag: "1c15016f8065fe237bfd8bac76738daa"
+x-oauth-scopes: public_repo, read:user, repo:status, user:email
+x-accepted-oauth-scopes: 
+x-github-media-type: github.v3; param=black-cat-preview; format=json
+access-control-expose-headers: ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+access-control-allow-origin: *
+strict-transport-security: max-age=31536000; includeSubdomains; preload
+x-frame-options: deny
+x-content-type-options: nosniff
+x-xss-protection: 1; mode=block
+referrer-policy: origin-when-cross-origin, strict-origin-when-cross-origin
+content-security-policy: default-src 'none'
+x-runtime-rack: 0.033748
+x-github-request-id: 189C:3959:2E45ACD:747FE26:5B4689CD
+
+{"permission":"write","user":{"login":"tobie","id":3392,"node_id":"MDQ6VXNlcjMzOTI=","avatar_url":"https://avatars3.githubusercontent.com/u/3392?v=4","gravatar_id":"","url":"https://api.github.com/users/tobie","html_url":"https://github.com/tobie","followers_url":"https://api.github.com/users/tobie/followers","following_url":"https://api.github.com/users/tobie/following{/other_user}","gists_url":"https://api.github.com/users/tobie/gists{/gist_id}","starred_url":"https://api.github.com/users/tobie/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/tobie/subscriptions","organizations_url":"https://api.github.com/users/tobie/orgs","repos_url":"https://api.github.com/users/tobie/repos","events_url":"https://api.github.com/users/tobie/events{/privacy}","received_events_url":"https://api.github.com/users/tobie/received_events","type":"User","site_admin":false}}

@@ -1,0 +1,32 @@
+GET /repos/web-platform-tests/wpt/collaborators/jensl/permission
+accept: application/vnd.github.black-cat-preview+json
+host: api.github.com
+
+HTTP/1.1 200 OK
+server: GitHub.com
+date: Wed, 11 Jul 2018 22:50:53 GMT
+content-type: application/json; charset=utf-8
+content-length: 898
+connection: close
+status: 200 OK
+x-ratelimit-limit: 5000
+x-ratelimit-remaining: 4978
+x-ratelimit-reset: 1531350384
+cache-control: private, max-age=60, s-maxage=60
+vary: Accept, Authorization, Cookie, X-GitHub-OTP
+etag: "79a7ed997ce5555aff167185c520f549"
+x-oauth-scopes: public_repo, read:user, repo:status, user:email
+x-accepted-oauth-scopes: 
+x-github-media-type: github.v3; param=black-cat-preview; format=json
+access-control-expose-headers: ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+access-control-allow-origin: *
+strict-transport-security: max-age=31536000; includeSubdomains; preload
+x-frame-options: deny
+x-content-type-options: nosniff
+x-xss-protection: 1; mode=block
+referrer-policy: origin-when-cross-origin, strict-origin-when-cross-origin
+content-security-policy: default-src 'none'
+x-runtime-rack: 0.035150
+x-github-request-id: 0E16:395A:4C4302F:AD68526:5B4689CD
+
+{"permission":"write","user":{"login":"jensl","id":129190,"node_id":"MDQ6VXNlcjEyOTE5MA==","avatar_url":"https://avatars0.githubusercontent.com/u/129190?v=4","gravatar_id":"","url":"https://api.github.com/users/jensl","html_url":"https://github.com/jensl","followers_url":"https://api.github.com/users/jensl/followers","following_url":"https://api.github.com/users/jensl/following{/other_user}","gists_url":"https://api.github.com/users/jensl/gists{/gist_id}","starred_url":"https://api.github.com/users/jensl/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/jensl/subscriptions","organizations_url":"https://api.github.com/users/jensl/orgs","repos_url":"https://api.github.com/users/jensl/repos","events_url":"https://api.github.com/users/jensl/events{/privacy}","received_events_url":"https://api.github.com/users/jensl/received_events","type":"User","site_admin":false}}

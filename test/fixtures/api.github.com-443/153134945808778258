@@ -1,0 +1,32 @@
+GET /repos/web-platform-tests/wpt/collaborators/lukebjerring/permission
+accept: application/vnd.github.black-cat-preview+json
+host: api.github.com
+
+HTTP/1.1 200 OK
+server: GitHub.com
+date: Wed, 11 Jul 2018 22:50:58 GMT
+content-type: application/json; charset=utf-8
+content-length: 982
+connection: close
+status: 200 OK
+x-ratelimit-limit: 5000
+x-ratelimit-remaining: 4973
+x-ratelimit-reset: 1531350384
+cache-control: private, max-age=60, s-maxage=60
+vary: Accept, Authorization, Cookie, X-GitHub-OTP
+etag: "739add41e000d6067ee31a03b5f9582d"
+x-oauth-scopes: public_repo, read:user, repo:status, user:email
+x-accepted-oauth-scopes: 
+x-github-media-type: github.v3; param=black-cat-preview; format=json
+access-control-expose-headers: ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+access-control-allow-origin: *
+strict-transport-security: max-age=31536000; includeSubdomains; preload
+x-frame-options: deny
+x-content-type-options: nosniff
+x-xss-protection: 1; mode=block
+referrer-policy: origin-when-cross-origin, strict-origin-when-cross-origin
+content-security-policy: default-src 'none'
+x-runtime-rack: 0.054817
+x-github-request-id: 70EA:395B:685D196:D57264D:5B4689D1
+
+{"permission":"write","user":{"login":"lukebjerring","id":777956,"node_id":"MDQ6VXNlcjc3Nzk1Ng==","avatar_url":"https://avatars2.githubusercontent.com/u/777956?v=4","gravatar_id":"","url":"https://api.github.com/users/lukebjerring","html_url":"https://github.com/lukebjerring","followers_url":"https://api.github.com/users/lukebjerring/followers","following_url":"https://api.github.com/users/lukebjerring/following{/other_user}","gists_url":"https://api.github.com/users/lukebjerring/gists{/gist_id}","starred_url":"https://api.github.com/users/lukebjerring/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/lukebjerring/subscriptions","organizations_url":"https://api.github.com/users/lukebjerring/orgs","repos_url":"https://api.github.com/users/lukebjerring/repos","events_url":"https://api.github.com/users/lukebjerring/events{/privacy}","received_events_url":"https://api.github.com/users/lukebjerring/received_events","type":"User","site_admin":false}}

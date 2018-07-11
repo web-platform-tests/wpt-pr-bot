@@ -1,0 +1,33 @@
+GET /repos/web-platform-tests/wpt/pulls/11698/files
+accept: application/vnd.github.black-cat-preview+json
+host: api.github.com
+
+HTTP/1.1 200 OK
+server: GitHub.com
+date: Wed, 11 Jul 2018 22:50:31 GMT
+content-type: application/json; charset=utf-8
+content-length: 2236
+connection: close
+status: 200 OK
+x-ratelimit-limit: 5000
+x-ratelimit-remaining: 4988
+x-ratelimit-reset: 1531350384
+cache-control: private, max-age=60, s-maxage=60
+vary: Accept, Authorization, Cookie, X-GitHub-OTP
+etag: "4a7c2f5e533e34b5f6a8f2a1ae67c4b4"
+last-modified: Fri, 29 Jun 2018 11:26:03 GMT
+x-oauth-scopes: public_repo, read:user, repo:status, user:email
+x-accepted-oauth-scopes: 
+x-github-media-type: github.v3; param=black-cat-preview; format=json
+access-control-expose-headers: ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+access-control-allow-origin: *
+strict-transport-security: max-age=31536000; includeSubdomains; preload
+x-frame-options: deny
+x-content-type-options: nosniff
+x-xss-protection: 1; mode=block
+referrer-policy: origin-when-cross-origin, strict-origin-when-cross-origin
+content-security-policy: default-src 'none'
+x-runtime-rack: 0.072784
+x-github-request-id: BE28:395B:685C718:D571353:5B4689B7
+
+[{"sha":"2683aae9cb6c5f48083159b67d18c6dedb11b481","filename":"WebIDL/interfaces.html","status":"modified","additions":1,"deletions":1,"changes":2,"blob_url":"https://github.com/web-platform-tests/wpt/blob/9cb7c1ac9fc201f48b576a5c67e5da8eb83d876c/WebIDL/interfaces.html","raw_url":"https://github.com/web-platform-tests/wpt/raw/9cb7c1ac9fc201f48b576a5c67e5da8eb83d876c/WebIDL/interfaces.html","contents_url":"https://api.github.com/repos/web-platform-tests/wpt/contents/WebIDL/interfaces.html?ref=9cb7c1ac9fc201f48b576a5c67e5da8eb83d876c","patch":"@@ -22,7 +22,7 @@\n }\n \n promise_test(function() {\n-  return fetch(\"/interfaces/webidl.idl\").then(response => response.text())\n+  return fetch(\"/interfaces/WebIDL.idl\").then(response => response.text())\n                                         .then(doTest);\n }, \"Test driver\");\n </script>"},{"sha":"2dc52129041d3b0108d67088bd734a003620e168","filename":"interfaces/WebIDL.idl","status":"renamed","additions":5,"deletions":3,"changes":8,"blob_url":"https://github.com/web-platform-tests/wpt/blob/9cb7c1ac9fc201f48b576a5c67e5da8eb83d876c/interfaces/WebIDL.idl","raw_url":"https://github.com/web-platform-tests/wpt/raw/9cb7c1ac9fc201f48b576a5c67e5da8eb83d876c/interfaces/WebIDL.idl","contents_url":"https://api.github.com/repos/web-platform-tests/wpt/contents/interfaces/WebIDL.idl?ref=9cb7c1ac9fc201f48b576a5c67e5da8eb83d876c","patch":"@@ -1,9 +1,13 @@\n+// GENERATED CONTENT - DO NOT EDIT\n+// Content of this file was automatically extracted from the\n+// \"Web IDL\" spec.\n+// See: https://heycam.github.io/webidl/\n+\n typedef (Int8Array or Int16Array or Int32Array or\n          Uint8Array or Uint16Array or Uint32Array or Uint8ClampedArray or\n          Float32Array or Float64Array or DataView) ArrayBufferView;\n \n typedef (ArrayBufferView or ArrayBuffer) BufferSource;\n-\n [\n  Exposed=(Window,Worker),\n  Constructor(optional DOMString message = \"\", optional DOMString name = \"Error\")\n@@ -41,7 +45,5 @@ interface DOMException { // but see below note about ECMAScript binding\n };\n \n typedef unsigned long long DOMTimeStamp;\n-\n callback Function = any (any... arguments);\n-\n callback VoidFunction = void ();","previous_filename":"interfaces/webidl.idl"}]

@@ -1,0 +1,32 @@
+GET /repos/web-platform-tests/wpt/pulls/11698/reviews
+accept: application/vnd.github.black-cat-preview+json
+host: api.github.com
+
+HTTP/1.1 200 OK
+server: GitHub.com
+date: Wed, 11 Jul 2018 22:51:01 GMT
+content-type: application/json; charset=utf-8
+content-length: 1490
+connection: close
+status: 200 OK
+x-ratelimit-limit: 5000
+x-ratelimit-remaining: 4970
+x-ratelimit-reset: 1531350384
+cache-control: private, max-age=60, s-maxage=60
+vary: Accept, Authorization, Cookie, X-GitHub-OTP
+etag: "a5cfdf135741e1edf5c36d8ab44d84ca"
+x-oauth-scopes: public_repo, read:user, repo:status, user:email
+x-accepted-oauth-scopes: 
+x-github-media-type: github.v3; param=black-cat-preview; format=json
+access-control-expose-headers: ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+access-control-allow-origin: *
+strict-transport-security: max-age=31536000; includeSubdomains; preload
+x-frame-options: deny
+x-content-type-options: nosniff
+x-xss-protection: 1; mode=block
+referrer-policy: origin-when-cross-origin, strict-origin-when-cross-origin
+content-security-policy: default-src 'none'
+x-runtime-rack: 0.124833
+x-github-request-id: 0FCC:3958:1F6C9CD:50C04A2:5B4689D5
+
+[{"id":133189917,"node_id":"MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MTMzMTg5OTE3","user":{"login":"Ms2ger","id":111161,"node_id":"MDQ6VXNlcjExMTE2MQ==","avatar_url":"https://avatars1.githubusercontent.com/u/111161?v=4","gravatar_id":"","url":"https://api.github.com/users/Ms2ger","html_url":"https://github.com/Ms2ger","followers_url":"https://api.github.com/users/Ms2ger/followers","following_url":"https://api.github.com/users/Ms2ger/following{/other_user}","gists_url":"https://api.github.com/users/Ms2ger/gists{/gist_id}","starred_url":"https://api.github.com/users/Ms2ger/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/Ms2ger/subscriptions","organizations_url":"https://api.github.com/users/Ms2ger/orgs","repos_url":"https://api.github.com/users/Ms2ger/repos","events_url":"https://api.github.com/users/Ms2ger/events{/privacy}","received_events_url":"https://api.github.com/users/Ms2ger/received_events","type":"User","site_admin":false},"body":"","state":"APPROVED","html_url":"https://github.com/web-platform-tests/wpt/pull/11698#pullrequestreview-133189917","pull_request_url":"https://api.github.com/repos/web-platform-tests/wpt/pulls/11698","author_association":"MEMBER","_links":{"html":{"href":"https://github.com/web-platform-tests/wpt/pull/11698#pullrequestreview-133189917"},"pull_request":{"href":"https://api.github.com/repos/web-platform-tests/wpt/pulls/11698"}},"submitted_at":"2018-06-29T11:25:58Z","commit_id":"9cb7c1ac9fc201f48b576a5c67e5da8eb83d876c"}]

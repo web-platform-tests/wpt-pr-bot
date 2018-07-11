@@ -16,6 +16,7 @@
     "request": "2.48.0"
   },
   "devDependencies": {
+    "chai": "^4.1.2",
     "mocha": "1.21.4",
     "replay": "^2.3.0"
   },

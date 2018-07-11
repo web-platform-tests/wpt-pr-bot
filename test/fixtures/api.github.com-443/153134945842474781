@@ -1,0 +1,32 @@
+GET /repos/web-platform-tests/wpt/pulls/11698/requested_reviewers
+accept: application/vnd.github.black-cat-preview+json
+host: api.github.com
+
+HTTP/1.1 200 OK
+server: GitHub.com
+date: Wed, 11 Jul 2018 22:50:58 GMT
+content-type: application/json; charset=utf-8
+content-length: 3518
+connection: close
+status: 200 OK
+x-ratelimit-limit: 5000
+x-ratelimit-remaining: 4972
+x-ratelimit-reset: 1531350384
+cache-control: private, max-age=60, s-maxage=60
+vary: Accept, Authorization, Cookie, X-GitHub-OTP
+etag: "476fd1684d51aefa89d61422cc476d8e"
+x-oauth-scopes: public_repo, read:user, repo:status, user:email
+x-accepted-oauth-scopes: 
+x-github-media-type: github.v3; param=black-cat-preview; format=json
+access-control-expose-headers: ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+access-control-allow-origin: *
+strict-transport-security: max-age=31536000; includeSubdomains; preload
+x-frame-options: deny
+x-content-type-options: nosniff
+x-xss-protection: 1; mode=block
+referrer-policy: origin-when-cross-origin, strict-origin-when-cross-origin
+content-security-policy: default-src 'none'
+x-runtime-rack: 0.040048
+x-github-request-id: 63FF:395A:4C43144:AD687E0:5B4689D2
+
+{"users":[{"login":"tobie","id":3392,"node_id":"MDQ6VXNlcjMzOTI=","avatar_url":"https://avatars3.githubusercontent.com/u/3392?v=4","gravatar_id":"","url":"https://api.github.com/users/tobie","html_url":"https://github.com/tobie","followers_url":"https://api.github.com/users/tobie/followers","following_url":"https://api.github.com/users/tobie/following{/other_user}","gists_url":"https://api.github.com/users/tobie/gists{/gist_id}","starred_url":"https://api.github.com/users/tobie/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/tobie/subscriptions","organizations_url":"https://api.github.com/users/tobie/orgs","repos_url":"https://api.github.com/users/tobie/repos","events_url":"https://api.github.com/users/tobie/events{/privacy}","received_events_url":"https://api.github.com/users/tobie/received_events","type":"User","site_admin":false},{"login":"jensl","id":129190,"node_id":"MDQ6VXNlcjEyOTE5MA==","avatar_url":"https://avatars0.githubusercontent.com/u/129190?v=4","gravatar_id":"","url":"https://api.github.com/users/jensl","html_url":"https://github.com/jensl","followers_url":"https://api.github.com/users/jensl/followers","following_url":"https://api.github.com/users/jensl/following{/other_user}","gists_url":"https://api.github.com/users/jensl/gists{/gist_id}","starred_url":"https://api.github.com/users/jensl/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/jensl/subscriptions","organizations_url":"https://api.github.com/users/jensl/orgs","repos_url":"https://api.github.com/users/jensl/repos","events_url":"https://api.github.com/users/jensl/events{/privacy}","received_events_url":"https://api.github.com/users/jensl/received_events","type":"User","site_admin":false},{"login":"domenic","id":617481,"node_id":"MDQ6VXNlcjYxNzQ4MQ==","avatar_url":"https://avatars0.githubusercontent.com/u/617481?v=4","gravatar_id":"","url":"https://api.github.com/users/domenic","html_url":"https://github.com/domenic","followers_url":"https://api.github.com/users/domenic/followers","following_url":"https://api.github.com/users/domenic/following{/other_user}","gists_url":"https://api.github.com/users/domenic/gists{/gist_id}","starred_url":"https://api.github.com/users/domenic/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/domenic/subscriptions","organizations_url":"https://api.github.com/users/domenic/orgs","repos_url":"https://api.github.com/users/domenic/repos","events_url":"https://api.github.com/users/domenic/events{/privacy}","received_events_url":"https://api.github.com/users/domenic/received_events","type":"User","site_admin":false},{"login":"yuki3","id":13570184,"node_id":"MDQ6VXNlcjEzNTcwMTg0","avatar_url":"https://avatars2.githubusercontent.com/u/13570184?v=4","gravatar_id":"","url":"https://api.github.com/users/yuki3","html_url":"https://github.com/yuki3","followers_url":"https://api.github.com/users/yuki3/followers","following_url":"https://api.github.com/users/yuki3/following{/other_user}","gists_url":"https://api.github.com/users/yuki3/gists{/gist_id}","starred_url":"https://api.github.com/users/yuki3/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/yuki3/subscriptions","organizations_url":"https://api.github.com/users/yuki3/orgs","repos_url":"https://api.github.com/users/yuki3/repos","events_url":"https://api.github.com/users/yuki3/events{/privacy}","received_events_url":"https://api.github.com/users/yuki3/received_events","type":"User","site_admin":false}],"teams":[]}
