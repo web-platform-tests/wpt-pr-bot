@@ -58,15 +58,15 @@ function getPullRequest(n, body) {
 var currentlyRunning = {};
 
 app.post('/github-hook', function (req, res, next) {
-	req.pipe(bl(function (err, body) {
-    	if (err) {
-        	logArgs(err.message);
-		} else if (process.env.NODE_ENV != 'production' || checkRequest(body, req.headers["x-hub-signature"], process.env.GITHUB_SECRET)) {
-		    res.send(new Date().toISOString());
+    req.pipe(bl(function (err, body) {
+        if (err) {
+            logArgs(err.message);
+        } else if (process.env.NODE_ENV != 'production' || checkRequest(body, req.headers["x-hub-signature"], process.env.GITHUB_SECRET)) {
+            res.send(new Date().toISOString());
 
             // FILTER ALL THE THINGS
             try {
-    	        body = JSON.parse(body);
+                body = JSON.parse(body);
             } catch(e) {
                 return;
             }
@@ -84,7 +84,7 @@ app.post('/github-hook', function (req, res, next) {
             if (!isComment && action == "edited") {
                 if (body.pull_request.merged) return; // we know .pullrequest is available because it's not a comment.
                 logArgs("#" + n, "pull request edited");
-	            metadata(n, u, content).then(function(metadata) {
+                metadata(n, u, content).then(function(metadata) {
                     return removeReviewableBanner(n, metadata);
                 });
             } else if (action == "opened" || action == "synchronize" || (isComment && action == "created")) {
