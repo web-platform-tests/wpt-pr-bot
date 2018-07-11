@@ -8,7 +8,7 @@ suite('complement', function() {
         assert.deepEqual([], complement(["baz", "foo"], []));
         assert.deepEqual([], complement([], []));
     });
-	
+
     test('complement returns the extra elements found in the second array', function() {
         assert.deepEqual(["foo", "bar"], complement(["baz"], ["foo", "bar", "baz"]));
         assert.deepEqual(["baz"], complement([], ["baz"]));
