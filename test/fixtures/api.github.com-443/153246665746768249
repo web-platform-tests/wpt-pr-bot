@@ -1,0 +1,29 @@
+GET /repos/web-platform-tests/wpt/collaborators/yoavweiss
+accept: application/vnd.github.black-cat-preview+json
+host: api.github.com
+
+HTTP/1.1 403 Forbidden
+server: GitHub.com
+date: Tue, 24 Jul 2018 21:10:57 GMT
+content-type: application/json; charset=utf-8
+content-length: 178
+connection: close
+status: 403 Forbidden
+x-ratelimit-limit: 5000
+x-ratelimit-remaining: 4811
+x-ratelimit-reset: 1532468901
+x-oauth-scopes: 
+x-accepted-oauth-scopes: 
+x-github-media-type: github.v3; param=black-cat-preview; format=json
+access-control-expose-headers: ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+access-control-allow-origin: *
+strict-transport-security: max-age=31536000; includeSubdomains; preload
+x-frame-options: deny
+x-content-type-options: nosniff
+x-xss-protection: 1; mode=block
+referrer-policy: origin-when-cross-origin, strict-origin-when-cross-origin
+content-security-policy: default-src 'none'
+x-runtime-rack: 0.025407
+x-github-request-id: D253:54FD:9323A1:12345C1:5B5795E1
+
+{"message":"Must have push access to view repository collaborators.","documentation_url":"https://developer.github.com/v3/repos/collaborators/#check-if-a-user-is-a-collaborator"}
