@@ -1,0 +1,33 @@
+GET /repos/web-platform-tests/wpt/contents/css/css-tables/META.yml
+accept: application/vnd.github.black-cat-preview+json
+host: api.github.com
+
+HTTP/1.1 200 OK
+server: GitHub.com
+date: Tue, 24 Jul 2018 21:10:17 GMT
+content-type: application/json; charset=utf-8
+content-length: 1042
+connection: close
+status: 200 OK
+x-ratelimit-limit: 5000
+x-ratelimit-remaining: 4922
+x-ratelimit-reset: 1532468901
+cache-control: private, max-age=60, s-maxage=60
+vary: Accept, Authorization, Cookie, X-GitHub-OTP
+etag: "ac81381ef568cdadf3b7f59f0f8268354f129574"
+last-modified: Tue, 24 Jul 2018 19:22:39 GMT
+x-oauth-scopes: 
+x-accepted-oauth-scopes: 
+x-github-media-type: github.v3; param=black-cat-preview; format=json
+access-control-expose-headers: ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+access-control-allow-origin: *
+strict-transport-security: max-age=31536000; includeSubdomains; preload
+x-frame-options: deny
+x-content-type-options: nosniff
+x-xss-protection: 1; mode=block
+referrer-policy: origin-when-cross-origin, strict-origin-when-cross-origin
+content-security-policy: default-src 'none'
+x-runtime-rack: 0.086150
+x-github-request-id: 6A83:54FE:418B32:9D1FCE:5B5795B9
+
+{"name":"META.yml","path":"css/css-tables/META.yml","sha":"ac81381ef568cdadf3b7f59f0f8268354f129574","size":110,"url":"https://api.github.com/repos/web-platform-tests/wpt/contents/css/css-tables/META.yml?ref=master","html_url":"https://github.com/web-platform-tests/wpt/blob/master/css/css-tables/META.yml","git_url":"https://api.github.com/repos/web-platform-tests/wpt/git/blobs/ac81381ef568cdadf3b7f59f0f8268354f129574","download_url":"https://raw.githubusercontent.com/web-platform-tests/wpt/master/css/css-tables/META.yml","type":"file","content":"c3BlYzogaHR0cHM6Ly9kcmFmdHMuY3Nzd2cub3JnL2Nzcy10YWJsZXMvCnN1\nZ2dlc3RlZF9yZXZpZXdlcnM6CiAgLSBkYmFyb24KICAtIEZyZW15Q29tcGFu\neQogIC0gZ3JlZ3doaXR3b3J0aAo=\n","encoding":"base64","_links":{"self":"https://api.github.com/repos/web-platform-tests/wpt/contents/css/css-tables/META.yml?ref=master","git":"https://api.github.com/repos/web-platform-tests/wpt/git/blobs/ac81381ef568cdadf3b7f59f0f8268354f129574","html":"https://github.com/web-platform-tests/wpt/blob/master/css/css-tables/META.yml"}}

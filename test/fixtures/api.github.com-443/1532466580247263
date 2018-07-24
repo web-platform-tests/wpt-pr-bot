@@ -1,0 +1,33 @@
+GET /repos/web-platform-tests/wpt/contents/domxpath/META.yml
+accept: application/vnd.github.black-cat-preview+json
+host: api.github.com
+
+HTTP/1.1 200 OK
+server: GitHub.com
+date: Tue, 24 Jul 2018 21:09:39 GMT
+content-type: application/json; charset=utf-8
+content-length: 998
+connection: close
+status: 200 OK
+x-ratelimit-limit: 5000
+x-ratelimit-remaining: 4953
+x-ratelimit-reset: 1532468901
+cache-control: private, max-age=60, s-maxage=60
+vary: Accept, Authorization, Cookie, X-GitHub-OTP
+etag: "6c9963a8222b41e956d5d49d516f8e3c5811fc73"
+last-modified: Tue, 24 Jul 2018 19:22:39 GMT
+x-oauth-scopes: 
+x-accepted-oauth-scopes: 
+x-github-media-type: github.v3; param=black-cat-preview; format=json
+access-control-expose-headers: ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+access-control-allow-origin: *
+strict-transport-security: max-age=31536000; includeSubdomains; preload
+x-frame-options: deny
+x-content-type-options: nosniff
+x-xss-protection: 1; mode=block
+referrer-policy: origin-when-cross-origin, strict-origin-when-cross-origin
+content-security-policy: default-src 'none'
+x-runtime-rack: 0.069424
+x-github-request-id: 5D50:54FC:667D1D:E969B7:5B579593
+
+{"name":"META.yml","path":"domxpath/META.yml","sha":"6c9963a8222b41e956d5d49d516f8e3c5811fc73","size":105,"url":"https://api.github.com/repos/web-platform-tests/wpt/contents/domxpath/META.yml?ref=master","html_url":"https://github.com/web-platform-tests/wpt/blob/master/domxpath/META.yml","git_url":"https://api.github.com/repos/web-platform-tests/wpt/git/blobs/6c9963a8222b41e956d5d49d516f8e3c5811fc73","download_url":"https://raw.githubusercontent.com/web-platform-tests/wpt/master/domxpath/META.yml","type":"file","content":"c3BlYzogaHR0cHM6Ly93d3cudzMub3JnL1RSL0RPTS1MZXZlbC0zLVhQYXRo\nLwpzdWdnZXN0ZWRfcmV2aWV3ZXJzOgogIC0gZ3NuZWRkZXJzCiAgLSB6cXpo\nYW5nCiAgLSBkZW5pYWsK\n","encoding":"base64","_links":{"self":"https://api.github.com/repos/web-platform-tests/wpt/contents/domxpath/META.yml?ref=master","git":"https://api.github.com/repos/web-platform-tests/wpt/git/blobs/6c9963a8222b41e956d5d49d516f8e3c5811fc73","html":"https://github.com/web-platform-tests/wpt/blob/master/domxpath/META.yml"}}

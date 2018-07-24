@@ -1,0 +1,33 @@
+GET /repos/web-platform-tests/wpt/contents/css/selectors/i18n/META.yml
+accept: application/vnd.github.black-cat-preview+json
+host: api.github.com
+
+HTTP/1.1 200 OK
+server: GitHub.com
+date: Tue, 24 Jul 2018 21:09:43 GMT
+content-type: application/json; charset=utf-8
+content-length: 953
+connection: close
+status: 200 OK
+x-ratelimit-limit: 5000
+x-ratelimit-remaining: 4942
+x-ratelimit-reset: 1532468901
+cache-control: private, max-age=60, s-maxage=60
+vary: Accept, Authorization, Cookie, X-GitHub-OTP
+etag: "9fa8c3b6c9bdbfa2b9731c89b23ffc6f47ceba2b"
+last-modified: Tue, 24 Jul 2018 19:22:39 GMT
+x-oauth-scopes: 
+x-accepted-oauth-scopes: 
+x-github-media-type: github.v3; param=black-cat-preview; format=json
+access-control-expose-headers: ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+access-control-allow-origin: *
+strict-transport-security: max-age=31536000; includeSubdomains; preload
+x-frame-options: deny
+x-content-type-options: nosniff
+x-xss-protection: 1; mode=block
+referrer-policy: origin-when-cross-origin, strict-origin-when-cross-origin
+content-security-policy: default-src 'none'
+x-runtime-rack: 0.078151
+x-github-request-id: B945:54FE:4184DC:9D10A5:5B579597
+
+{"name":"META.yml","path":"css/selectors/i18n/META.yml","sha":"9fa8c3b6c9bdbfa2b9731c89b23ffc6f47ceba2b","size":30,"url":"https://api.github.com/repos/web-platform-tests/wpt/contents/css/selectors/i18n/META.yml?ref=master","html_url":"https://github.com/web-platform-tests/wpt/blob/master/css/selectors/i18n/META.yml","git_url":"https://api.github.com/repos/web-platform-tests/wpt/git/blobs/9fa8c3b6c9bdbfa2b9731c89b23ffc6f47ceba2b","download_url":"https://raw.githubusercontent.com/web-platform-tests/wpt/master/css/selectors/i18n/META.yml","type":"file","content":"c3VnZ2VzdGVkX3Jldmlld2VyczoKICAtIHIxMmEK\n","encoding":"base64","_links":{"self":"https://api.github.com/repos/web-platform-tests/wpt/contents/css/selectors/i18n/META.yml?ref=master","git":"https://api.github.com/repos/web-platform-tests/wpt/git/blobs/9fa8c3b6c9bdbfa2b9731c89b23ffc6f47ceba2b","html":"https://github.com/web-platform-tests/wpt/blob/master/css/selectors/i18n/META.yml"}}

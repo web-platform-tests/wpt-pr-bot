@@ -1,0 +1,33 @@
+GET /repos/web-platform-tests/wpt/contents/css/geometry/META.yml
+accept: application/vnd.github.black-cat-preview+json
+host: api.github.com
+
+HTTP/1.1 200 OK
+server: GitHub.com
+date: Tue, 24 Jul 2018 21:09:44 GMT
+content-type: application/json; charset=utf-8
+content-length: 1030
+connection: close
+status: 200 OK
+x-ratelimit-limit: 5000
+x-ratelimit-remaining: 4937
+x-ratelimit-reset: 1532468901
+cache-control: private, max-age=60, s-maxage=60
+vary: Accept, Authorization, Cookie, X-GitHub-OTP
+etag: "9e3a7979ed80210ccba78da767526aad875e00c2"
+last-modified: Tue, 24 Jul 2018 19:22:39 GMT
+x-oauth-scopes: 
+x-accepted-oauth-scopes: 
+x-github-media-type: github.v3; param=black-cat-preview; format=json
+access-control-expose-headers: ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+access-control-allow-origin: *
+strict-transport-security: max-age=31536000; includeSubdomains; preload
+x-frame-options: deny
+x-content-type-options: nosniff
+x-xss-protection: 1; mode=block
+referrer-policy: origin-when-cross-origin, strict-origin-when-cross-origin
+content-security-policy: default-src 'none'
+x-runtime-rack: 0.060241
+x-github-request-id: 91D5:54FC:667E61:E96CFE:5B579598
+
+{"name":"META.yml","path":"css/geometry/META.yml","sha":"9e3a7979ed80210ccba78da767526aad875e00c2","size":109,"url":"https://api.github.com/repos/web-platform-tests/wpt/contents/css/geometry/META.yml?ref=master","html_url":"https://github.com/web-platform-tests/wpt/blob/master/css/geometry/META.yml","git_url":"https://api.github.com/repos/web-platform-tests/wpt/git/blobs/9e3a7979ed80210ccba78da767526aad875e00c2","download_url":"https://raw.githubusercontent.com/web-platform-tests/wpt/master/css/geometry/META.yml","type":"file","content":"c3BlYzogaHR0cHM6Ly9kcmFmdHMuZnh0Zi5vcmcvZ2VvbWV0cnkvCnN1Z2dl\nc3RlZF9yZXZpZXdlcnM6CiAgLSBwZXRlcmpvZWwKICAtIHRzY2huZWlkZXJl\naXQKICAtIGRpcmtzY2h1bHplCg==\n","encoding":"base64","_links":{"self":"https://api.github.com/repos/web-platform-tests/wpt/contents/css/geometry/META.yml?ref=master","git":"https://api.github.com/repos/web-platform-tests/wpt/git/blobs/9e3a7979ed80210ccba78da767526aad875e00c2","html":"https://github.com/web-platform-tests/wpt/blob/master/css/geometry/META.yml"}}
