@@ -1,0 +1,33 @@
+GET /repos/web-platform-tests/wpt/contents/css/css-ruby/META.yml
+accept: application/vnd.github.black-cat-preview+json
+host: api.github.com
+
+HTTP/1.1 200 OK
+server: GitHub.com
+date: Tue, 24 Jul 2018 21:10:20 GMT
+content-type: application/json; charset=utf-8
+content-length: 1018
+connection: close
+status: 200 OK
+x-ratelimit-limit: 5000
+x-ratelimit-remaining: 4911
+x-ratelimit-reset: 1532468901
+cache-control: private, max-age=60, s-maxage=60
+vary: Accept, Authorization, Cookie, X-GitHub-OTP
+etag: "b0098caea13c61def740fa706be68efb74b3bd9b"
+last-modified: Tue, 24 Jul 2018 19:22:39 GMT
+x-oauth-scopes: 
+x-accepted-oauth-scopes: 
+x-github-media-type: github.v3; param=black-cat-preview; format=json
+access-control-expose-headers: ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+access-control-allow-origin: *
+strict-transport-security: max-age=31536000; includeSubdomains; preload
+x-frame-options: deny
+x-content-type-options: nosniff
+x-xss-protection: 1; mode=block
+referrer-policy: origin-when-cross-origin, strict-origin-when-cross-origin
+content-security-policy: default-src 'none'
+x-runtime-rack: 0.058393
+x-github-request-id: E990:54FD:9317B1:1232C0B:5B5795BC
+
+{"name":"META.yml","path":"css/css-ruby/META.yml","sha":"b0098caea13c61def740fa706be68efb74b3bd9b","size":100,"url":"https://api.github.com/repos/web-platform-tests/wpt/contents/css/css-ruby/META.yml?ref=master","html_url":"https://github.com/web-platform-tests/wpt/blob/master/css/css-ruby/META.yml","git_url":"https://api.github.com/repos/web-platform-tests/wpt/git/blobs/b0098caea13c61def740fa706be68efb74b3bd9b","download_url":"https://raw.githubusercontent.com/web-platform-tests/wpt/master/css/css-ruby/META.yml","type":"file","content":"c3BlYzogaHR0cHM6Ly9kcmFmdHMuY3Nzd2cub3JnL2Nzcy1ydWJ5LwpzdWdn\nZXN0ZWRfcmV2aWV3ZXJzOgogIC0ga29qaWlzaGkKICAtIGZhbnRhc2FpCiAg\nLSB1cHN1cGVyCg==\n","encoding":"base64","_links":{"self":"https://api.github.com/repos/web-platform-tests/wpt/contents/css/css-ruby/META.yml?ref=master","git":"https://api.github.com/repos/web-platform-tests/wpt/git/blobs/b0098caea13c61def740fa706be68efb74b3bd9b","html":"https://github.com/web-platform-tests/wpt/blob/master/css/css-ruby/META.yml"}}

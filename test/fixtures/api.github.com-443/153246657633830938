@@ -1,0 +1,33 @@
+GET /repos/web-platform-tests/wpt/contents/gamepad/META.yml
+accept: application/vnd.github.black-cat-preview+json
+host: api.github.com
+
+HTTP/1.1 200 OK
+server: GitHub.com
+date: Tue, 24 Jul 2018 21:09:36 GMT
+content-type: application/json; charset=utf-8
+content-length: 941
+connection: close
+status: 200 OK
+x-ratelimit-limit: 5000
+x-ratelimit-remaining: 4965
+x-ratelimit-reset: 1532468901
+cache-control: private, max-age=60, s-maxage=60
+vary: Accept, Authorization, Cookie, X-GitHub-OTP
+etag: "5f99b9db8eb163c24bf9a330039a8a7a1659ba6d"
+last-modified: Tue, 24 Jul 2018 19:22:39 GMT
+x-oauth-scopes: 
+x-accepted-oauth-scopes: 
+x-github-media-type: github.v3; param=black-cat-preview; format=json
+access-control-expose-headers: ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+access-control-allow-origin: *
+strict-transport-security: max-age=31536000; includeSubdomains; preload
+x-frame-options: deny
+x-content-type-options: nosniff
+x-xss-protection: 1; mode=block
+referrer-policy: origin-when-cross-origin, strict-origin-when-cross-origin
+content-security-policy: default-src 'none'
+x-runtime-rack: 0.069939
+x-github-request-id: 2DB9:54FD:930848:1230A55:5B579590
+
+{"name":"META.yml","path":"gamepad/META.yml","sha":"5f99b9db8eb163c24bf9a330039a8a7a1659ba6d","size":68,"url":"https://api.github.com/repos/web-platform-tests/wpt/contents/gamepad/META.yml?ref=master","html_url":"https://github.com/web-platform-tests/wpt/blob/master/gamepad/META.yml","git_url":"https://api.github.com/repos/web-platform-tests/wpt/git/blobs/5f99b9db8eb163c24bf9a330039a8a7a1659ba6d","download_url":"https://raw.githubusercontent.com/web-platform-tests/wpt/master/gamepad/META.yml","type":"file","content":"c3BlYzogaHR0cHM6Ly93M2MuZ2l0aHViLmlvL2dhbWVwYWQvCnN1Z2dlc3Rl\nZF9yZXZpZXdlcnM6CiAgLSBsdXNlcgo=\n","encoding":"base64","_links":{"self":"https://api.github.com/repos/web-platform-tests/wpt/contents/gamepad/META.yml?ref=master","git":"https://api.github.com/repos/web-platform-tests/wpt/git/blobs/5f99b9db8eb163c24bf9a330039a8a7a1659ba6d","html":"https://github.com/web-platform-tests/wpt/blob/master/gamepad/META.yml"}}

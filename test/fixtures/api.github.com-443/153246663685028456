@@ -1,0 +1,33 @@
+GET /repos/web-platform-tests/wpt/contents/cookies/META.yml
+accept: application/vnd.github.black-cat-preview+json
+host: api.github.com
+
+HTTP/1.1 200 OK
+server: GitHub.com
+date: Tue, 24 Jul 2018 21:10:36 GMT
+content-type: application/json; charset=utf-8
+content-length: 913
+connection: close
+status: 200 OK
+x-ratelimit-limit: 5000
+x-ratelimit-remaining: 4864
+x-ratelimit-reset: 1532468901
+cache-control: private, max-age=60, s-maxage=60
+vary: Accept, Authorization, Cookie, X-GitHub-OTP
+etag: "946da8833ac886c2f00488880e3b7a10926efe63"
+last-modified: Tue, 24 Jul 2018 19:22:39 GMT
+x-oauth-scopes: 
+x-accepted-oauth-scopes: 
+x-github-media-type: github.v3; param=black-cat-preview; format=json
+access-control-expose-headers: ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+access-control-allow-origin: *
+strict-transport-security: max-age=31536000; includeSubdomains; preload
+x-frame-options: deny
+x-content-type-options: nosniff
+x-xss-protection: 1; mode=block
+referrer-policy: origin-when-cross-origin, strict-origin-when-cross-origin
+content-security-policy: default-src 'none'
+x-runtime-rack: 0.060829
+x-github-request-id: 87ED:54FE:418DFC:9D2757:5B5795CC
+
+{"name":"META.yml","path":"cookies/META.yml","sha":"946da8833ac886c2f00488880e3b7a10926efe63","size":47,"url":"https://api.github.com/repos/web-platform-tests/wpt/contents/cookies/META.yml?ref=master","html_url":"https://github.com/web-platform-tests/wpt/blob/master/cookies/META.yml","git_url":"https://api.github.com/repos/web-platform-tests/wpt/git/blobs/946da8833ac886c2f00488880e3b7a10926efe63","download_url":"https://raw.githubusercontent.com/web-platform-tests/wpt/master/cookies/META.yml","type":"file","content":"c3VnZ2VzdGVkX3Jldmlld2VyczoKICAtIGluaWt1bGluCiAgLSBtaWtld2Vz\ndAo=\n","encoding":"base64","_links":{"self":"https://api.github.com/repos/web-platform-tests/wpt/contents/cookies/META.yml?ref=master","git":"https://api.github.com/repos/web-platform-tests/wpt/git/blobs/946da8833ac886c2f00488880e3b7a10926efe63","html":"https://github.com/web-platform-tests/wpt/blob/master/cookies/META.yml"}}
