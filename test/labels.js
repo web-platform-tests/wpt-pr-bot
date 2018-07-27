@@ -5,6 +5,7 @@ suite('labels', function() {
     suite('fromFiles', function() {
         test('must return root dir of filename as label', function() {
             assert.sameMembers(["foo"], labels.fromFiles(["foo/bar/baz"]));
+            assert.sameMembers(["old-tests"], labels.fromFiles(["old-tests/f/g"]));
         });
 
         test('must return correct shortname of spec for directories which used to be spelled incorrectly', function() {
