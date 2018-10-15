@@ -9,7 +9,7 @@ var express = require("express"),
     rmReviewable = require('./lib/rm-reviewable'),
     github = require('./lib/github'),
     checkRequest = require('./lib/check-request'),
-    isProcessed = require('./lib/is-processed'),
+    epochs = require('./lib/epochs'),
     q = require('q');
 
 function promise(value) {
@@ -125,6 +125,63 @@ app.post('/github-hook', function (req, res, next) {
         } else {
             logArgs("Unverified request", req);
         }
+    }));
+});
+
+var knownEpochs = [ 'weekly', 'daily' ];
+var inFlightEpochs = {};
+app.post('/update-epoch', function (req, res, next) {
+    req.pipe(bl(function (err, body) {
+        // Handle req/res pair inline.
+        if (err) {
+            logArgs(err.message);
+            return
+        }
+        try {
+            body = JSON.parse(body);
+        } catch(e) {
+            logArgs("Error parsing JSON from updated-epochs body", body);
+            res.sendStatus(400);
+            return;
+        }
+        if (!body) {
+            logArgs("update-epochs body deserialized to falsey value", body);
+            res.sendStatus(422);
+            return;
+        }
+        if (!knownEpochs.includes(body.epoch)) {
+            logArgs("Unknown epoch in 'epoch' key value of body", body);
+            res.sendStatus(422);
+            return;
+        }
+        var epoch = body.epoch;
+        if (inFlightEpochs[epoch]) {
+            logArgs("Already processing update for epoch", epoch);
+            res.sendStatus(429);
+            return;
+        }
+        if (!body.next) {
+            logArgs("Missing 'next' key value in body", body);
+            res.sendStatus(422);
+            return;
+        }
+        if (!body.next.hash) {
+            logArgs("Missing 'next.hash' key value in body", body);
+            res.sendStatus(422);
+            return;
+        }
+
+        inFlightEpochs[epoch] = true;
+        res.sendStatus(200);
+
+        // Defer to epochs library for update.
+        epochs.updateEpoch(epoch).then(function (next) {
+            delete inFlightEpochs[epoch];
+            logArgs("Updated epoch", epoch, next);
+        }, function (err) {
+            delete inFlightEpochs[epoch];
+            logArgs("Error updating epoch", epoch, "\n", err);
+        });
     }));
 });
 
