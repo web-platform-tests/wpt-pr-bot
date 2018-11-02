@@ -140,8 +140,15 @@ var updateEpoch = function (epoch) {
 
     logArgs("Updating epoch", epoch);
 
-    // Defer to epochs library for update.
-    epochs.updateEpoch(epoch).then(function (next) {
+    // Timeout update operation after 1.5 minutes.
+    var timeout = q.defer();
+    setTimeout(timeout.reject.bind(timeout,
+            new Error(`Epoch update for ${epoch} timed out`)),
+        90 * 1000);
+    q.promise.race([
+        // Defer to epochs library for update.
+        epochs.updateEpoch(epoch), timeout
+    ]).then(function (next) {
         delete inFlightEpochs[epoch];
         logArgs("Updated epoch", epoch, next);
     }, function (err) {
