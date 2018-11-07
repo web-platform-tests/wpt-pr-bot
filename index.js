@@ -145,7 +145,7 @@ var updateEpoch = function (epoch) {
     setTimeout(timeout.reject.bind(timeout,
             new Error(`Epoch update for ${epoch} timed out`)),
         90 * 1000);
-    q.promise.race([
+    q.race([
         // Defer to epochs library for update.
         epochs.updateEpoch(epoch), timeout
     ]).then(function (next) {
