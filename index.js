@@ -9,7 +9,7 @@ var express = require("express"),
     rmReviewable = require('./lib/rm-reviewable'),
     github = require('./lib/github'),
     checkRequest = require('./lib/check-request'),
-    isProcessed = require('./lib/is-processed'),
+    epochs = require('./lib/epochs'),
     q = require('q');
 
 function promise(value) {
@@ -127,6 +127,39 @@ app.post('/github-hook', function (req, res, next) {
         }
     }));
 });
+
+var knownEpochs = [ 'weekly', 'daily' ];
+var inFlightEpochs = {};
+var updateEpoch = function (epoch) {
+    if (inFlightEpochs[epoch]) {
+        logArgs("Skipping epoch update: previous update still in progress",
+            epoch);
+        return;
+    }
+    inFlightEpochs[epoch] = true;
+
+    logArgs("Updating epoch", epoch);
+
+    // Timeout update operation after 1.5 minutes.
+    var timeout = q.defer();
+    setTimeout(timeout.reject.bind(timeout,
+            new Error(`Epoch update for ${epoch} timed out`)),
+        90 * 1000);
+    q.promise.race([
+        // Defer to epochs library for update.
+        epochs.updateEpoch(epoch), timeout
+    ]).then(function (next) {
+        delete inFlightEpochs[epoch];
+        logArgs("Updated epoch", epoch, next);
+    }, function (err) {
+        delete inFlightEpochs[epoch];
+        logArgs("Error updating epoch", epoch, "\n", err);
+    });
+}
+
+for (var i = 0; i < knownEpochs.length; i++) {
+    setInterval(updateEpoch.bind(this, knownEpochs[i]), 2 * 60 * 1000);
+}
 
 var port = process.env.PORT || 5000;
 app.listen(port, function() {
