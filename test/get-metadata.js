@@ -68,7 +68,8 @@ suite('getMetadata', function() {
             reviewers: [ 'domenic', 'jensl', 'ms2ger', 'tobie', 'yuki3' ],
             isMergeable: true,
             reviewedDownstream: false,
-            missingReviewers: []
+            missingAssignee: 'jensl', // reviewersExcludingAuthor[11698 % 4]
+            missingReviewers: [],
         };
 
         return getMetadata(11698, 'lukebjerring', '')
