@@ -1,0 +1,31 @@
+GET /repos/web-platform-tests/wpt/pulls/13990/reviews
+accept: application/vnd.github.black-cat-preview+json
+host: api.github.com
+
+HTTP/1.1 200 OK
+server: GitHub.com
+date: Fri, 09 Nov 2018 01:35:07 GMT
+content-type: application/json; charset=utf-8
+content-length: 1576
+connection: close
+status: 200 OK
+x-ratelimit-limit: 5000
+x-ratelimit-remaining: 4997
+x-ratelimit-reset: 1541729149
+cache-control: private, max-age=60, s-maxage=60
+vary: Accept, Authorization, Cookie, X-GitHub-OTP
+etag: "9951cb2c99002d7409b77ede48c39c33"
+x-oauth-scopes: public_repo
+x-accepted-oauth-scopes: 
+x-github-media-type: github.v3; param=black-cat-preview; format=json
+access-control-expose-headers: ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type
+access-control-allow-origin: *
+strict-transport-security: max-age=31536000; includeSubdomains; preload
+x-frame-options: deny
+x-content-type-options: nosniff
+x-xss-protection: 1; mode=block
+referrer-policy: origin-when-cross-origin, strict-origin-when-cross-origin
+content-security-policy: default-src 'none'
+x-github-request-id: D028:6FD7:49FC6BA:9A8F236:5BE4E44A
+
+[{"id":173186207,"node_id":"MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MTczMTg2MjA3","user":{"login":"wpt-pr-bot","id":16780864,"node_id":"MDQ6VXNlcjE2NzgwODY0","avatar_url":"https://avatars3.githubusercontent.com/u/16780864?v=4","gravatar_id":"","url":"https://api.github.com/users/wpt-pr-bot","html_url":"https://github.com/wpt-pr-bot","followers_url":"https://api.github.com/users/wpt-pr-bot/followers","following_url":"https://api.github.com/users/wpt-pr-bot/following{/other_user}","gists_url":"https://api.github.com/users/wpt-pr-bot/gists{/gist_id}","starred_url":"https://api.github.com/users/wpt-pr-bot/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/wpt-pr-bot/subscriptions","organizations_url":"https://api.github.com/users/wpt-pr-bot/orgs","repos_url":"https://api.github.com/users/wpt-pr-bot/repos","events_url":"https://api.github.com/users/wpt-pr-bot/events{/privacy}","received_events_url":"https://api.github.com/users/wpt-pr-bot/received_events","type":"User","site_admin":false},"body":"Already reviewed downstream.","state":"APPROVED","html_url":"https://github.com/web-platform-tests/wpt/pull/13990#pullrequestreview-173186207","pull_request_url":"https://api.github.com/repos/web-platform-tests/wpt/pulls/13990","author_association":"COLLABORATOR","_links":{"html":{"href":"https://github.com/web-platform-tests/wpt/pull/13990#pullrequestreview-173186207"},"pull_request":{"href":"https://api.github.com/repos/web-platform-tests/wpt/pulls/13990"}},"submitted_at":"2018-11-08T21:43:25Z","commit_id":"cee3c69216627203789f37a1c58f0351bdb112ce"}]
