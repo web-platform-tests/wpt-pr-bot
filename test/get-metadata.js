@@ -1,8 +1,15 @@
 'use strict';
 var assert = require('chai').assert,
+    sinon = require('sinon'),
     getMetadata = require('../lib/metadata');
 
 suite('getMetadata', function() {
+    let sandbox;
+    setup(() => {
+        sandbox = sinon.createSandbox();
+        sandbox.replace(Math, 'random', () => 0.5);
+    });
+
     test('retrieval and formatting of metadata', function() {
         var expected = {
             issue: 11698,
@@ -68,7 +75,7 @@ suite('getMetadata', function() {
             reviewers: [ 'domenic', 'jensl', 'ms2ger', 'tobie', 'yuki3' ],
             isMergeable: true,
             reviewedDownstream: false,
-            missingAssignee: 'jensl', // reviewersExcludingAuthor[11698 % 4]
+            missingAssignee: 'jensl',
             missingReviewers: [],
         };
 
@@ -76,5 +83,9 @@ suite('getMetadata', function() {
             .then(function(actual) {
                 assert.deepEqual(expected, actual);
             });
+    });
+
+    teardown(() => {
+        sandbox.restore();
     });
 });
