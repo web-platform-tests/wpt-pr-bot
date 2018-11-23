@@ -75,7 +75,7 @@ suite('getMetadata', function() {
             reviewers: [ 'domenic', 'jensl', 'ms2ger', 'tobie', 'yuki3' ],
             isMergeable: true,
             reviewedDownstream: false,
-            missingAssignee: 'jensl',
+            missingAssignee: 'Ms2ger',
             missingReviewers: [],
         };
 
