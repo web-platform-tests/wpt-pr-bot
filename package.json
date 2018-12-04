@@ -4,7 +4,9 @@
   "description": "A helper bot for web-platform-tests.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha -u tdd ./test/setup.js ./test/*.js",
+    "lint": "jshint lib test",
+    "test": "npm run lint && npm run test-unit",
+    "test-unit": "mocha -u tdd ./test/setup.js ./test/*.js",
     "start": "node index.js"
   },
   "dependencies": {
@@ -19,6 +21,7 @@
   },
   "devDependencies": {
     "chai": "^4.1.2",
+    "jshint": "^2.9.6",
     "mocha": "1.21.4",
     "replay": "^2.3.0"
   },
