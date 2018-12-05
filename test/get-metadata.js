@@ -13,6 +13,47 @@ suite('getMetadata', function() {
     test('retrieval and formatting of metadata', function() {
         var expected = {
             issue: 11698,
+            reviews: [
+              {
+                _links: {
+                  html: {
+                    href: 'https://github.com/web-platform-tests/wpt/pull/11698#pullrequestreview-133189917'
+                  },
+                  pull_request: {
+                    href: 'https://api.github.com/repos/web-platform-tests/wpt/pulls/11698'
+                  }
+                },
+                author_association: 'MEMBER',
+                body: '',
+                commit_id: '9cb7c1ac9fc201f48b576a5c67e5da8eb83d876c',
+                html_url: 'https://github.com/web-platform-tests/wpt/pull/11698#pullrequestreview-133189917',
+                id: 133189917,
+                node_id: 'MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MTMzMTg5OTE3',
+                pull_request_url: 'https://api.github.com/repos/web-platform-tests/wpt/pulls/11698',
+                state: 'APPROVED',
+                submitted_at: '2018-06-29T11:25:58Z',
+                user: {
+                  avatar_url: 'https://avatars1.githubusercontent.com/u/111161?v=4',
+                  events_url: 'https://api.github.com/users/Ms2ger/events{/privacy}',
+                  followers_url: 'https://api.github.com/users/Ms2ger/followers',
+                  following_url: 'https://api.github.com/users/Ms2ger/following{/other_user}',
+                  gists_url: 'https://api.github.com/users/Ms2ger/gists{/gist_id}',
+                  gravatar_id: '',
+                  html_url: 'https://github.com/Ms2ger',
+                  id: 111161,
+                  login: 'Ms2ger',
+                  node_id: 'MDQ6VXNlcjExMTE2MQ==',
+                  organizations_url: 'https://api.github.com/users/Ms2ger/orgs',
+                  received_events_url: 'https://api.github.com/users/Ms2ger/received_events',
+                  repos_url: 'https://api.github.com/users/Ms2ger/repos',
+                  site_admin: false,
+                  starred_url: 'https://api.github.com/users/Ms2ger/starred{/owner}{/repo}',
+                  subscriptions_url: 'https://api.github.com/users/Ms2ger/subscriptions',
+                  type: 'User',
+                  url: 'https://api.github.com/users/Ms2ger'
+                }
+              }
+            ],
             rootReviewers: [ 'jgraham' ],
             filenames: [ 'WebIDL/interfaces.html', 'interfaces/WebIDL.idl' ],
             filenamesIgnoreRemoved: [ 'WebIDL/interfaces.html', 'interfaces/WebIDL.idl' ],
