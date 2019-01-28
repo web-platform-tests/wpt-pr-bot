@@ -128,7 +128,7 @@ app.post('/github-hook', function (req, res, next) {
     }));
 });
 
-var knownEpochs = [ 'weekly', 'daily' ];
+var knownEpochs = [ 'weekly', 'daily', 'twelve_hourly', 'six_hourly' ];
 var inFlightEpochs = {};
 var updateEpoch = function (epoch) {
     if (inFlightEpochs[epoch]) {
