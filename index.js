@@ -147,7 +147,7 @@ var updateEpoch = function (epoch) {
         90 * 1000);
     q.race([
         // Defer to epochs library for update.
-        epochs.updateEpoch(epoch), timeout
+        epochs.updateEpoch(epoch), timeout.promise
     ]).then(function (next) {
         delete inFlightEpochs[epoch];
         logArgs("Updated epoch", epoch, next);
