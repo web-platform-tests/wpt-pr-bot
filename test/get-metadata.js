@@ -115,7 +115,7 @@ suite('getMetadata', function() {
             ],
             reviewers: [ 'domenic', 'jensl', 'ms2ger', 'tobie', 'yuki3' ],
             isMergeable: true,
-            reviewedDownstream: false,
+            reviewedDownstream: null,
             missingAssignee: 'Ms2ger',
             missingReviewers: [],
         };
@@ -177,7 +177,7 @@ suite('getMetadata', function() {
             "svg/coordinate-systems",
             "svg/coordinate-systems/parsing",
           ],
-          reviewedDownstream: false,
+          reviewedDownstream: null,
           reviewers: [
             "ameliabr",
             "ewilligers",
