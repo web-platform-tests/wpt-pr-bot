@@ -73,6 +73,7 @@ app.post('/github-hook', function (req, res, next) {
             if (!body) return;
             if (body.sender && body.sender.login == "wpt-pr-bot") return;
             if (!body.pull_request && (body.issue && !body.issue.pull_request)) return;
+            if (body.pull_request && body.pull_request.draft) return;
             // END FILTERNG //
 
             var action = body.action;
