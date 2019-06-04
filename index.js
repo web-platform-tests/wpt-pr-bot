@@ -70,10 +70,22 @@ app.post('/github-hook', function (req, res, next) {
             } catch(e) {
                 return;
             }
-            if (!body) return;
-            if (body.sender && body.sender.login == "wpt-pr-bot") return;
-            if (!body.pull_request && (body.issue && !body.issue.pull_request)) return;
-            if (body.pull_request && body.pull_request.draft) return;
+            if (!body) {
+                logArgs("Ignoring event: empty body");
+                return;
+            }
+            if (body.sender && body.sender.login == "wpt-pr-bot") {
+                logArgs("Ignoring event: sender is wpt-pr-bot");
+                return;
+            }
+            if (!body.pull_request && (body.issue && !body.issue.pull_request)) {
+                logArgs("Ignoring event: not a pull request");
+                return;
+            }
+            if (body.pull_request && body.pull_request.draft) {
+                logArgs("Ignoring event: pull request is a draft");
+                return;
+            }
             // END FILTERNG //
 
             var action = body.action;
