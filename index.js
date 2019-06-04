@@ -100,7 +100,9 @@ app.post('/github-hook', function (req, res, next) {
                 metadata(n, u, content).then(function(metadata) {
                     return removeReviewableBanner(n, metadata);
                 });
-            } else if (action == "opened" || action == "synchronize" || (isComment && action == "created")) {
+            } else if (action == "opened" || action == "synchronize" ||
+                action == "ready_for_review" ||
+                (isComment && action == "created")) {
                 if (n in currentlyRunning) {
                     logArgs("#" + n + " is already being processed.");
                     return;
