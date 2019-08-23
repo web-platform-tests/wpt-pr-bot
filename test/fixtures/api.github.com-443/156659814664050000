@@ -1,0 +1,31 @@
+GET /repos/web-platform-tests/wpt/collaborators/nikosandronikos/permission
+accept: application/vnd.github.black-cat-preview+json
+host: api.github.com
+
+HTTP/1.1 200 OK
+server: GitHub.com
+date: Fri, 23 Aug 2019 22:09:06 GMT
+content-type: application/json; charset=utf-8
+content-length: 1020
+connection: close
+status: 200 OK
+x-ratelimit-limit: 5000
+x-ratelimit-remaining: 4991
+x-ratelimit-reset: 1566601741
+cache-control: private, max-age=60, s-maxage=60
+vary: Accept, Authorization, Cookie, X-GitHub-OTP
+etag: "dd4c842ad9e51b8bd5a8d39a57d70dce"
+x-oauth-scopes: repo
+x-accepted-oauth-scopes: 
+x-github-media-type: github.v3; param=black-cat-preview; format=json
+access-control-expose-headers: ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type
+access-control-allow-origin: *
+strict-transport-security: max-age=31536000; includeSubdomains; preload
+x-frame-options: deny
+x-content-type-options: nosniff
+x-xss-protection: 1; mode=block
+referrer-policy: origin-when-cross-origin, strict-origin-when-cross-origin
+content-security-policy: default-src 'none'
+x-github-request-id: 8EAA:1271:1DB42A7:3C94436:5D606402
+
+{"permission":"write","user":{"login":"nikosandronikos","id":4891471,"node_id":"MDQ6VXNlcjQ4OTE0NzE=","avatar_url":"https://avatars3.githubusercontent.com/u/4891471?v=4","gravatar_id":"","url":"https://api.github.com/users/nikosandronikos","html_url":"https://github.com/nikosandronikos","followers_url":"https://api.github.com/users/nikosandronikos/followers","following_url":"https://api.github.com/users/nikosandronikos/following{/other_user}","gists_url":"https://api.github.com/users/nikosandronikos/gists{/gist_id}","starred_url":"https://api.github.com/users/nikosandronikos/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/nikosandronikos/subscriptions","organizations_url":"https://api.github.com/users/nikosandronikos/orgs","repos_url":"https://api.github.com/users/nikosandronikos/repos","events_url":"https://api.github.com/users/nikosandronikos/events{/privacy}","received_events_url":"https://api.github.com/users/nikosandronikos/received_events","type":"User","site_admin":false}}

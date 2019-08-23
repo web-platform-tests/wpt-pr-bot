@@ -1,0 +1,32 @@
+GET /repos/web-platform-tests/wpt/issues/18353
+accept: application/vnd.github.black-cat-preview+json
+host: api.github.com
+
+HTTP/1.1 200 OK
+server: GitHub.com
+date: Fri, 23 Aug 2019 22:09:12 GMT
+content-type: application/json; charset=utf-8
+content-length: 4559
+connection: close
+status: 200 OK
+x-ratelimit-limit: 5000
+x-ratelimit-remaining: 4982
+x-ratelimit-reset: 1566601741
+cache-control: private, max-age=60, s-maxage=60
+vary: Accept, Authorization, Cookie, X-GitHub-OTP
+etag: "6ffad8e59450088baf2b969d95e4faeb"
+last-modified: Sun, 18 Aug 2019 23:35:05 GMT
+x-oauth-scopes: repo
+x-accepted-oauth-scopes: repo
+x-github-media-type: github.v3; param=black-cat-preview; format=json
+access-control-expose-headers: ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type
+access-control-allow-origin: *
+strict-transport-security: max-age=31536000; includeSubdomains; preload
+x-frame-options: deny
+x-content-type-options: nosniff
+x-xss-protection: 1; mode=block
+referrer-policy: origin-when-cross-origin, strict-origin-when-cross-origin
+content-security-policy: default-src 'none'
+x-github-request-id: 8EBC:5DA7:23F1DB0:44A3028:5D606407
+
+{"url":"https://api.github.com/repos/web-platform-tests/wpt/issues/18353","repository_url":"https://api.github.com/repos/web-platform-tests/wpt","labels_url":"https://api.github.com/repos/web-platform-tests/wpt/issues/18353/labels{/name}","comments_url":"https://api.github.com/repos/web-platform-tests/wpt/issues/18353/comments","events_url":"https://api.github.com/repos/web-platform-tests/wpt/issues/18353/events","html_url":"https://github.com/web-platform-tests/wpt/pull/18353","id":478908965,"node_id":"MDExOlB1bGxSZXF1ZXN0MzA1OTI1OTIz","number":18353,"title":"SVG: Parsing of vector-effect","user":{"login":"ewilligers","id":929206,"node_id":"MDQ6VXNlcjkyOTIwNg==","avatar_url":"https://avatars1.githubusercontent.com/u/929206?v=4","gravatar_id":"","url":"https://api.github.com/users/ewilligers","html_url":"https://github.com/ewilligers","followers_url":"https://api.github.com/users/ewilligers/followers","following_url":"https://api.github.com/users/ewilligers/following{/other_user}","gists_url":"https://api.github.com/users/ewilligers/gists{/gist_id}","starred_url":"https://api.github.com/users/ewilligers/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/ewilligers/subscriptions","organizations_url":"https://api.github.com/users/ewilligers/orgs","repos_url":"https://api.github.com/users/ewilligers/repos","events_url":"https://api.github.com/users/ewilligers/events{/privacy}","received_events_url":"https://api.github.com/users/ewilligers/received_events","type":"User","site_admin":false},"labels":[{"id":202220715,"node_id":"MDU6TGFiZWwyMDIyMjA3MTU=","url":"https://api.github.com/repos/web-platform-tests/wpt/labels/svg","name":"svg","color":"ededed","default":false},{"id":93361069,"node_id":"MDU6TGFiZWw5MzM2MTA2OQ==","url":"https://api.github.com/repos/web-platform-tests/wpt/labels/wg-svg","name":"wg-svg","color":"0052cc","default":false}],"state":"open","locked":false,"assignee":{"login":"AmeliaBR","id":9876129,"node_id":"MDQ6VXNlcjk4NzYxMjk=","avatar_url":"https://avatars2.githubusercontent.com/u/9876129?v=4","gravatar_id":"","url":"https://api.github.com/users/AmeliaBR","html_url":"https://github.com/AmeliaBR","followers_url":"https://api.github.com/users/AmeliaBR/followers","following_url":"https://api.github.com/users/AmeliaBR/following{/other_user}","gists_url":"https://api.github.com/users/AmeliaBR/gists{/gist_id}","starred_url":"https://api.github.com/users/AmeliaBR/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/AmeliaBR/subscriptions","organizations_url":"https://api.github.com/users/AmeliaBR/orgs","repos_url":"https://api.github.com/users/AmeliaBR/repos","events_url":"https://api.github.com/users/AmeliaBR/events{/privacy}","received_events_url":"https://api.github.com/users/AmeliaBR/received_events","type":"User","site_admin":false},"assignees":[{"login":"AmeliaBR","id":9876129,"node_id":"MDQ6VXNlcjk4NzYxMjk=","avatar_url":"https://avatars2.githubusercontent.com/u/9876129?v=4","gravatar_id":"","url":"https://api.github.com/users/AmeliaBR","html_url":"https://github.com/AmeliaBR","followers_url":"https://api.github.com/users/AmeliaBR/followers","following_url":"https://api.github.com/users/AmeliaBR/following{/other_user}","gists_url":"https://api.github.com/users/AmeliaBR/gists{/gist_id}","starred_url":"https://api.github.com/users/AmeliaBR/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/AmeliaBR/subscriptions","organizations_url":"https://api.github.com/users/AmeliaBR/orgs","repos_url":"https://api.github.com/users/AmeliaBR/repos","events_url":"https://api.github.com/users/AmeliaBR/events{/privacy}","received_events_url":"https://api.github.com/users/AmeliaBR/received_events","type":"User","site_admin":false}],"milestone":null,"comments":1,"created_at":"2019-08-09T10:09:52Z","updated_at":"2019-08-18T23:35:05Z","closed_at":null,"author_association":"MEMBER","pull_request":{"url":"https://api.github.com/repos/web-platform-tests/wpt/pulls/18353","html_url":"https://github.com/web-platform-tests/wpt/pull/18353","diff_url":"https://github.com/web-platform-tests/wpt/pull/18353.diff","patch_url":"https://github.com/web-platform-tests/wpt/pull/18353.patch"},"body":"vector-effect has initial value none and does not inherit. It accepts\r\nnone | non-scaling-stroke | non-scaling-size | non-rotation | fixed-position\r\nhttps://svgwg.org/svg2-draft/coords.html#VectorEffectProperty\r\n\r\nValues other than none and non-scaling-stroke are at risk.\r\nhttps://github.com/w3c/svgwg/issues/306","closed_by":null}

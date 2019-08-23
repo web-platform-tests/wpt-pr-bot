@@ -1,0 +1,19 @@
+GET /bibrefs?refs=svg
+host: specref.herokuapp.com
+
+HTTP/1.1 200 OK
+server: Cowboy
+connection: close
+x-powered-by: Express
+access-control-allow-origin: *
+expires: Sat, 24 Aug 2019 21:26:29 GMT
+cache-control: public, max-age=86400
+x-content-type-options: nosniff
+content-type: application/json; charset=utf-8
+content-length: 549
+etag: W/"225-e452W6s8jYt0mYVqSqnKx5iAJ+U"
+vary: Accept-Encoding
+date: Fri, 23 Aug 2019 21:26:29 GMT
+via: 1.1 vegur
+
+{"svg":{"aliasOf":"SVG","id":"svg"},"SVG":{"authors":["Jon Ferraiolo"],"href":"https://www.w3.org/TR/SVG/","title":"Scalable Vector Graphics (SVG) 1.0 Specification","status":"REC","publisher":"W3C","deliveredBy":[{"url":"https://www.w3.org/Graphics/SVG/WG/","shortname":"svg"}],"versions":["SVG-20010904","SVG-20010719","SVG-20001102","SVG-20000802","SVG-20000629","SVG-20000303","SVG-19991203","SVG-19990812","SVG-19990730","SVG-19990706","SVG-19990625","SVG-19990412","SVG-19990211"],"obsoletedBy":["SVG11"],"id":"SVG","date":"4 September 2001"}}

@@ -1,0 +1,31 @@
+GET /repos/web-platform-tests/wpt/pulls/18353/requested_reviewers
+accept: application/vnd.github.black-cat-preview+json
+host: api.github.com
+
+HTTP/1.1 200 OK
+server: GitHub.com
+date: Fri, 23 Aug 2019 22:09:07 GMT
+content-type: application/json; charset=utf-8
+content-length: 2827
+connection: close
+status: 200 OK
+x-ratelimit-limit: 5000
+x-ratelimit-remaining: 4985
+x-ratelimit-reset: 1566601741
+cache-control: private, max-age=60, s-maxage=60
+vary: Accept, Authorization, Cookie, X-GitHub-OTP
+etag: "9efd2a25a820970d8d257e63b999ba02"
+x-oauth-scopes: repo
+x-accepted-oauth-scopes: 
+x-github-media-type: github.v3; param=black-cat-preview; format=json
+access-control-expose-headers: ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type
+access-control-allow-origin: *
+strict-transport-security: max-age=31536000; includeSubdomains; preload
+x-frame-options: deny
+x-content-type-options: nosniff
+x-xss-protection: 1; mode=block
+referrer-policy: origin-when-cross-origin, strict-origin-when-cross-origin
+content-security-policy: default-src 'none'
+x-github-request-id: 8EB6:44D8:26144FF:49B8B02:5D606403
+
+{"users":[{"login":"svgeesus","id":2506926,"node_id":"MDQ6VXNlcjI1MDY5MjY=","avatar_url":"https://avatars1.githubusercontent.com/u/2506926?v=4","gravatar_id":"","url":"https://api.github.com/users/svgeesus","html_url":"https://github.com/svgeesus","followers_url":"https://api.github.com/users/svgeesus/followers","following_url":"https://api.github.com/users/svgeesus/following{/other_user}","gists_url":"https://api.github.com/users/svgeesus/gists{/gist_id}","starred_url":"https://api.github.com/users/svgeesus/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/svgeesus/subscriptions","organizations_url":"https://api.github.com/users/svgeesus/orgs","repos_url":"https://api.github.com/users/svgeesus/repos","events_url":"https://api.github.com/users/svgeesus/events{/privacy}","received_events_url":"https://api.github.com/users/svgeesus/received_events","type":"User","site_admin":false},{"login":"nikosandronikos","id":4891471,"node_id":"MDQ6VXNlcjQ4OTE0NzE=","avatar_url":"https://avatars3.githubusercontent.com/u/4891471?v=4","gravatar_id":"","url":"https://api.github.com/users/nikosandronikos","html_url":"https://github.com/nikosandronikos","followers_url":"https://api.github.com/users/nikosandronikos/followers","following_url":"https://api.github.com/users/nikosandronikos/following{/other_user}","gists_url":"https://api.github.com/users/nikosandronikos/gists{/gist_id}","starred_url":"https://api.github.com/users/nikosandronikos/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/nikosandronikos/subscriptions","organizations_url":"https://api.github.com/users/nikosandronikos/orgs","repos_url":"https://api.github.com/users/nikosandronikos/repos","events_url":"https://api.github.com/users/nikosandronikos/events{/privacy}","received_events_url":"https://api.github.com/users/nikosandronikos/received_events","type":"User","site_admin":false},{"login":"AmeliaBR","id":9876129,"node_id":"MDQ6VXNlcjk4NzYxMjk=","avatar_url":"https://avatars2.githubusercontent.com/u/9876129?v=4","gravatar_id":"","url":"https://api.github.com/users/AmeliaBR","html_url":"https://github.com/AmeliaBR","followers_url":"https://api.github.com/users/AmeliaBR/followers","following_url":"https://api.github.com/users/AmeliaBR/following{/other_user}","gists_url":"https://api.github.com/users/AmeliaBR/gists{/gist_id}","starred_url":"https://api.github.com/users/AmeliaBR/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/AmeliaBR/subscriptions","organizations_url":"https://api.github.com/users/AmeliaBR/orgs","repos_url":"https://api.github.com/users/AmeliaBR/repos","events_url":"https://api.github.com/users/AmeliaBR/events{/privacy}","received_events_url":"https://api.github.com/users/AmeliaBR/received_events","type":"User","site_admin":false}],"teams":[]}

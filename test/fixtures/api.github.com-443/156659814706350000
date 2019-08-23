@@ -1,0 +1,31 @@
+GET /repos/web-platform-tests/wpt/collaborators/ewilligers/permission
+accept: application/vnd.github.black-cat-preview+json
+host: api.github.com
+
+HTTP/1.1 200 OK
+server: GitHub.com
+date: Fri, 23 Aug 2019 22:09:07 GMT
+content-type: application/json; charset=utf-8
+content-length: 958
+connection: close
+status: 200 OK
+x-ratelimit-limit: 5000
+x-ratelimit-remaining: 4989
+x-ratelimit-reset: 1566601741
+cache-control: private, max-age=60, s-maxage=60
+vary: Accept, Authorization, Cookie, X-GitHub-OTP
+etag: "f1efffc5f66762ea950812534c996a9a"
+x-oauth-scopes: repo
+x-accepted-oauth-scopes: 
+x-github-media-type: github.v3; param=black-cat-preview; format=json
+access-control-expose-headers: ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type
+access-control-allow-origin: *
+strict-transport-security: max-age=31536000; includeSubdomains; preload
+x-frame-options: deny
+x-content-type-options: nosniff
+x-xss-protection: 1; mode=block
+referrer-policy: origin-when-cross-origin, strict-origin-when-cross-origin
+content-security-policy: default-src 'none'
+x-github-request-id: 8EAE:07F9:11433EE:2808F2A:5D606402
+
+{"permission":"write","user":{"login":"ewilligers","id":929206,"node_id":"MDQ6VXNlcjkyOTIwNg==","avatar_url":"https://avatars1.githubusercontent.com/u/929206?v=4","gravatar_id":"","url":"https://api.github.com/users/ewilligers","html_url":"https://github.com/ewilligers","followers_url":"https://api.github.com/users/ewilligers/followers","following_url":"https://api.github.com/users/ewilligers/following{/other_user}","gists_url":"https://api.github.com/users/ewilligers/gists{/gist_id}","starred_url":"https://api.github.com/users/ewilligers/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/ewilligers/subscriptions","organizations_url":"https://api.github.com/users/ewilligers/orgs","repos_url":"https://api.github.com/users/ewilligers/repos","events_url":"https://api.github.com/users/ewilligers/events{/privacy}","received_events_url":"https://api.github.com/users/ewilligers/received_events","type":"User","site_admin":false}}
