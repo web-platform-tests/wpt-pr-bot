@@ -39,6 +39,19 @@ suite('Test get-reviewers', function() {
             reviewersExcludingAuthor: [{ login: "bar" }, { login: "foobar" }],
             isRoot: false,
             rootReviewers: ["jgraham"]
+        }));
+    });
+
+    // In the context of the application, each item in the `reviewers` array is
+    // converted to lower case, but the `login` property of each object in
+    // `reviewersExcludingAuthor` is not.
+    test('getReviewers for simple case, follow-up - case insensitive', function() {
+        assert.deepEqual(["foobar"], getReviewers({
+            author: { login: "foo" },
+            reviewers: ["hasupper"],
+            reviewersExcludingAuthor: [{ login: "HasUpper" }, { login: "foobar" }],
+            isRoot: false,
+            rootReviewers: ["jgraham"]
         }).sort());
     });
 

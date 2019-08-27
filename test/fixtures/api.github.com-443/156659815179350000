@@ -1,0 +1,31 @@
+GET /repos/web-platform-tests/wpt/pulls/18353/reviews
+accept: application/vnd.github.black-cat-preview+json
+host: api.github.com
+
+HTTP/1.1 200 OK
+server: GitHub.com
+date: Fri, 23 Aug 2019 22:09:11 GMT
+content-type: application/json; charset=utf-8
+content-length: 4794
+connection: close
+status: 200 OK
+x-ratelimit-limit: 5000
+x-ratelimit-remaining: 4983
+x-ratelimit-reset: 1566601741
+cache-control: private, max-age=60, s-maxage=60
+vary: Accept, Authorization, Cookie, X-GitHub-OTP
+etag: "43df5bc0f414a70c68d1d0c2522c8425"
+x-oauth-scopes: repo
+x-accepted-oauth-scopes: 
+x-github-media-type: github.v3; param=black-cat-preview; format=json
+access-control-expose-headers: ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type
+access-control-allow-origin: *
+strict-transport-security: max-age=31536000; includeSubdomains; preload
+x-frame-options: deny
+x-content-type-options: nosniff
+x-xss-protection: 1; mode=block
+referrer-policy: origin-when-cross-origin, strict-origin-when-cross-origin
+content-security-policy: default-src 'none'
+x-github-request-id: 8EBA:3533:1121CE9:27F545B:5D606407
+
+[{"id":276294934,"node_id":"MDE3OlB1bGxSZXF1ZXN0UmV2aWV3Mjc2Mjk0OTM0","user":{"login":"AmeliaBR","id":9876129,"node_id":"MDQ6VXNlcjk4NzYxMjk=","avatar_url":"https://avatars2.githubusercontent.com/u/9876129?v=4","gravatar_id":"","url":"https://api.github.com/users/AmeliaBR","html_url":"https://github.com/AmeliaBR","followers_url":"https://api.github.com/users/AmeliaBR/followers","following_url":"https://api.github.com/users/AmeliaBR/following{/other_user}","gists_url":"https://api.github.com/users/AmeliaBR/gists{/gist_id}","starred_url":"https://api.github.com/users/AmeliaBR/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/AmeliaBR/subscriptions","organizations_url":"https://api.github.com/users/AmeliaBR/orgs","repos_url":"https://api.github.com/users/AmeliaBR/repos","events_url":"https://api.github.com/users/AmeliaBR/events{/privacy}","received_events_url":"https://api.github.com/users/AmeliaBR/received_events","type":"User","site_admin":false},"body":"These tests correctly reflect the grammar as it is currently written in the spec. But, that grammar is logically incorrect.\r\n\r\nSee https://github.com/w3c/svgwg/issues/725, and maybe delay merging until that is resolved.","state":"COMMENTED","html_url":"https://github.com/web-platform-tests/wpt/pull/18353#pullrequestreview-276294934","pull_request_url":"https://api.github.com/repos/web-platform-tests/wpt/pulls/18353","author_association":"MEMBER","_links":{"html":{"href":"https://github.com/web-platform-tests/wpt/pull/18353#pullrequestreview-276294934"},"pull_request":{"href":"https://api.github.com/repos/web-platform-tests/wpt/pulls/18353"}},"submitted_at":"2019-08-18T20:55:43Z","commit_id":"256bdd5865650e4558d4d36c48270476dc27880c"},{"id":276296533,"node_id":"MDE3OlB1bGxSZXF1ZXN0UmV2aWV3Mjc2Mjk2NTMz","user":{"login":"ewilligers","id":929206,"node_id":"MDQ6VXNlcjkyOTIwNg==","avatar_url":"https://avatars1.githubusercontent.com/u/929206?v=4","gravatar_id":"","url":"https://api.github.com/users/ewilligers","html_url":"https://github.com/ewilligers","followers_url":"https://api.github.com/users/ewilligers/followers","following_url":"https://api.github.com/users/ewilligers/following{/other_user}","gists_url":"https://api.github.com/users/ewilligers/gists{/gist_id}","starred_url":"https://api.github.com/users/ewilligers/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/ewilligers/subscriptions","organizations_url":"https://api.github.com/users/ewilligers/orgs","repos_url":"https://api.github.com/users/ewilligers/repos","events_url":"https://api.github.com/users/ewilligers/events{/privacy}","received_events_url":"https://api.github.com/users/ewilligers/received_events","type":"User","site_admin":false},"body":"","state":"COMMENTED","html_url":"https://github.com/web-platform-tests/wpt/pull/18353#pullrequestreview-276296533","pull_request_url":"https://api.github.com/repos/web-platform-tests/wpt/pulls/18353","author_association":"MEMBER","_links":{"html":{"href":"https://github.com/web-platform-tests/wpt/pull/18353#pullrequestreview-276296533"},"pull_request":{"href":"https://api.github.com/repos/web-platform-tests/wpt/pulls/18353"}},"submitted_at":"2019-08-18T21:26:18Z","commit_id":"256bdd5865650e4558d4d36c48270476dc27880c"},{"id":276297954,"node_id":"MDE3OlB1bGxSZXF1ZXN0UmV2aWV3Mjc2Mjk3OTU0","user":{"login":"AmeliaBR","id":9876129,"node_id":"MDQ6VXNlcjk4NzYxMjk=","avatar_url":"https://avatars2.githubusercontent.com/u/9876129?v=4","gravatar_id":"","url":"https://api.github.com/users/AmeliaBR","html_url":"https://github.com/AmeliaBR","followers_url":"https://api.github.com/users/AmeliaBR/followers","following_url":"https://api.github.com/users/AmeliaBR/following{/other_user}","gists_url":"https://api.github.com/users/AmeliaBR/gists{/gist_id}","starred_url":"https://api.github.com/users/AmeliaBR/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/AmeliaBR/subscriptions","organizations_url":"https://api.github.com/users/AmeliaBR/orgs","repos_url":"https://api.github.com/users/AmeliaBR/repos","events_url":"https://api.github.com/users/AmeliaBR/events{/privacy}","received_events_url":"https://api.github.com/users/AmeliaBR/received_events","type":"User","site_admin":false},"body":"","state":"COMMENTED","html_url":"https://github.com/web-platform-tests/wpt/pull/18353#pullrequestreview-276297954","pull_request_url":"https://api.github.com/repos/web-platform-tests/wpt/pulls/18353","author_association":"MEMBER","_links":{"html":{"href":"https://github.com/web-platform-tests/wpt/pull/18353#pullrequestreview-276297954"},"pull_request":{"href":"https://api.github.com/repos/web-platform-tests/wpt/pulls/18353"}},"submitted_at":"2019-08-18T22:09:56Z","commit_id":"256bdd5865650e4558d4d36c48270476dc27880c"}]
