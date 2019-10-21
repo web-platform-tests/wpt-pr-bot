@@ -52,12 +52,12 @@ function getPullRequest(n, body) {
     if (body.pull_request) {
         return promise(body.pull_request);
     }
-    return github.get("/repos/:owner/:repo/pulls/:number", { number: n })
+    return github.get("/repos/:owner/:repo/pulls/:number", { number: n });
 }
 
 var currentlyRunning = {};
 
-app.post('/github-hook', function (req, res, next) {
+app.post('/github-hook', function (req, res) {
     req.pipe(bl(function (err, body) {
         if (err) {
             logArgs(err.message);
@@ -170,10 +170,10 @@ var updateEpoch = function (epoch) {
         delete inFlightEpochs[epoch];
         logArgs("Error updating epoch", epoch, "\n", err);
     });
-}
+};
 
 for (var i = 0; i < knownEpochs.length; i++) {
-    setInterval(updateEpoch.bind(this, knownEpochs[i]), 2 * 60 * 1000);
+    setInterval(updateEpoch.bind(global, knownEpochs[i]), 2 * 60 * 1000);
 }
 
 var port = process.env.PORT || 5000;
