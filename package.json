@@ -2,6 +2,10 @@
   "name": "wpt-pr-bot",
   "version": "0.4.0",
   "description": "A helper bot for web-platform-tests.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/web-platform-tests/wpt-pr-bot.git"
+  },
   "main": "index.js",
   "scripts": {
     "lint": "jshint lib test",
