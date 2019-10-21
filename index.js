@@ -95,7 +95,8 @@ app.post('/github-hook', function (req, res, next) {
             var u = (issue.user && issue.user.login) || null;
             var content = issue.body || "";
             if (!isComment && action == "edited") {
-                if (body.pull_request.merged) return; // we know .pullrequest is available because it's not a comment.
+                // We know .pull_request is available because it's not a comment.
+                if (body.pull_request.state != "open") return; 
                 logArgs("#" + n, "pull request edited");
                 metadata(n, u, content).then(function(metadata) {
                     return removeReviewableBanner(n, metadata);
@@ -113,7 +114,7 @@ app.post('/github-hook', function (req, res, next) {
                 waitFor(5 * 1000).then(function() { // Avoid race condition
                     return getPullRequest(n, body);
                 }).then(function(pull_request) {
-                    if (pull_request.merged) return;
+                    if (pull_request.state != "open") return;
                     return metadata(n, u, content).then(function(metadata) {
                         logArgs(metadata);
                         return labelModel.post(n, metadata.labels).then(
