@@ -10,6 +10,7 @@ var express = require("express"),
     github = require('./lib/github'),
     checkRequest = require('./lib/check-request'),
     epochs = require('./lib/epochs'),
+    filter = require('./lib/filter'),
     q = require('q');
 
 function promise(value) {
@@ -70,22 +71,17 @@ app.post('/github-hook', function (req, res) {
             } catch(e) {
                 return;
             }
-            if (!body) {
-                logArgs("Ignoring event: empty body");
-                return;
-            }
-            if (body.sender && body.sender.login == "wpt-pr-bot") {
-                logArgs("Ignoring event: sender is wpt-pr-bot");
+            if (!filter.event(body, logArgs)) {
                 return;
             }
             if (!body.pull_request && (body.issue && !body.issue.pull_request)) {
                 logArgs("Ignoring event: not a pull request");
                 return;
             }
-            if (body.pull_request && body.pull_request.draft) {
-                logArgs("Ignoring event: pull request is a draft");
+            if (!filter.pullRequest(body.pull_request, logArgs)) {
                 return;
             }
+            // Note: `filter.pullRequest` is checked again after a timeout.
             // END FILTERNG //
 
             var action = body.action;
@@ -95,7 +91,6 @@ app.post('/github-hook', function (req, res) {
             var u = (issue.user && issue.user.login) || null;
             var content = issue.body || "";
             if (!isComment && action == "edited") {
-                if (body.pull_request.merged) return; // we know .pullrequest is available because it's not a comment.
                 logArgs("#" + n, "pull request edited");
                 metadata(n, u, content).then(function(metadata) {
                     return removeReviewableBanner(n, metadata);
@@ -113,7 +108,9 @@ app.post('/github-hook', function (req, res) {
                 waitFor(5 * 1000).then(function() { // Avoid race condition
                     return getPullRequest(n, body);
                 }).then(function(pull_request) {
-                    if (pull_request.merged) return;
+                    if (!filter.pullRequest(pull_request, logArgs)) {
+                        return;
+                    }
                     return metadata(n, u, content).then(function(metadata) {
                         logArgs(metadata);
                         return labelModel.post(n, metadata.labels).then(
