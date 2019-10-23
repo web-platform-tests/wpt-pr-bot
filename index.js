@@ -78,7 +78,7 @@ app.post('/github-hook', function (req, res) {
                 logArgs("Ignoring event: not a pull request");
                 return;
             }
-            if (!filter.pullRequest(body.pull_request, logArgs)) {
+            if (body.pull_request && !filter.pullRequest(body.pull_request, logArgs)) {
                 return;
             }
             // Note: `filter.pullRequest` is checked again after a timeout.
