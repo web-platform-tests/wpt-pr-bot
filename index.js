@@ -6,7 +6,6 @@ var express = require("express"),
     labelModel = require('./lib/label-model'),
     metadata = require('./lib/metadata'),
     comment = require('./lib/comment'),
-    rmReviewable = require('./lib/rm-reviewable'),
     github = require('./lib/github'),
     checkRequest = require('./lib/check-request'),
     epochs = require('./lib/epochs'),
@@ -40,13 +39,6 @@ function funkLogMsg(num, msg) {
 
 function funkLogErr(num, msg) {
     return function(err) { logArgs("#" + num + ": " + msg + "\n", err); };
-}
-
-function removeReviewableBanner(n, metadata) {
-    return rmReviewable(n, metadata).then(
-        funkLogMsg(n, "Removed Reviewable banner."),
-        funkLogErr(n, "Error when attempting to remove Reviewable banner.")
-    );
 }
 
 function getPullRequest(n, body) {
@@ -90,12 +82,7 @@ app.post('/github-hook', function (req, res) {
             var n = issue.number;
             var u = (issue.user && issue.user.login) || null;
             var content = issue.body || "";
-            if (!isComment && action == "edited") {
-                logArgs("#" + n, "pull request edited");
-                metadata(n, u, content).then(function(metadata) {
-                    return removeReviewableBanner(n, metadata);
-                });
-            } else if (action == "opened" || action == "synchronize" ||
+            if (action == "opened" || action == "synchronize" ||
                 action == "ready_for_review" ||
                 (isComment && action == "created")) {
                 if (n in currentlyRunning) {
@@ -121,9 +108,7 @@ app.post('/github-hook', function (req, res) {
                         }).then(
                             funkLogMsg(n, "Added missing REVIEWERS if any."),
                             funkLogErr(n, "Something went wrong while adding missing REVIEWERS.")
-                        ).then(function() {
-                            return removeReviewableBanner(n, metadata);
-                        });
+                        );
                     });
                 }).then(function() {
                     delete currentlyRunning[n];
