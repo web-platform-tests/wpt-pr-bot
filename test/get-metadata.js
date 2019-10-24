@@ -60,7 +60,6 @@ suite('getMetadata', function() {
             paths: [ 'WebIDL', 'interfaces' ],
             labels: [ 'WebIDL', 'interfaces', 'wg-webplatform' ],
             isRoot: false,
-            isReviewable: false,
             specs: {
                 WebIDL: {
                     authors: [
@@ -146,7 +145,6 @@ suite('getMetadata', function() {
             "svg/coordinate-systems/parsing/vector-effect-valid.svg",
           ],
           isMergeable: true,
-          isReviewable: false,
           isRoot: false,
           issue: 18353,
           labels: [
