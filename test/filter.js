@@ -40,16 +40,22 @@ suite('Pull request filtering', function() {
     test('empty payload', function() {
         assert.strictEqual(filter.pullRequest({}, nullLog), true);
     });
-    test('closed pull request', function() {
+    test('`state` is "closed"', function() {
         assert.strictEqual(filter.pullRequest({state: "closed"}, nullLog), false);
     });
-    test('open pull request', function() {
+    test('`state` is "open"', function() {
         assert.strictEqual(filter.pullRequest({state: "open"}, nullLog), true);
     });
-    test('draft pull request', function() {
+    test('`draft` is true', function() {
         assert.strictEqual(filter.pullRequest({draft: true}, nullLog), false);
     });
-    test('explicitly non-draft pull request', function() {
+    test('`draft` is false', function() {
         assert.strictEqual(filter.pullRequest({draft: false}, nullLog), true);
+    });
+    test('`mergeable_state` is "draft"', function() {
+        assert.strictEqual(filter.pullRequest({mergeable_state: "draft"}, nullLog), false);
+    });
+    test('`mergeable_state` is "unknown"', function() {
+        assert.strictEqual(filter.pullRequest({mergeable_state: "unknown"}, nullLog), true);
     });
 });
