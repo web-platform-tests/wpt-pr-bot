@@ -23,11 +23,11 @@
     "request": "2.48.0"
   },
   "devDependencies": {
-    "chai": "^4.1.2",
-    "jshint": "^2.9.6",
+    "chai": "4.2.0",
+    "jshint": "2.10.2",
     "mocha": "1.21.4",
-    "replay": "^2.3.0",
-    "sinon": "^7.1.1"
+    "replay": "2.4.0",
+    "sinon": "7.5.0"
   },
   "license": "Apache-2.0",
   "author": "Tobie Langel",
