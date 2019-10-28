@@ -12,10 +12,14 @@ suite('Event filtering', function() {
         assert.strictEqual(filter.event(null, nullLog), false);
     });
     test('empty body', function() {
-        assert.strictEqual(filter.event({}, nullLog), true);
+        assert.strictEqual(filter.event({}, nullLog), false);
+    });
+    test('pull request', function() {
+        assert.strictEqual(filter.event({pull_request: {}}, nullLog), true);
     });
     test('wpt-pr-bot sender', function() {
         assert.strictEqual(filter.event({
+            pull_request: {},
             sender: {
                 login: 'wpt-pr-bot'
             }
@@ -23,6 +27,7 @@ suite('Event filtering', function() {
     });
     test('other sender', function() {
         assert.strictEqual(filter.event({
+            pull_request: {},
             sender: {
                 login: 'some-other-user'
             }

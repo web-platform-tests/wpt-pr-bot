@@ -9,16 +9,9 @@ var express = require("express"),
     labelModel = require('./lib/label-model'),
     metadata = require('./lib/metadata'),
     comment = require('./lib/comment'),
-    github = require('./lib/github'),
     checkRequest = require('./lib/check-request'),
     filter = require('./lib/filter'),
     q = require('q');
-
-function promise(value) {
-    var deferred = q.defer();
-    deferred.resolve(value);
-    return deferred.promise;
-}
 
 function waitFor(ms) {
     var deferred = q.defer();
@@ -43,13 +36,6 @@ function funkLogErr(num, msg) {
     return function(err) { logArgs("#" + num + ": " + msg + "\n", err); };
 }
 
-function getPullRequest(n, body) {
-    if (body.pull_request) {
-        return promise(body.pull_request);
-    }
-    return github.get("/repos/:owner/:repo/pulls/:number", { number: n });
-}
-
 var currentlyRunning = {};
 
 app.post('/github-hook', function (req, res) {
@@ -59,7 +45,6 @@ app.post('/github-hook', function (req, res) {
         } else if (process.env.NODE_ENV != 'production' || checkRequest(body, req.headers["x-hub-signature"], process.env.GITHUB_SECRET)) {
             res.send(new Date().toISOString());
 
-            // FILTER ALL THE THINGS
             try {
                 body = JSON.parse(body);
             } catch(e) {
@@ -68,38 +53,25 @@ app.post('/github-hook', function (req, res) {
             if (!filter.event(body, logArgs)) {
                 return;
             }
-            if (!body.pull_request && (body.issue && !body.issue.pull_request)) {
-                logArgs("Ignoring event: not a pull request");
+            if (!filter.pullRequest(body.pull_request, logArgs)) {
                 return;
             }
-            if (body.pull_request && !filter.pullRequest(body.pull_request, logArgs)) {
-                return;
-            }
-            // Note: `filter.pullRequest` is checked again after a timeout.
-            // END FILTERNG //
 
             var action = body.action;
-            var isComment = !!body.comment;
-            var issue = body.pull_request || body.issue;
-            var n = issue.number;
-            var u = (issue.user && issue.user.login) || null;
-            var content = issue.body || "";
+            var pr = body.pull_request;
+            var n = pr.number;
+            var u = (pr.user && pr.user.login) || null;
+            var content = pr.body || "";
             if (action == "opened" || action == "synchronize" ||
-                action == "ready_for_review" ||
-                (isComment && action == "created")) {
+                action == "ready_for_review") {
                 if (n in currentlyRunning) {
                     logArgs("#" + n + " is already being processed.");
                     return;
                 }
                 currentlyRunning[n] = true;
-                logArgs("#" + n, isComment ? "comment" : "pull request", action);
+                logArgs("#" + n, action);
 
                 waitFor(5 * 1000).then(function() { // Avoid race condition
-                    return getPullRequest(n, body);
-                }).then(function(pull_request) {
-                    if (!filter.pullRequest(pull_request, logArgs)) {
-                        return;
-                    }
                     return metadata(n, u, content).then(function(metadata) {
                         logArgs(metadata);
                         return labelModel.post(n, metadata.labels).then(
@@ -119,7 +91,7 @@ app.post('/github-hook', function (req, res) {
                     funkLogErr(n, "THIS SHOULDN'T EVER HAPPEN")(err);
                 });
             } else {
-                logArgs("#" + n + ": not handled.", "action:", action, "isComment:", isComment);
+                logArgs("#" + n + ": not handled.", "action:", action);
             }
         } else {
             logArgs("Unverified request", req);
