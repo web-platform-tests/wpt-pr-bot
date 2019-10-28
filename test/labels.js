@@ -86,5 +86,9 @@ suite('labels', function() {
         test('must not return duplicates', function() {
             assert.sameMembers(["html"], labels.fromFiles(["html/some/path/to/file.html", "html/some/other/path/to/file.html"]));
         });
+
+        test('must operate in the absence of files', function() {
+            assert.sameMembers([], labels.fromFiles([]));
+        });
     });
 });
