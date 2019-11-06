@@ -24,7 +24,7 @@
   "devDependencies": {
     "chai": "^4.1.2",
     "jshint": "^2.9.6",
-    "mocha": "1.21.4",
+    "mocha": "6.2.2",
     "replay": "^2.3.0",
     "sinon": "^7.1.1"
   },
