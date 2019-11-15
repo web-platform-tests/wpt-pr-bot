@@ -8,8 +8,9 @@
   },
   "main": "index.js",
   "scripts": {
+    "coverage": "nyc --all --check-coverage --per-file npm run test-unit",
     "lint": "jshint index.js api.js lib test",
-    "test": "npm run lint && npm run test-unit",
+    "test": "npm run lint && npm run coverage",
     "test-unit": "mocha -u tdd ./test/setup.js ./test/*.js",
     "start": "node index.js"
   },
@@ -25,6 +26,7 @@
     "chai": "^4.1.2",
     "jshint": "^2.9.6",
     "mocha": "6.2.2",
+    "nyc": "^14.1.1",
     "replay": "^2.3.0",
     "sinon": "^7.1.1"
   },

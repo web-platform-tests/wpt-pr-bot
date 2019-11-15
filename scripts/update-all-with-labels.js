@@ -1,3 +1,5 @@
+// istanbul ignore file
+
 var labelModel = require("../lib/label-model");
 var metadata = require("../lib/metadata");
 var github = require("../lib/github");

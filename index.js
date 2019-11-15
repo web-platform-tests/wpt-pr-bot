@@ -1,4 +1,7 @@
+// istanbul ignore file
+
 "use strict";
+
 var t0 = Date.now();
 
 var express = require("express"),
