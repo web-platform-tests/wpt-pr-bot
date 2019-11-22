@@ -1,0 +1,19 @@
+GET /rest/bug/201401
+host: bugs.webkit.org
+
+HTTP/1.1 200 OK
+date: Sat, 30 Nov 2019 14:02:07 GMT
+server: Apache/2.4
+x-xss-protection: 1; mode=block
+access-control-allow-headers: origin, content-type, accept, x-requested-with
+access-control-allow-origin: *, *
+x-frame-options: SAMEORIGIN
+x-content-type-options: nosniff
+set-cookie: Bugzilla_login_request_cookie=209DFljFZh; path=/; secure; HttpOnly
+etag: jXilBcff1nXfTXVGCwb65w
+strict-transport-security: max-age=7776000
+connection: close
+transfer-encoding: chunked
+content-type: application/json; charset=UTF-8
+
+{"bugs":[{"priority":"P2","assigned_to_detail":{"email":"aboya@igalia.com","real_name":"Alicia Boya García","name":"aboya@igalia.com","id":26809},"blocks":[],"creator":"mcatanzaro@gnome.org","last_change_time":"2019-10-24T16:40:06Z","is_cc_accessible":true,"keywords":["InRadar"],"creator_detail":{"email":"mcatanzaro@gnome.org","real_name":"Michael Catanzaro","name":"mcatanzaro@gnome.org","id":21676},"cc":["aboya@igalia.com","bugs-noreply@webkitgtk.org","calvaris@igalia.com","cgarcia@igalia.com","commit-queue@webkit.org","eric.carlson@apple.com","ews@webkit.org","glenn@skynav.com","gns@gnome.org","jer.noble@apple.com","mario@webkit.org","mcatanzaro@gnome.org","menard@kde.org","philipj@opera.com","pnormand@igalia.com","sergio@correia.cc","vjaquez@igalia.com","webkit-bug-importer@group.apple.com"],"url":"","assigned_to":"aboya@igalia.com","groups":[],"see_also":["https://github.com/web-platform-tests/wpt/pull/19538"],"id":201401,"whiteboard":"","creation_time":"2019-09-02T14:42:47Z","qa_contact":"","depends_on":[],"dupe_of":null,"resolution":"FIXED","classification":"Unclassified","alias":[],"op_sys":"Linux","status":"RESOLVED","cc_detail":[{"email":"aboya@igalia.com","real_name":"Alicia Boya García","name":"aboya@igalia.com","id":26809},{"email":"bugs-noreply@webkitgtk.org","real_name":"WebKitGTK+ bugs","name":"bugs-noreply@webkitgtk.org","id":24100},{"email":"calvaris@igalia.com","real_name":"Xabier Rodríguez Calvar","name":"calvaris@igalia.com","id":18338},{"email":"cgarcia@igalia.com","real_name":"Carlos Garcia Campos","name":"cgarcia@igalia.com","id":10421},{"email":"commit-queue@webkit.org","real_name":"WebKit Commit Bot","name":"commit-queue@webkit.org","id":10616},{"email":"eric.carlson@apple.com","real_name":"Eric Carlson","name":"eric.carlson@apple.com","id":2769},{"email":"ews@webkit.org","real_name":"Build Bot","name":"ews@webkit.org","id":26490},{"email":"glenn@skynav.com","real_name":"Glenn Adams","name":"glenn@skynav.com","id":14926},{"email":"gns@gnome.org","real_name":"Gustavo Noronha (kov)","name":"gns@gnome.org","id":7052},{"email":"jer.noble@apple.com","real_name":"Jer Noble","name":"jer.noble@apple.com","id":12084},{"email":"mario@webkit.org","real_name":"Mario Sanchez Prada","name":"mario@webkit.org","id":10290},{"email":"mcatanzaro@gnome.org","real_name":"Michael Catanzaro","name":"mcatanzaro@gnome.org","id":21676},{"email":"menard@kde.org","real_name":"Alexis Menard (darktears)","name":"menard@kde.org","id":12077},{"email":"philipj@opera.com","real_name":"Philip Jägenstedt","name":"philipj@opera.com","id":10312},{"email":"pnormand@igalia.com","real_name":"Philippe Normand","name":"pnormand@igalia.com","id":10698},{"email":"sergio@correia.cc","real_name":"Sergio Correia (qrwteyrutiyoup)","name":"sergio@correia.cc","id":20230},{"email":"vjaquez@igalia.com","real_name":"Víctor M. Jáquez L.","name":"vjaquez@igalia.com","id":14649},{"email":"webkit-bug-importer@group.apple.com","real_name":"Radar WebKit Bug Importer","name":"webkit-bug-importer@group.apple.com","id":15060}],"summary":"[GStreamer] cnn.com videos don't work","is_open":false,"platform":"PC","severity":"Normal","flags":[],"version":"WebKit Nightly Build","deadline":null,"component":"Media","is_creator_accessible":true,"product":"WebKit","is_confirmed":true,"target_milestone":"---"}],"faults":[]}

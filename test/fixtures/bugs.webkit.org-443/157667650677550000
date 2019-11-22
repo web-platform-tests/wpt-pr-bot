@@ -1,0 +1,20 @@
+GET /rest/bug/202311
+host: bugs.webkit.org
+
+HTTP/1.1 400 Bad request
+date: Wed, 18 Dec 2019 13:41:46 GMT
+server: Apache/2.4
+x-xss-protection: 1; mode=block
+access-control-allow-headers: origin, content-type, accept, x-requested-with
+access-control-allow-origin: *, *
+x-frame-options: SAMEORIGIN
+x-content-type-options: nosniff
+set-cookie: Bugzilla_login_request_cookie=7X8Z1kQTXQ; path=/; secure; HttpOnly
+etag: wxMcU4mrz8kBlP4Ex1DNAw
+strict-transport-security: max-age=7776000
+connection: close
+transfer-encoding: chunked
+content-type: application/json; charset=UTF-8
+
+
+{"documentation":"https://bugzilla.readthedocs.org/en/5.0/api/","error":true,"code":100,"message":"'202311' is not a valid bug number nor an alias to a bug."}

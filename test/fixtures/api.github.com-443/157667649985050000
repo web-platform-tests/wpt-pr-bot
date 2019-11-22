@@ -1,0 +1,32 @@
+GET /repos/web-platform-tests/wpt/pulls/19381/files
+accept: application/vnd.github.black-cat-preview+json
+host: api.github.com
+
+HTTP/1.1 200 OK
+date: Wed, 18 Dec 2019 13:41:39 GMT
+content-type: application/json; charset=utf-8
+content-length: 4661
+connection: close
+server: GitHub.com
+status: 200 OK
+x-ratelimit-limit: 5000
+x-ratelimit-remaining: 4066
+x-ratelimit-reset: 1576677119
+cache-control: private, max-age=60, s-maxage=60
+vary: Accept, Authorization, Cookie, X-GitHub-OTP, Accept-Encoding
+etag: "92a0d19bd469de86808c6606b3519b87"
+last-modified: Thu, 05 Dec 2019 16:23:03 GMT
+x-oauth-scopes: public_repo
+x-accepted-oauth-scopes: 
+x-github-media-type: github.v3; param=black-cat-preview; format=json
+access-control-expose-headers: ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type
+access-control-allow-origin: *
+strict-transport-security: max-age=31536000; includeSubdomains; preload
+x-frame-options: deny
+x-content-type-options: nosniff
+x-xss-protection: 1; mode=block
+referrer-policy: origin-when-cross-origin, strict-origin-when-cross-origin
+content-security-policy: default-src 'none'
+x-github-request-id: 88F0:40D1E:A8FBA:CFFD8:5DFA2C93
+
+[{"sha":"df3b9cd897a9463ad666716afbfcf1e77726e2e9","filename":"fetch/api/policies/referrer-origin-when-cross-origin.js","status":"modified","additions":1,"deletions":1,"changes":2,"blob_url":"https://github.com/web-platform-tests/wpt/blob/ed3b45c019b145c1a5668d23bda757d82eee8c21/fetch/api/policies/referrer-origin-when-cross-origin.js","raw_url":"https://github.com/web-platform-tests/wpt/raw/ed3b45c019b145c1a5668d23bda757d82eee8c21/fetch/api/policies/referrer-origin-when-cross-origin.js","contents_url":"https://api.github.com/repos/web-platform-tests/wpt/contents/fetch/api/policies/referrer-origin-when-cross-origin.js?ref=ed3b45c019b145c1a5668d23bda757d82eee8c21","patch":"@@ -8,7 +8,7 @@ if (this.document === undefined) {\n }\n \n var referrerOrigin = location.origin + '/';\n-var fetchedUrl = \"https://{{domains[www]}}:{{ports[https][0]}}\" + dirname(location.pathname) + RESOURCES_DIR + \"inspect-headers.py?cors&headers=referer\";\n+var fetchedUrl = \"https://{{hosts[alt][]}}:{{ports[https][0]}}\" + dirname(location.pathname) + RESOURCES_DIR + \"inspect-headers.py?cors&headers=referer\";\n \n promise_test(function(test) {\n   return fetch(fetchedUrl).then(function(resp) {"},{"sha":"6a82fcb997e4466acde8a636e3097ae4d5df979c","filename":"fetch/api/policies/referrer-origin.js","status":"modified","additions":1,"deletions":1,"changes":2,"blob_url":"https://github.com/web-platform-tests/wpt/blob/ed3b45c019b145c1a5668d23bda757d82eee8c21/fetch/api/policies/referrer-origin.js","raw_url":"https://github.com/web-platform-tests/wpt/raw/ed3b45c019b145c1a5668d23bda757d82eee8c21/fetch/api/policies/referrer-origin.js","contents_url":"https://api.github.com/repos/web-platform-tests/wpt/contents/fetch/api/policies/referrer-origin.js?ref=ed3b45c019b145c1a5668d23bda757d82eee8c21","patch":"@@ -19,7 +19,7 @@ promise_test(function(test) {\n }, \"Request's referrer is origin\");\n \n promise_test(function(test) {\n-  var referrerUrl = \"https://{{domains[www]}}:{{ports[https][0]}}/\";\n+  var referrerUrl = \"https://{{hosts[alt][]}}:{{ports[https][0]}}/\";\n   return fetch(fetchedUrl, { \"referrer\": referrerUrl }).then(function(resp) {\n     assert_equals(resp.status, 200, \"HTTP status is 200\");\n     assert_equals(resp.type , \"basic\", \"Response's type is basic\");"},{"sha":"cb614cf825b5cfa2223be0773f34df38e2bed44d","filename":"fetch/corb/script-html-via-cross-origin-blob-url.sub.html","status":"modified","additions":1,"deletions":1,"changes":2,"blob_url":"https://github.com/web-platform-tests/wpt/blob/ed3b45c019b145c1a5668d23bda757d82eee8c21/fetch/corb/script-html-via-cross-origin-blob-url.sub.html","raw_url":"https://github.com/web-platform-tests/wpt/raw/ed3b45c019b145c1a5668d23bda757d82eee8c21/fetch/corb/script-html-via-cross-origin-blob-url.sub.html","contents_url":"https://api.github.com/repos/web-platform-tests/wpt/contents/fetch/corb/script-html-via-cross-origin-blob-url.sub.html?ref=ed3b45c019b145c1a5668d23bda757d82eee8c21","patch":"@@ -14,7 +14,7 @@\n     });\n     var subframe = document.createElement(\"iframe\")\n     // www1 is cross-origin, to ensure that the received blob will be cross-origin.\n-    subframe.src = 'http://{{domains[www1]}}:{{ports[http][0]}}/fetch/corb/resources/subframe-that-posts-html-containing-blob-url-to-parent.html';\n+    subframe.src = 'http://{{hosts[alt][]}}:{{ports[http][0]}}/fetch/corb/resources/subframe-that-posts-html-containing-blob-url-to-parent.html';\n     document.body.appendChild(subframe);\n   }\n "},{"sha":"531d350598a74941c4411c34887498733e0e3e25","filename":"fetch/security/embedded-credentials.tentative.sub.html","status":"modified","additions":1,"deletions":1,"changes":2,"blob_url":"https://github.com/web-platform-tests/wpt/blob/ed3b45c019b145c1a5668d23bda757d82eee8c21/fetch/security/embedded-credentials.tentative.sub.html","raw_url":"https://github.com/web-platform-tests/wpt/raw/ed3b45c019b145c1a5668d23bda757d82eee8c21/fetch/security/embedded-credentials.tentative.sub.html","contents_url":"https://api.github.com/repos/web-platform-tests/wpt/contents/fetch/security/embedded-credentials.tentative.sub.html?ref=ed3b45c019b145c1a5668d23bda757d82eee8c21","patch":"@@ -73,7 +73,7 @@\n \n     async_test(t => {\n       var w = window.open();\n-      w.location.href = \"http://user:pass@{{domains[www]}}:{{ports[http][0]}}/fetch/security/support/embedded-credential-window.sub.html\";\n+      w.location.href = \"http://user:pass@{{hosts[alt][]}}:{{ports[http][0]}}/fetch/security/support/embedded-credential-window.sub.html\";\n       window.addEventListener(\"message\", t.step_func(message => {\n         if (message.source != w)\n           return;"}]

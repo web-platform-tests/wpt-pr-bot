@@ -1,0 +1,19 @@
+GET /bibrefs?refs=media-source
+host: specref.herokuapp.com
+
+HTTP/1.1 200 OK
+server: Cowboy
+connection: close
+x-powered-by: Express
+access-control-allow-origin: *
+expires: Sun, 01 Dec 2019 14:02:02 GMT
+cache-control: public, max-age=86400
+x-content-type-options: nosniff
+content-type: application/json; charset=utf-8
+content-length: 720
+etag: W/"2d0-E380s6KFUsXC/SmroWJd+06rkaY"
+vary: Accept-Encoding
+date: Sat, 30 Nov 2019 14:02:02 GMT
+via: 1.1 vegur
+
+{"media-source":{"authors":["Matthew Wolenetz","Jerry Smith","Mark Watson","Aaron Colwell","Adrian Bateman"],"href":"https://www.w3.org/TR/media-source/","title":"Media Source Extensions™","status":"REC","publisher":"W3C","deliveredBy":[{"url":"https://www.w3.org/html/wg/","shortname":"html"}],"versions":["media-source-20161117","media-source-20161004","media-source-20160705","media-source-20160503","media-source-20151112","media-source-20150331","media-source-20140717","media-source-20140109","media-source-20130905","media-source-20130415","media-source-20130129"],"edDraft":"https://w3c.github.io/media-source/","repository":"https://github.com/w3c/media-source","id":"media-source","date":"17 November 2016"}}
