@@ -8,6 +8,7 @@
   },
   "main": "index.js",
   "scripts": {
+    "deploy": "gcloud app deploy",
     "lint": "jshint index.js api.js lib test",
     "test": "npm run lint && npm run test-unit",
     "test-unit": "mocha -u tdd ./test/setup.js ./test/*.js",
@@ -32,6 +33,6 @@
   "author": "Tobie Langel",
   "subdomain": "ganesh",
   "engines": {
-    "node": "8.x.x"
+    "node": "12.x.x"
   }
 }
