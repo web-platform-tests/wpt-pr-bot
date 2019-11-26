@@ -9,7 +9,8 @@ var express = require("express"),
     github = require('./lib/github'),
     checkRequest = require('./lib/check-request'),
     filter = require('./lib/filter'),
-    q = require('q');
+    q = require('q'),
+    {Datastore} = require('@google-cloud/datastore');
 
 function promise(value) {
     var deferred = q.defer();
@@ -47,13 +48,21 @@ function getPullRequest(n, body) {
     return github.get("/repos/:owner/:repo/pulls/:number", { number: n });
 }
 
+async function getWebhookSecret() {
+    const datastore = new Datastore({projectId: 'wpt-pr-bot'});
+    const key = datastore.key(['Token', 'github-webhook-secret']);
+    let entity = await datastore.get(key);
+    return entity[0].Secret;
+}
+
 var currentlyRunning = {};
 
-app.post('/github-hook', function (req, res) {
-    req.pipe(bl(function (err, body) {
+app.post('/github-hook', async function (req, res) {
+    req.pipe(bl(async function (err, body) {
+        let webhookSecret = await getWebhookSecret();
         if (err) {
             logArgs(err.message);
-        } else if (process.env.NODE_ENV != 'production' || checkRequest(body, req.headers["x-hub-signature"], process.env.GITHUB_SECRET)) {
+        } else if (process.env.NODE_ENV != 'production' || checkRequest(body, req.headers["x-hub-signature"], webhookSecret)) {
             res.send(new Date().toISOString());
 
             // FILTER ALL THE THINGS
