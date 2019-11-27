@@ -10,7 +10,8 @@ var express = require("express"),
     checkRequest = require('./lib/check-request'),
     filter = require('./lib/filter'),
     q = require('q'),
-    flags = require('flags');
+    flags = require('flags'),
+    fs = require('fs');
 
 flags.defineBoolean('dry-run', false, 'Run in dry-run mode (no POSTs to GitHub)');
 flags.parse();
@@ -51,13 +52,27 @@ function getPullRequest(n, body) {
     return github.get("/repos/:owner/:repo/pulls/:number", { number: n });
 }
 
+// Load the secrets in.
+let secrets;
+try {
+    fs.accessSync('secrets.json', fs.constants.R_OK);
+    secrets = JSON.parse(fs.readFileSync('secrets.json', 'utf-8'));
+} catch (err) {
+    // Fallback to using env.
+    secrets = {
+        githubToken: process.env.GITHUB_TOKEN,
+        webhookSecret: process.env.GITHUB_SECRET,
+    };
+}
+github.setToken(secrets.githubToken);
+
 var currentlyRunning = {};
 
 app.post('/github-hook', function (req, res) {
     req.pipe(bl(function (err, body) {
         if (err) {
             logArgs(err.message);
-        } else if (process.env.NODE_ENV != 'production' || checkRequest(body, req.headers["x-hub-signature"], process.env.GITHUB_SECRET)) {
+        } else if (process.env.NODE_ENV != 'production' || checkRequest(body, req.headers["x-hub-signature"], secrets.githubToken)) {
             res.send(new Date().toISOString());
 
             // FILTER ALL THE THINGS
