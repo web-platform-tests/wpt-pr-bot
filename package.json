@@ -19,7 +19,7 @@
     "express": "4.x",
     "js-yaml": "3.13.1",
     "minimatch": "^3.0.4",
-    "q": "1.0.0",
+    "q": "1.5.1",
     "request": "2.88.0"
   },
   "devDependencies": {
