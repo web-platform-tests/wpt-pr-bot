@@ -10,7 +10,11 @@ var express = require("express"),
     checkRequest = require('./lib/check-request'),
     filter = require('./lib/filter'),
     q = require('q'),
+    flags = require('flags'),
     {Datastore} = require('@google-cloud/datastore');
+
+flags.defineBoolean('dry-run', false, 'Run in dry-run mode (no POSTs to GitHub)');
+flags.parse();
 
 function promise(value) {
     var deferred = q.defer();
@@ -108,11 +112,11 @@ app.post('/github-hook', async function (req, res) {
                     }
                     return metadata(n, u, content).then(function(metadata) {
                         logArgs(metadata);
-                        return labelModel.post(n, metadata.labels).then(
+                        return labelModel.post(n, metadata.labels, flags.get('dry-run')).then(
                             funkLogMsg(n, "Added missing LABELS if any."),
                             funkLogErr(n, "Something went wrong while adding missing LABELS.")
                         ).then(function() {
-                            return comment(n, metadata);
+                            return comment(n, metadata, flags.get('dry-run'));
                         }).then(
                             funkLogMsg(n, "Added missing REVIEWERS if any."),
                             funkLogErr(n, "Something went wrong while adding missing REVIEWERS.")
@@ -137,4 +141,6 @@ var port = process.env.PORT || 5000;
 app.listen(port, function() {
     console.log("Express server listening on port %d in %s mode", port, app.settings.env);
     console.log("App started in", (Date.now() - t0) + "ms.");
+    if (flags.get('dry-run'))
+        console.log('Starting in DRY-RUN mode');
 });
