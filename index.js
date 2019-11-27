@@ -132,4 +132,6 @@ var port = process.env.PORT || 5000;
 app.listen(port, function() {
     console.log("Express server listening on port %d in %s mode", port, app.settings.env);
     console.log("App started in", (Date.now() - t0) + "ms.");
+    if (flags.get('dry-run'))
+        console.log('Starting in DRY-RUN mode');
 });
