@@ -9,7 +9,11 @@ var express = require("express"),
     github = require('./lib/github'),
     checkRequest = require('./lib/check-request'),
     filter = require('./lib/filter'),
-    q = require('q');
+    q = require('q'),
+    flags = require('flags');
+
+flags.defineBoolean('dry-run', false, 'Run in dry-run mode (no POSTs to GitHub)');
+flags.parse();
 
 function promise(value) {
     var deferred = q.defer();
@@ -99,11 +103,11 @@ app.post('/github-hook', function (req, res) {
                     }
                     return metadata(n, u, content).then(function(metadata) {
                         logArgs(metadata);
-                        return labelModel.post(n, metadata.labels).then(
+                        return labelModel.post(n, metadata.labels, flags.get('dry-run')).then(
                             funkLogMsg(n, "Added missing LABELS if any."),
                             funkLogErr(n, "Something went wrong while adding missing LABELS.")
                         ).then(function() {
-                            return comment(n, metadata);
+                            return comment(n, metadata, flags.get('dry-run'));
                         }).then(
                             funkLogMsg(n, "Added missing REVIEWERS if any."),
                             funkLogErr(n, "Something went wrong while adding missing REVIEWERS.")
