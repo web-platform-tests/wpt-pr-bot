@@ -8,6 +8,8 @@
   },
   "main": "index.js",
   "scripts": {
+    "gcp-build": "node create-secrets.js",
+    "deploy": "gcloud app deploy",
     "coverage": "nyc --all --check-coverage --per-file npm run test-unit",
     "lint": "jshint index.js api.js lib test",
     "test": "npm run lint && npm run coverage",
@@ -15,6 +17,7 @@
     "start": "node index.js"
   },
   "dependencies": {
+    "@google-cloud/datastore": "^5.0.1",
     "bl": "^4.0.0",
     "express": "4.x",
     "flags": "^0.1.3",

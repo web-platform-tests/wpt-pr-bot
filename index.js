@@ -7,6 +7,7 @@ var t0 = Date.now();
 var express = require("express"),
     bl = require("bl"),
     labelModel = require('./lib/label-model'),
+    github = require('./lib/github'),
     metadata = require('./lib/metadata'),
     comment = require('./lib/comment'),
     checkRequest = require('./lib/check-request'),
@@ -40,13 +41,27 @@ function funkLogErr(num, msg) {
     return function(err) { logArgs("#" + num + ": " + msg + "\n", err); };
 }
 
+// Load the secrets in.
+let secrets;
+try {
+    secrets = require('./secrets.json');
+} catch (err) {
+    console.log(`Unable to load secrets.json, falling back to env (error: ${err})`);
+    secrets = {
+        githubToken: process.env.GITHUB_TOKEN,
+        webhookSecret: process.env.GITHUB_SECRET,
+    };
+}
+// TODO(stephenmcgruer): Refactor code to avoid awkward global setter.
+github.setToken(secrets.githubToken);
+
 var currentlyRunning = {};
 
 app.post('/github-hook', function (req, res) {
     req.pipe(bl(function (err, body) {
         if (err) {
             logArgs(err.message);
-        } else if (process.env.NODE_ENV != 'production' || checkRequest(body, req.headers["x-hub-signature"], process.env.GITHUB_SECRET)) {
+        } else if (process.env.NODE_ENV != 'production' || checkRequest(body, req.headers["x-hub-signature"], secrets.webhookSecret)) {
             res.send(new Date().toISOString());
 
             try {
