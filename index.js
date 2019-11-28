@@ -10,8 +10,7 @@ var express = require("express"),
     checkRequest = require('./lib/check-request'),
     filter = require('./lib/filter'),
     q = require('q'),
-    flags = require('flags'),
-    fs = require('fs');
+    flags = require('flags');
 
 flags.defineBoolean('dry-run', false, 'Run in dry-run mode (no POSTs to GitHub)');
 flags.parse();
@@ -55,10 +54,9 @@ function getPullRequest(n, body) {
 // Load the secrets in.
 let secrets;
 try {
-    fs.accessSync('secrets.json', fs.constants.R_OK);
-    secrets = JSON.parse(fs.readFileSync('secrets.json', 'utf-8'));
+    secrets = require('./secrets.json');
 } catch (err) {
-    // Fallback to using env.
+    console.log(`Unable to load secrets.json, falling back to env (error: ${err})`);
     secrets = {
         githubToken: process.env.GITHUB_TOKEN,
         webhookSecret: process.env.GITHUB_SECRET,

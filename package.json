@@ -8,7 +8,8 @@
   },
   "main": "index.js",
   "scripts": {
-    "deploy": "node create_secrets.js && gcloud app deploy",
+    "gcp-build": "node create-secrets.js",
+    "deploy": "gcloud app deploy",
     "lint": "jshint index.js api.js lib test",
     "test": "npm run lint && npm run test-unit",
     "test-unit": "mocha -u tdd ./test/setup.js ./test/*.js",
