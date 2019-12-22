@@ -32,7 +32,7 @@
     "mocha": "6.2.2",
     "nyc": "^14.1.1",
     "replay": "^2.3.0",
-    "sinon": "^7.1.1"
+    "sinon": "^8.0.0"
   },
   "license": "Apache-2.0",
   "author": "Tobie Langel",
