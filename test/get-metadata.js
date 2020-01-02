@@ -60,6 +60,7 @@ suite('getMetadata', function() {
             paths: [ 'WebIDL', 'interfaces' ],
             labels: [ 'WebIDL', 'interfaces', 'wg-webplatform' ],
             isRoot: false,
+            isWebKitVerified: false,
             specs: {
                 WebIDL: {
                     authors: [
@@ -98,6 +99,7 @@ suite('getMetadata', function() {
                     date: '15 December 2016'
                 }
             },
+            title: "",
             workingGroups: [ 'webplatform' ],
             owners: [
                { login: 'yuki3', permission: 'write' },
@@ -119,7 +121,7 @@ suite('getMetadata', function() {
             missingReviewers: [],
         };
 
-        return getMetadata(11698, 'lukebjerring', '')
+        return getMetadata(11698, 'lukebjerring', '', '')
             .then(function(actual) {
                 assert.deepEqual(expected, actual);
             });
@@ -146,6 +148,7 @@ suite('getMetadata', function() {
           ],
           isMergeable: true,
           isRoot: false,
+          isWebKitVerified: false,
           issue: 18353,
           labels: [
             "svg",
@@ -355,21 +358,116 @@ suite('getMetadata', function() {
               ],
             },
           },
+          title: "",
           workingGroups: [
             "svg",
           ]
         };
 
-        return getMetadata(18353, 'ewilligers', '')
+        return getMetadata(18353, 'ewilligers', '', '')
             .then(function(actual) {
                 assert.deepEqual(expected, actual);
             });
     });
 
+    test('retrieval and formatting of metadata for a WebKit related pull request', function() {
+        var expected = {
+            issue: 19538,
+            title: 'WebKit export of https://bugs.webkit.org/show_bug.cgi?id=201401',
+            rootReviewers: [ 'jgraham' ],
+            filenames:
+             [ 'lint.whitelist',
+               'media-source/mediasource-video-is-visible-expected.html',
+               'media-source/mediasource-video-is-visible.html',
+               'media-source/mp4/test-a-1s.mp4',
+               'media-source/mp4/test-a-1s.mp4-manifest.json',
+               'media-source/mp4/test-v-1s-blue.mp4',
+               'media-source/mp4/test-v-1s-blue.mp4-manifest.json',
+               'media-source/webm/test-a-1s.webm',
+               'media-source/webm/test-a-1s.webm-manifest.json',
+               'media-source/webm/test-v-1s-blue.webm',
+               'media-source/webm/test-v-1s-blue.webm-manifest.json' ],
+            filenamesIgnoreRemoved:
+             [ 'lint.whitelist',
+               'media-source/mediasource-video-is-visible-expected.html',
+               'media-source/mediasource-video-is-visible.html',
+               'media-source/mp4/test-a-1s.mp4',
+               'media-source/mp4/test-a-1s.mp4-manifest.json',
+               'media-source/mp4/test-v-1s-blue.mp4',
+               'media-source/mp4/test-v-1s-blue.mp4-manifest.json',
+               'media-source/webm/test-a-1s.webm',
+               'media-source/webm/test-a-1s.webm-manifest.json',
+               'media-source/webm/test-v-1s-blue.webm',
+               'media-source/webm/test-v-1s-blue.webm-manifest.json' ],
+            paths: [ '', 'media-source', 'media-source/mp4', 'media-source/webm' ],
+            isRoot: true,
+            specs:
+             { 'media-source':
+                { authors: [
+                      "Matthew Wolenetz",
+                      "Jerry Smith",
+                      "Mark Watson",
+                      "Aaron Colwell",
+                      "Adrian Bateman",
+                  ],
+                  href: 'https://www.w3.org/TR/media-source/',
+                  title: 'Media Source Extensions™',
+                  status: 'REC',
+                  publisher: 'W3C',
+                  deliveredBy: [
+                   {
+                       "shortname": "html",
+                          "url": "https://www.w3.org/html/wg/",
+                      }
+                ],
+                  versions: [
+                      "media-source-20161117",
+                      "media-source-20161004",
+                      "media-source-20160705",
+                      "media-source-20160503",
+                      "media-source-20151112",
+                      "media-source-20150331",
+                      "media-source-20140717",
+                      "media-source-20140109",
+                      "media-source-20130905",
+                      "media-source-20130415",
+                      "media-source-20130129",
+                ],
+                  edDraft: 'https://w3c.github.io/media-source/',
+                  repository: 'https://github.com/w3c/media-source',
+                  id: 'media-source',
+                  date: '17 November 2016' } },
+            workingGroups: [ 'html' ],
+            labels: [ 'infra', 'media-source', 'wg-html', 'webkit-export' ],
+            owners: [],
+            author: { login: 'ntrrgc', permission: 'none', isOwner: false },
+            reviewersExcludingAuthor: [],
+            reviews: [],
+            reviewers: [ 'jgraham', 'wolenetz' ],
+            webkit: { flags: { inCommit: true, reviewed: true }, issue: '201401' },
+            isWebKitVerified: true,
+            isMergeable: true,
+            reviewedDownstream: 'WebKit',
+            missingReviewers: [],
+            missingAssignee: null ,
+        };
+
+        return getMetadata(19538, 'ntrrgc', 'WebKit export of https://bugs.webkit.org/show_bug.cgi?id=201401', '')
+            .then(function(actual) {
+                assert.deepEqual(expected, actual);
+            });
+    });
+    test('retrieval and formatting of metadata for a WebKit related pull request with wrong bugzilla reference', function() {
+        var expected = "'202311' is not a valid bug number nor an alias to a bug.";
+        return getMetadata(19381, 'rwlbuis', 'WebKit export of https://bugs.webkit.org/show_bug.cgi?id=202311', '')
+            .then(function() {}, function(actual) {
+                assert.deepEqual(expected, actual.message);
+            });
+    });
     test('limiting labels for pull requests that modify many files', function() {
         var expected = ['infra', 'very-large'];
 
-        return getMetadata(11201, 'kereliuk', '')
+        return getMetadata(11201, 'kereliuk', '', '')
             .then(function(actual) {
                 assert.sameMembers(expected, actual.labels);
             });

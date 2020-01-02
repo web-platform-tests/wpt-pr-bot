@@ -1,0 +1,19 @@
+GET /bibrefs?refs=fetch
+host: specref.herokuapp.com
+
+HTTP/1.1 200 OK
+server: Cowboy
+connection: close
+x-powered-by: Express
+access-control-allow-origin: *
+expires: Thu, 19 Dec 2019 13:41:40 GMT
+cache-control: public, max-age=86400
+x-content-type-options: nosniff
+content-type: application/json; charset=utf-8
+content-length: 257
+etag: W/"101-Q2/EmwYxQlWlqIMxBXlagA6BKn0"
+vary: Accept-Encoding
+date: Wed, 18 Dec 2019 13:41:40 GMT
+via: 1.1 vegur
+
+{"fetch":{"aliasOf":"FETCH","id":"fetch"},"FETCH":{"authors":["Anne van Kesteren"],"href":"https://fetch.spec.whatwg.org/","title":"Fetch Standard","status":"Living Standard","publisher":"WHATWG","repository":"https://github.com/whatwg/fetch","id":"FETCH"}}

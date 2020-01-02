@@ -1,0 +1,31 @@
+GET /repos/web-platform-tests/wpt/pulls/19538/requested_reviewers
+accept: application/vnd.github.black-cat-preview+json
+host: api.github.com
+
+HTTP/1.1 200 OK
+date: Sat, 30 Nov 2019 14:02:06 GMT
+content-type: application/json; charset=utf-8
+content-length: 1824
+connection: close
+server: GitHub.com
+status: 200 OK
+x-ratelimit-limit: 5000
+x-ratelimit-remaining: 4974
+x-ratelimit-reset: 1575126120
+cache-control: private, max-age=60, s-maxage=60
+vary: Accept, Authorization, Cookie, X-GitHub-OTP, Accept-Encoding
+etag: "5cb945da303efd3928987153e83711b8"
+x-oauth-scopes: public_repo
+x-accepted-oauth-scopes: 
+x-github-media-type: github.v3; param=black-cat-preview; format=json
+access-control-expose-headers: ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type
+access-control-allow-origin: *
+strict-transport-security: max-age=31536000; includeSubdomains; preload
+x-frame-options: deny
+x-content-type-options: nosniff
+x-xss-protection: 1; mode=block
+referrer-policy: origin-when-cross-origin, strict-origin-when-cross-origin
+content-security-policy: default-src 'none'
+x-github-request-id: BF40:9495:717B0E6:8714BE4:5DE2765D
+
+{"users":[{"login":"jgraham","id":294864,"node_id":"MDQ6VXNlcjI5NDg2NA==","avatar_url":"https://avatars1.githubusercontent.com/u/294864?v=4","gravatar_id":"","url":"https://api.github.com/users/jgraham","html_url":"https://github.com/jgraham","followers_url":"https://api.github.com/users/jgraham/followers","following_url":"https://api.github.com/users/jgraham/following{/other_user}","gists_url":"https://api.github.com/users/jgraham/gists{/gist_id}","starred_url":"https://api.github.com/users/jgraham/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/jgraham/subscriptions","organizations_url":"https://api.github.com/users/jgraham/orgs","repos_url":"https://api.github.com/users/jgraham/repos","events_url":"https://api.github.com/users/jgraham/events{/privacy}","received_events_url":"https://api.github.com/users/jgraham/received_events","type":"User","site_admin":false},{"login":"wolenetz","id":11578819,"node_id":"MDQ6VXNlcjExNTc4ODE5","avatar_url":"https://avatars0.githubusercontent.com/u/11578819?v=4","gravatar_id":"","url":"https://api.github.com/users/wolenetz","html_url":"https://github.com/wolenetz","followers_url":"https://api.github.com/users/wolenetz/followers","following_url":"https://api.github.com/users/wolenetz/following{/other_user}","gists_url":"https://api.github.com/users/wolenetz/gists{/gist_id}","starred_url":"https://api.github.com/users/wolenetz/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/wolenetz/subscriptions","organizations_url":"https://api.github.com/users/wolenetz/orgs","repos_url":"https://api.github.com/users/wolenetz/repos","events_url":"https://api.github.com/users/wolenetz/events{/privacy}","received_events_url":"https://api.github.com/users/wolenetz/received_events","type":"User","site_admin":false}],"teams":[]}

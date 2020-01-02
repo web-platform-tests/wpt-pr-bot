@@ -1,0 +1,28 @@
+GET /repos/web-platform-tests/wpt/contents/fetch/api/META.yml
+accept: application/vnd.github.black-cat-preview+json
+host: api.github.com
+
+HTTP/1.1 404 Not Found
+date: Wed, 18 Dec 2019 13:41:43 GMT
+content-type: application/json; charset=utf-8
+content-length: 106
+connection: close
+server: GitHub.com
+status: 404 Not Found
+x-ratelimit-limit: 5000
+x-ratelimit-remaining: 4062
+x-ratelimit-reset: 1576677119
+x-oauth-scopes: public_repo
+x-accepted-oauth-scopes: 
+x-github-media-type: github.v3; param=black-cat-preview; format=json
+access-control-expose-headers: ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type
+access-control-allow-origin: *
+strict-transport-security: max-age=31536000; includeSubdomains; preload
+x-frame-options: deny
+x-content-type-options: nosniff
+x-xss-protection: 1; mode=block
+referrer-policy: origin-when-cross-origin, strict-origin-when-cross-origin
+content-security-policy: default-src 'none'
+x-github-request-id: 88FA:223CC:1BF383:222108:5DFA2C96
+
+{"message":"Not Found","documentation_url":"https://developer.github.com/v3/repos/contents/#get-contents"}

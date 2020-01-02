@@ -1,0 +1,32 @@
+GET /repos/web-platform-tests/wpt/issues/19381
+accept: application/vnd.github.black-cat-preview+json
+host: api.github.com
+
+HTTP/1.1 200 OK
+date: Wed, 18 Dec 2019 13:41:47 GMT
+content-type: application/json; charset=utf-8
+content-length: 4594
+connection: close
+server: GitHub.com
+status: 200 OK
+x-ratelimit-limit: 5000
+x-ratelimit-remaining: 4056
+x-ratelimit-reset: 1576677120
+cache-control: private, max-age=60, s-maxage=60
+vary: Accept, Authorization, Cookie, X-GitHub-OTP, Accept-Encoding
+etag: "a66305ab82c7d39a94c6de8b93bac872"
+last-modified: Wed, 11 Dec 2019 15:44:29 GMT
+x-oauth-scopes: public_repo
+x-accepted-oauth-scopes: repo
+x-github-media-type: github.v3; param=black-cat-preview; format=json
+access-control-expose-headers: ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type
+access-control-allow-origin: *
+strict-transport-security: max-age=31536000; includeSubdomains; preload
+x-frame-options: deny
+x-content-type-options: nosniff
+x-xss-protection: 1; mode=block
+referrer-policy: origin-when-cross-origin, strict-origin-when-cross-origin
+content-security-policy: default-src 'none'
+x-github-request-id: 8908:223D8:462BF4:557EC9:5DFA2C9A
+
+{"url":"https://api.github.com/repos/web-platform-tests/wpt/issues/19381","repository_url":"https://api.github.com/repos/web-platform-tests/wpt","labels_url":"https://api.github.com/repos/web-platform-tests/wpt/issues/19381/labels{/name}","comments_url":"https://api.github.com/repos/web-platform-tests/wpt/issues/19381/comments","events_url":"https://api.github.com/repos/web-platform-tests/wpt/issues/19381/events","html_url":"https://github.com/web-platform-tests/wpt/pull/19381","id":499642496,"node_id":"MDExOlB1bGxSZXF1ZXN0MzIyMzIxMzcx","number":19381,"title":"WebKit export of https://bugs.webkit.org/show_bug.cgi?id=202311","user":{"login":"rwlbuis","id":22796292,"node_id":"MDQ6VXNlcjIyNzk2Mjky","avatar_url":"https://avatars2.githubusercontent.com/u/22796292?v=4","gravatar_id":"","url":"https://api.github.com/users/rwlbuis","html_url":"https://github.com/rwlbuis","followers_url":"https://api.github.com/users/rwlbuis/followers","following_url":"https://api.github.com/users/rwlbuis/following{/other_user}","gists_url":"https://api.github.com/users/rwlbuis/gists{/gist_id}","starred_url":"https://api.github.com/users/rwlbuis/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/rwlbuis/subscriptions","organizations_url":"https://api.github.com/users/rwlbuis/orgs","repos_url":"https://api.github.com/users/rwlbuis/repos","events_url":"https://api.github.com/users/rwlbuis/events{/privacy}","received_events_url":"https://api.github.com/users/rwlbuis/received_events","type":"User","site_admin":false},"labels":[{"id":461919687,"node_id":"MDU6TGFiZWw0NjE5MTk2ODc=","url":"https://api.github.com/repos/web-platform-tests/wpt/labels/do%20not%20merge%20yet","name":"do not merge yet","color":"d93f0b","default":false,"description":null},{"id":195095545,"node_id":"MDU6TGFiZWwxOTUwOTU1NDU=","url":"https://api.github.com/repos/web-platform-tests/wpt/labels/fetch","name":"fetch","color":"ededed","default":false,"description":null},{"id":801864806,"node_id":"MDU6TGFiZWw4MDE4NjQ4MDY=","url":"https://api.github.com/repos/web-platform-tests/wpt/labels/webkit-export","name":"webkit-export","color":"8e56b1","default":false,"description":null}],"state":"open","locked":false,"assignee":{"login":"domfarolino","id":9669289,"node_id":"MDQ6VXNlcjk2NjkyODk=","avatar_url":"https://avatars1.githubusercontent.com/u/9669289?v=4","gravatar_id":"","url":"https://api.github.com/users/domfarolino","html_url":"https://github.com/domfarolino","followers_url":"https://api.github.com/users/domfarolino/followers","following_url":"https://api.github.com/users/domfarolino/following{/other_user}","gists_url":"https://api.github.com/users/domfarolino/gists{/gist_id}","starred_url":"https://api.github.com/users/domfarolino/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/domfarolino/subscriptions","organizations_url":"https://api.github.com/users/domfarolino/orgs","repos_url":"https://api.github.com/users/domfarolino/repos","events_url":"https://api.github.com/users/domfarolino/events{/privacy}","received_events_url":"https://api.github.com/users/domfarolino/received_events","type":"User","site_admin":false},"assignees":[{"login":"domfarolino","id":9669289,"node_id":"MDQ6VXNlcjk2NjkyODk=","avatar_url":"https://avatars1.githubusercontent.com/u/9669289?v=4","gravatar_id":"","url":"https://api.github.com/users/domfarolino","html_url":"https://github.com/domfarolino","followers_url":"https://api.github.com/users/domfarolino/followers","following_url":"https://api.github.com/users/domfarolino/following{/other_user}","gists_url":"https://api.github.com/users/domfarolino/gists{/gist_id}","starred_url":"https://api.github.com/users/domfarolino/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/domfarolino/subscriptions","organizations_url":"https://api.github.com/users/domfarolino/orgs","repos_url":"https://api.github.com/users/domfarolino/repos","events_url":"https://api.github.com/users/domfarolino/events{/privacy}","received_events_url":"https://api.github.com/users/domfarolino/received_events","type":"User","site_admin":false}],"milestone":null,"comments":4,"created_at":"2019-09-27T20:45:18Z","updated_at":"2019-10-20T07:35:53Z","closed_at":null,"author_association":"CONTRIBUTOR","pull_request":{"url":"https://api.github.com/repos/web-platform-tests/wpt/pulls/19381","html_url":"https://github.com/web-platform-tests/wpt/pull/19381","diff_url":"https://github.com/web-platform-tests/wpt/pull/19381.diff","patch_url":"https://github.com/web-platform-tests/wpt/pull/19381.patch"},"body":"","closed_by":null}

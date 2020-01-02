@@ -16,6 +16,7 @@ async function fetchSecret(tokenName) {
     const secrets = {
         webhookSecret: await fetchSecret('github-webhook-secret'),
         githubToken: await fetchSecret('wpt-pr-bot-github-token'),
+        bugsWebkit: await fetchSecret('wpt-pr-bot-bugswebkit-token'),
     };
     await fs.promises.writeFile('secrets.json', JSON.stringify(secrets), 'utf8');
 })().catch((reason) => { console.error(reason); process.exit(1) });

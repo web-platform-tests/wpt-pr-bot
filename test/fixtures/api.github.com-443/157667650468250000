@@ -1,0 +1,26 @@
+GET /repos/web-platform-tests/wpt/collaborators/rwlbuis
+accept: application/vnd.github.black-cat-preview+json
+host: api.github.com
+
+HTTP/1.1 204 No Content
+date: Wed, 18 Dec 2019 13:41:44 GMT
+connection: close
+server: GitHub.com
+status: 204 No Content
+x-ratelimit-limit: 5000
+x-ratelimit-remaining: 4060
+x-ratelimit-reset: 1576677119
+x-oauth-scopes: public_repo
+x-accepted-oauth-scopes: 
+x-github-media-type: github.v3; param=black-cat-preview; format=json
+access-control-expose-headers: ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type
+access-control-allow-origin: *
+strict-transport-security: max-age=31536000; includeSubdomains; preload
+x-frame-options: deny
+x-content-type-options: nosniff
+x-xss-protection: 1; mode=block
+referrer-policy: origin-when-cross-origin, strict-origin-when-cross-origin
+content-security-policy: default-src 'none'
+vary: Accept-Encoding
+x-github-request-id: 88FE:1B63D:C8F4F:F235D:5DFA2C98
+
