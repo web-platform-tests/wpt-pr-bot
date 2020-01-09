@@ -135,6 +135,8 @@ app.listen(port, function() {
 // In addition to listening for notifications from GitHub, we regularly poll the
 // set of PRs to keep WebKit exports synchronized with the upstream PR.
 function pullRequestPoller() {
+    // TODO(smcgruer): Change this back to once per minute (to minimize latency)
+    // once we have fully launched WebKit export synchronization.
     waitFor(5 * 60 * 1000).then(function() {
         console.log('Checking for changes to WebKit-exported pull requests');
         github.get("/repos/:owner/:repo/pulls", {}).then(function (pull_requests) {
