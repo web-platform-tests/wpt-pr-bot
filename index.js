@@ -135,7 +135,10 @@ app.listen(port, function() {
 // In addition to listening for notifications from GitHub, we regularly poll the
 // set of PRs to keep WebKit exports synchronized with the upstream PR.
 function pullRequestPoller() {
-    waitFor(60 * 1000).then(function() {
+    // TODO(smcgruer): Change this back to once per minute (to minimize latency)
+    // once we have fully launched WebKit export synchronization.
+    waitFor(5 * 60 * 1000).then(function() {
+        console.log('Checking for changes to WebKit-exported pull requests');
         github.get("/repos/:owner/:repo/pulls", {}).then(function (pull_requests) {
             pull_requests.forEach(function(pull_request) {
                 if (!webkit.related(pull_request.title)) {
@@ -158,16 +161,21 @@ function pullRequestPoller() {
                               console.log("  inCommit");
                         }
                     }
-                    // TODO: This part of the code must be uncommmented to
-                    /* return labelModel.post(n, metadata.labels, flags.get('dry-run')).then(
+                    // Hard-coded dry-run mode until we launch webkit-export
+                    // support in wpt-pr-bot
+                    const dryRun = true;
+                    const n = pull_request.number;
+                    return labelModel.post(n, metadata.labels, dryRun).then(
                          funkLogMsg(n, "Added missing LABELS if any."),
                          funkLogErr(n, "Something went wrong while adding missing LABELS.")
                     ).then(function() {
-                        return comment(n, metadata, flags.get('dry-run'));
+                        return comment(n, metadata, dryRun);
                     }).then(
                         funkLogMsg(n, "Added missing REVIEWERS if any."),
                         funkLogErr(n, "Something went wrong while adding missing REVIEWERS.")
-                    ); */
+                    );
+                }).catch(e => {
+                  console.log(e);
                 });
             });
             pullRequestPoller();
