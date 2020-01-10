@@ -161,15 +161,12 @@ function pullRequestPoller() {
                               console.log("  inCommit");
                         }
                     }
-                    // Hard-coded dry-run mode until we launch webkit-export
-                    // support in wpt-pr-bot
-                    const dryRun = true;
                     const n = pull_request.number;
-                    return labelModel.post(n, metadata.labels, dryRun).then(
+                    return labelModel.post(n, metadata.labels, flags.get('dry-run')).then(
                          funkLogMsg(n, "Added missing LABELS if any."),
                          funkLogErr(n, "Something went wrong while adding missing LABELS.")
                     ).then(function() {
-                        return comment(n, metadata, dryRun);
+                        return comment(n, metadata, flags.get('dry-run'));
                     }).then(
                         funkLogMsg(n, "Added missing REVIEWERS if any."),
                         funkLogErr(n, "Something went wrong while adding missing REVIEWERS.")
