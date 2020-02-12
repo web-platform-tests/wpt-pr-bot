@@ -135,9 +135,11 @@ app.listen(port, function() {
 // In addition to listening for notifications from GitHub, we regularly poll the
 // set of PRs to keep WebKit exports synchronized with the upstream PR.
 function pullRequestPoller() {
-    // TODO(smcgruer): Change this back to once per minute (to minimize latency)
-    // once we have fully launched WebKit export synchronization.
-    waitFor(5 * 60 * 1000).then(function() {
+    // As currently written, the WebKit PR poller does a huge number of API
+    // requests and can cause us to hit the GitHub API limit. To mitigate this,
+    // we currently only run it every 15 minutes.
+    // See https://github.com/web-platform-tests/wpt-pr-bot/issues/144
+    waitFor(15 * 60 * 1000).then(function() {
         console.log('Checking for changes to WebKit-exported pull requests');
         github.get("/repos/:owner/:repo/pulls", {}).then(function (pull_requests) {
             pull_requests.forEach(function(pull_request) {
