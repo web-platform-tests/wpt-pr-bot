@@ -17,7 +17,7 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "@google-cloud/datastore": "^5.0.1",
+    "@google-cloud/datastore": "^6.0.0",
     "bl": "^4.0.0",
     "express": "4.x",
     "flags": "^0.1.3",
