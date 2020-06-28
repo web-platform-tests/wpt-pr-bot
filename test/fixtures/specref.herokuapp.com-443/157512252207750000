@@ -1,5 +1,6 @@
 GET /bibrefs?refs=media-source
-host: specref.herokuapp.com
+accept: */*
+accept-encoding: gzip,deflate
 
 HTTP/1.1 200 OK
 server: Cowboy

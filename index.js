@@ -15,16 +15,13 @@ var express = require("express"),
     github = require('./lib/github'),
     checkRequest = require('./lib/check-request'),
     filter = require('./lib/filter'),
-    q = require('q'),
     flags = require('flags');
 
 flags.defineBoolean('dry-run', false, 'Run in dry-run mode (no POSTs to GitHub)');
 flags.parse();
 
 function waitFor(ms) {
-    var deferred = q.defer();
-    setTimeout(function() { deferred.resolve(); }, ms);
-    return deferred.promise;
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 var app = module.exports = express();
