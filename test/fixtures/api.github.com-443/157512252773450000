@@ -1,6 +1,5 @@
 GET /repos/web-platform-tests/wpt/issues/19538
 accept: application/vnd.github.black-cat-preview+json
-host: api.github.com
 
 HTTP/1.1 200 OK
 date: Sat, 30 Nov 2019 14:02:07 GMT

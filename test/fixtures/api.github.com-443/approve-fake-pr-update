@@ -1,6 +1,5 @@
 POST /repos/web-platform-tests/wpt/pulls/13976/reviews
 accept: application/vnd.github.black-cat-preview+json
-host: api.github.com
 body: {\"body\":\"I felt like it\",\"event\":\"APPROVE\",\"comments\":[]}
 
 HTTP/1.1 200 Okay

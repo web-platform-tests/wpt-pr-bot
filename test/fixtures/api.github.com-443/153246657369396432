@@ -1,6 +1,5 @@
 GET /repos/web-platform-tests/wpt/contents/html-media-capture/META.yml
 accept: application/vnd.github.black-cat-preview+json
-host: api.github.com
 
 HTTP/1.1 200 OK
 server: GitHub.com

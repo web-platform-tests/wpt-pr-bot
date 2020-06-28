@@ -1,6 +1,5 @@
 GET /repositories/3618133/issues/11201/events?page=6
 accept: application/vnd.github.black-cat-preview+json
-host: api.github.com
 
 HTTP/1.1 200 OK
 server: GitHub.com
