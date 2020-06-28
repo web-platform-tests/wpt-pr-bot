@@ -1,5 +1,6 @@
 GET /rest/bug/201401
-host: bugs.webkit.org
+accept: */*
+accept-encoding: gzip,deflate
 
 HTTP/1.1 200 OK
 date: Sat, 30 Nov 2019 14:02:07 GMT
