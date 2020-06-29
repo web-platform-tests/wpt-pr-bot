@@ -1,0 +1,28 @@
+POST /repos/web-platform-tests/wpt/pulls/16780/reviews
+accept: application/vnd.github.black-cat-preview+json
+body: {\"body\":\"The review process for this patch is being conducted in the Chromium project.\",\"event\":\"APPROVE\",\"comments\":[]}
+
+HTTP/1.1 200 Okay
+server: GitHub.com
+date: Fri, 09 Nov 2018 01:39:31 GMT
+content-type: application/json; charset=utf-8
+content-length: 2
+connection: close
+status: 200 Okay
+x-ratelimit-limit: 5000
+x-ratelimit-remaining: 4996
+x-ratelimit-reset: 1541729149
+x-oauth-scopes: public_repo
+x-accepted-oauth-scopes: repo
+x-github-media-type: github.v3; param=black-cat-preview; format=json
+access-control-expose-headers: ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type
+access-control-allow-origin: *
+strict-transport-security: max-age=31536000; includeSubdomains; preload
+x-frame-options: deny
+x-content-type-options: nosniff
+x-xss-protection: 1; mode=block
+referrer-policy: origin-when-cross-origin, strict-origin-when-cross-origin
+content-security-policy: default-src 'none'
+x-github-request-id: D05A:6FD7:4A0FCCA:9AB6F49:5BE4E553
+
+{}
