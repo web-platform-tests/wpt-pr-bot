@@ -1,0 +1,30 @@
+GET /repos/web-platform-tests/wpt/issues/16788/comments
+accept: application/vnd.github.black-cat-preview+json
+
+HTTP/1.1 200 OK
+server: GitHub.com
+date: Fri, 09 Nov 2018 01:35:07 GMT
+content-type: application/json; charset=utf-8
+content-length: 1576
+connection: close
+status: 200 OK
+x-ratelimit-limit: 5000
+x-ratelimit-remaining: 4997
+x-ratelimit-reset: 1541729149
+cache-control: private, max-age=60, s-maxage=60
+vary: Accept, Authorization, Cookie, X-GitHub-OTP
+etag: "9951cb2c99002d7409b77ede48c39c33"
+x-oauth-scopes: public_repo
+x-accepted-oauth-scopes: 
+x-github-media-type: github.v3; param=black-cat-preview; format=json
+access-control-expose-headers: ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type
+access-control-allow-origin: *
+strict-transport-security: max-age=31536000; includeSubdomains; preload
+x-frame-options: deny
+x-content-type-options: nosniff
+x-xss-protection: 1; mode=block
+referrer-policy: origin-when-cross-origin, strict-origin-when-cross-origin
+content-security-policy: default-src 'none'
+x-github-request-id: D028:6FD7:49FC6BA:9A8F236:5BE4E44A
+
+[]
