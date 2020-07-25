@@ -370,7 +370,7 @@ suite('getMetadata', function() {
             });
     });
 
-    test('retrieval and formatting of metadata for a WebKit related pull request', function() {
+    test('retrieval and formatting of metadata for a WebKit related pull request', async function() {
         var expected = {
             issue: 19538,
             title: 'WebKit export of https://bugs.webkit.org/show_bug.cgi?id=201401',
@@ -452,10 +452,13 @@ suite('getMetadata', function() {
             missingAssignee: null ,
         };
 
-        return getMetadata(19538, 'ntrrgc', 'WebKit export of https://bugs.webkit.org/show_bug.cgi?id=201401', '')
-            .then(function(actual) {
-                assert.deepEqual(expected, actual);
-            });
+        let actual = await getMetadata(19538, 'ntrrgc', 'WebKit export of https://bugs.webkit.org/show_bug.cgi?id=201401', '');
+        assert.deepEqual(expected, actual);
+
+        // Check that non-https works too.
+        actual = await getMetadata(19538, 'ntrrgc', 'WebKit export of http://bugs.webkit.org/show_bug.cgi?id=201401', '');
+        expected.title = 'WebKit export of http://bugs.webkit.org/show_bug.cgi?id=201401';
+        assert.deepEqual(expected, actual);
     });
     test('retrieval and formatting of metadata for a WebKit related pull request with wrong bugzilla reference', function() {
         var expected = "'202311' is not a valid bug number nor an alias to a bug.";
