@@ -9,7 +9,7 @@ var express = require("express"),
     labelModel = require('./lib/label-model'),
     bugsWebkit = require('./lib/bugs-webkit'),
     github = require('./lib/github'),
-    metadata = require('./lib/metadata'),
+    get_metadata = require('./lib/metadata'),
     webkit = require('./lib/metadata/webkit'),
     comment = require('./lib/comment'),
     github = require('./lib/github'),
@@ -94,7 +94,7 @@ app.post('/github-hook', function (req, res) {
                 logArgs("#" + n, action);
 
                 waitFor(5 * 1000).then(function() { // Avoid race condition
-                    return metadata(n, u, title, content).then(function(metadata) {
+                    return get_metadata(n, u, title, content).then(function(metadata) {
                         logArgs(metadata);
                         return labelModel.post(n, metadata.labels, flags.get('dry-run')).then(
                             funkLogMsg(n, "Added missing LABELS if any."),
@@ -131,52 +131,60 @@ app.listen(port, function() {
 
 // In addition to listening for notifications from GitHub, we regularly poll the
 // set of PRs to keep WebKit exports synchronized with the upstream PR.
-function pullRequestPoller() {
+async function pullRequestPoller() {
     // As currently written, the WebKit PR poller does a huge number of API
     // requests and can cause us to hit the GitHub API limit. To mitigate this,
     // we currently only run it every 15 minutes.
     // See https://github.com/web-platform-tests/wpt-pr-bot/issues/144
-    waitFor(15 * 60 * 1000).then(function() {
-        console.log('Checking for changes to WebKit-exported pull requests');
-        github.get("/repos/:owner/:repo/pulls", {}).then(function (pull_requests) {
-            pull_requests.forEach(function(pull_request) {
-                if (!webkit.related(pull_request.title)) {
-                    return;
-                }
-                metadata(pull_request.number, pull_request.user.login, pull_request.title, pull_request.body).then(function(metadata) {
-                    console.log("Issue: " + metadata.issue);
-                    console.log("Title: " + metadata.title);
-                    console.log("Labels: " + metadata.labels);
-                    console.log("isWebKitVerified: " + metadata.isWebKitVerified);
-                    console.log("isMergeable: " + metadata.isMergeable);
-                    console.log("reviewedDownstream: " + metadata.reviewedDownstream);
+    await waitFor(15 * 60 * 1000);
 
-                    if (metadata.isWebKitVerified) {
-                        console.log("Webkit flags:");
-                        if (metadata.webkit.flags.reviewed) {
-                              console.log("  Reviewed");
-                        }
-                        if (metadata.webkit.flags.inCommit) {
-                              console.log("  inCommit");
-                        }
-                    }
-                    const n = pull_request.number;
-                    return labelModel.post(n, metadata.labels, flags.get('dry-run')).then(
-                         funkLogMsg(n, "Added missing LABELS if any."),
-                         funkLogErr(n, "Something went wrong while adding missing LABELS.")
-                    ).then(function() {
-                        return comment(n, metadata, flags.get('dry-run'));
-                    }).then(
-                        funkLogMsg(n, "Added missing REVIEWERS if any."),
-                        funkLogErr(n, "Something went wrong while adding missing REVIEWERS.")
-                    );
-                }).catch(e => {
-                  console.log(e);
-                });
-            });
-            pullRequestPoller();
+    console.log('Checking for changes to WebKit-exported pull requests');
+    try {
+        const pull_requests = await github.get("/repos/:owner/:repo/pulls", {});
+        pull_requests.forEach(async function(pull_request) {
+            if (!webkit.related(pull_request.title)) {
+                return;
+            }
+            const metadata = await get_metadata(
+                pull_request.number,
+                pull_request.user.login,
+                pull_request.title,
+                pull_request.body);
+
+            console.log("Issue: " + metadata.issue);
+            console.log("Title: " + metadata.title);
+            console.log("Labels: " + metadata.labels);
+            console.log("isWebKitVerified: " + metadata.isWebKitVerified);
+            console.log("isMergeable: " + metadata.isMergeable);
+            console.log("reviewedDownstream: " + metadata.reviewedDownstream);
+
+            if (metadata.isWebKitVerified) {
+                console.log("Webkit flags:");
+                if (metadata.webkit.flags.reviewed) {
+                      console.log("  Reviewed");
+                }
+                if (metadata.webkit.flags.inCommit) {
+                      console.log("  inCommit");
+                }
+            }
+            const n = pull_request.number;
+            return labelModel.post(n, metadata.labels, flags.get('dry-run')).then(
+                 funkLogMsg(n, "Added missing LABELS if any."),
+                 funkLogErr(n, "Something went wrong while adding missing LABELS.")
+            ).then(function() {
+                return comment(n, metadata, flags.get('dry-run'));
+            }).then(
+                funkLogMsg(n, "Added missing REVIEWERS if any."),
+                funkLogErr(n, "Something went wrong while adding missing REVIEWERS.")
+            );
         });
-    });
+    } catch (e) {
+        // Assume that errors are likely recoverable, so log them and try again
+        // next time.
+        console.error(e);
+    }
+
+    pullRequestPoller();
 }
 
 pullRequestPoller();
