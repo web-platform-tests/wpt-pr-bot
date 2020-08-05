@@ -4,18 +4,18 @@
 
 var t0 = Date.now();
 
-var express = require("express"),
-    bl = require("bl"),
-    labelModel = require('./lib/label-model'),
-    bugsWebkit = require('./lib/bugs-webkit'),
-    github = require('./lib/github'),
-    get_metadata = require('./lib/metadata'),
-    webkit = require('./lib/metadata/webkit'),
-    comment = require('./lib/comment'),
-    github = require('./lib/github'),
-    checkRequest = require('./lib/check-request'),
-    filter = require('./lib/filter'),
-    flags = require('flags');
+const bl = require("bl"),
+      bugsWebkit = require('./lib/bugs-webkit'),
+      checkRequest = require('./lib/check-request'),
+      comment = require('./lib/comment'),
+      express = require("express"),
+      filter = require('./lib/filter'),
+      flags = require('flags'),
+      get_metadata = require('./lib/metadata'),
+      github = require('./lib/github'),
+      labelModel = require('./lib/label-model'),
+      logger = require('./lib/logger'),
+      webkit = require('./lib/metadata/webkit');
 
 flags.defineBoolean('dry-run', false, 'Run in dry-run mode (no POSTs to GitHub)');
 flags.parse();
@@ -26,19 +26,12 @@ function waitFor(ms) {
 
 var app = module.exports = express();
 
-function logArgs() {
-    var args = arguments;
-    process.nextTick(function() {
-        console.log.apply(console, args);
-    });
-}
-
 function funkLogMsg(num, msg) {
-    return function() { logArgs("#" + num + ": " + msg); };
+    return function() { logger.info("#" + num + ": " + msg); };
 }
 
 function funkLogErr(num, msg) {
-    return function(err) { logArgs("#" + num + ": " + msg + "\n", err); };
+    return function(err) { logger.error("#" + num + ": " + msg + "\n", err); };
 }
 
 // Load the secrets in.
@@ -46,7 +39,7 @@ let secrets;
 try {
     secrets = require('./secrets.json');
 } catch (err) {
-    console.log(`Unable to load secrets.json, falling back to env (error: ${err})`);
+    logger.warn(`Unable to load secrets.json, falling back to env (error: ${err})`);
     secrets = {
         bugsWebkitToken: process.env.WEBKIT_BUGZILLA_TOKEN,
         githubToken: process.env.GITHUB_TOKEN,
@@ -62,7 +55,7 @@ var currentlyRunning = {};
 app.post('/github-hook', function (req, res) {
     req.pipe(bl(function (err, body) {
         if (err) {
-            logArgs(err.message);
+            logger.error(err.message);
         } else if (process.env.NODE_ENV != 'production' || checkRequest(body, req.headers["x-hub-signature"], secrets.webhookSecret)) {
             res.send(new Date().toISOString());
 
@@ -71,10 +64,10 @@ app.post('/github-hook', function (req, res) {
             } catch(e) {
                 return;
             }
-            if (!filter.event(body, logArgs)) {
+            if (!filter.event(body, logger.info)) {
                 return;
             }
-            if (!filter.pullRequest(body.pull_request, logArgs)) {
+            if (!filter.pullRequest(body.pull_request, logger.info)) {
                 return;
             }
 
@@ -87,15 +80,15 @@ app.post('/github-hook', function (req, res) {
             if (action == "opened" || action == "synchronize" ||
                 action == "ready_for_review") {
                 if (n in currentlyRunning) {
-                    logArgs("#" + n + " is already being processed.");
+                    logger.info("#" + n + " is already being processed.");
                     return;
                 }
                 currentlyRunning[n] = true;
-                logArgs("#" + n, action);
+                logger.info("#" + n, action);
 
                 waitFor(5 * 1000).then(function() { // Avoid race condition
                     return get_metadata(n, u, title, content).then(function(metadata) {
-                        logArgs(metadata);
+                        logger.info(metadata);
                         return labelModel.post(n, metadata.labels, flags.get('dry-run')).then(
                             funkLogMsg(n, "Added missing LABELS if any."),
                             funkLogErr(n, "Something went wrong while adding missing LABELS.")
@@ -113,20 +106,21 @@ app.post('/github-hook', function (req, res) {
                     funkLogErr(n, "THIS SHOULDN'T EVER HAPPEN")(err);
                 });
             } else {
-                logArgs("#" + n + ": not handled.", "action:", action);
+                logger.info("#" + n + ": not handled.", "action:", action);
             }
         } else {
-            logArgs("Unverified request", req);
+            // Not an error, since anyone can send requests to us.
+            logger.info("Unverified request", req);
         }
     }));
 });
 
 var port = process.env.PORT || 5000;
 app.listen(port, function() {
-    console.log("Express server listening on port %d in %s mode", port, app.settings.env);
-    console.log("App started in", (Date.now() - t0) + "ms.");
+    logger.info("Express server listening on port %d in %s mode", port, app.settings.env);
+    logger.info("App started in", (Date.now() - t0) + "ms.");
     if (flags.get('dry-run'))
-        console.log('Starting in DRY-RUN mode');
+        logger.info('Starting in DRY-RUN mode');
 });
 
 // In addition to listening for notifications from GitHub, we regularly poll the
@@ -138,7 +132,7 @@ async function pullRequestPoller() {
     // See https://github.com/web-platform-tests/wpt-pr-bot/issues/144
     await waitFor(15 * 60 * 1000);
 
-    console.log('Checking for changes to WebKit-exported pull requests');
+    logger.info('Checking for changes to WebKit-exported pull requests');
     try {
         const pull_requests = await github.get("/repos/:owner/:repo/pulls", {});
         pull_requests.forEach(async function(pull_request) {
@@ -151,20 +145,20 @@ async function pullRequestPoller() {
                 pull_request.title,
                 pull_request.body);
 
-            console.log("Issue: " + metadata.issue);
-            console.log("Title: " + metadata.title);
-            console.log("Labels: " + metadata.labels);
-            console.log("isWebKitVerified: " + metadata.isWebKitVerified);
-            console.log("isMergeable: " + metadata.isMergeable);
-            console.log("reviewedDownstream: " + metadata.reviewedDownstream);
+            logger.info("Issue: " + metadata.issue);
+            logger.info("Title: " + metadata.title);
+            logger.info("Labels: " + metadata.labels);
+            logger.info("isWebKitVerified: " + metadata.isWebKitVerified);
+            logger.info("isMergeable: " + metadata.isMergeable);
+            logger.info("reviewedDownstream: " + metadata.reviewedDownstream);
 
             if (metadata.isWebKitVerified) {
-                console.log("Webkit flags:");
+                logger.info("Webkit flags:");
                 if (metadata.webkit.flags.reviewed) {
-                      console.log("  Reviewed");
+                      logger.info("  Reviewed");
                 }
                 if (metadata.webkit.flags.inCommit) {
-                      console.log("  inCommit");
+                      logger.info("  inCommit");
                 }
             }
             const n = pull_request.number;
@@ -181,7 +175,7 @@ async function pullRequestPoller() {
     } catch (e) {
         // Assume that errors are likely recoverable, so log them and try again
         // next time.
-        console.error(e);
+        logger.error(e);
     }
 
     pullRequestPoller();
