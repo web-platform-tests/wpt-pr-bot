@@ -84,7 +84,7 @@ app.post('/github-hook', function (req, res) {
                     return;
                 }
                 currentlyRunning[n] = true;
-                logger.info(`#${n}: ${action}`);
+                logger.info(`#${n}: handling action '${action}'`);
 
                 waitFor(5 * 1000).then(function() { // Avoid race condition
                     return get_metadata(n, u, title, content).then(function(metadata) {
@@ -106,11 +106,11 @@ app.post('/github-hook', function (req, res) {
                     funkLogErr(n, "THIS SHOULDN'T EVER HAPPEN")(err);
                 });
             } else {
-                logger.info(`#${n}: ignoring action ${action}`);
+                logger.debug(`#${n}: ignoring action '${action}'`);
             }
         } else {
             // Not an error, since anyone can send requests to us.
-            logger.info("Unverified request", req);
+            logger.debug("Unverified request", req);
         }
     }));
 });
