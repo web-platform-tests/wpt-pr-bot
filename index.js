@@ -145,22 +145,16 @@ async function pullRequestPoller() {
                 pull_request.title,
                 pull_request.body);
 
-            logger.info("Issue: " + metadata.issue);
-            logger.info("Title: " + metadata.title);
-            logger.info("Labels: " + metadata.labels);
-            logger.info("isWebKitVerified: " + metadata.isWebKitVerified);
-            logger.info("isMergeable: " + metadata.isMergeable);
-            logger.info("reviewedDownstream: " + metadata.reviewedDownstream);
+            logger.info({webkitExport: {
+                issue: metadata.issue,
+                title: metadata.title,
+                labels: metadata.labels,
+                isWebKitVerified: metadata.isWebKitVerified,
+                isMergeable: metadata.isMergeable,
+                reviewedDownstream: metadata.reviewedDownstream,
+                flags: metadata.webkit.flags || {},
+            }}, `Looking at pull request ${metadata.issue}`);
 
-            if (metadata.isWebKitVerified) {
-                logger.info("Webkit flags:");
-                if (metadata.webkit.flags.reviewed) {
-                      logger.info("  Reviewed");
-                }
-                if (metadata.webkit.flags.inCommit) {
-                      logger.info("  inCommit");
-                }
-            }
             const n = pull_request.number;
             return labelModel.post(n, metadata.labels, flags.get('dry-run')).then(
                  funkLogMsg(n, "Added missing LABELS if any."),
