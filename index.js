@@ -84,11 +84,11 @@ app.post('/github-hook', function (req, res) {
                     return;
                 }
                 currentlyRunning[n] = true;
-                logger.info("#" + n, action);
+                logger.info(`#${n}: ${action}`);
 
                 waitFor(5 * 1000).then(function() { // Avoid race condition
                     return get_metadata(n, u, title, content).then(function(metadata) {
-                        logger.info(metadata);
+                        logger.info({metadata: metadata}, `#${n}: Retrieved metadata for pull request`);
                         return labelModel.post(n, metadata.labels, flags.get('dry-run')).then(
                             funkLogMsg(n, "Added missing LABELS if any."),
                             funkLogErr(n, "Something went wrong while adding missing LABELS.")
@@ -106,7 +106,7 @@ app.post('/github-hook', function (req, res) {
                     funkLogErr(n, "THIS SHOULDN'T EVER HAPPEN")(err);
                 });
             } else {
-                logger.info("#" + n + ": not handled.", "action:", action);
+                logger.info(`#${n}: ignoring action ${action}`);
             }
         } else {
             // Not an error, since anyone can send requests to us.
@@ -145,6 +145,8 @@ async function pullRequestPoller() {
                 pull_request.title,
                 pull_request.body);
 
+            const n = pull_request.number;
+
             logger.info({webkitExport: {
                 issue: metadata.issue,
                 title: metadata.title,
@@ -153,9 +155,8 @@ async function pullRequestPoller() {
                 isMergeable: metadata.isMergeable,
                 reviewedDownstream: metadata.reviewedDownstream,
                 flags: metadata.webkit.flags || {},
-            }}, `Looking at pull request ${metadata.issue}`);
+            }}, `#${n}: Labelling and approving WebKit issue, if necessary`);
 
-            const n = pull_request.number;
             return labelModel.post(n, metadata.labels, flags.get('dry-run')).then(
                  funkLogMsg(n, "Added missing LABELS if any."),
                  funkLogErr(n, "Something went wrong while adding missing LABELS.")
