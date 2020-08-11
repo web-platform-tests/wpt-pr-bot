@@ -14,7 +14,7 @@
     "lint": "jshint index.js api.js lib test",
     "test": "npm run lint && npm run coverage",
     "test-unit": "mocha -u tdd ./test/setup.js ./test/*.js",
-    "start": "node index.js | ./node_modules/.bin/bunyan"
+    "start": "node index.js"
   },
   "dependencies": {
     "@google-cloud/datastore": "^6.0.0",
