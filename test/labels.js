@@ -79,6 +79,13 @@ suite('labels', function() {
             );
         });
 
+        test('must return label to designate webdriver-bidi changes', function() {
+            assert.sameMembers(
+                ['webdriver-bidi'],
+                labels.fromFiles(['webdriver/tests/bidi/new_session/connect.py'])
+            );
+        });
+
         test('must never return an empty string', function() {
             assert.sameMembers([], labels.fromFiles([""]));
         });
