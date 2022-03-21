@@ -17,7 +17,7 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "@google-cloud/datastore": "^6.0.0",
+    "@google-cloud/datastore": "^6.6.2",
     "@google-cloud/logging-bunyan": "^3.2.2",
     "bl": "^4.0.0",
     "bunyan": "^1.8.14",
