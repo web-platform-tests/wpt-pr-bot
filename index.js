@@ -64,10 +64,10 @@ app.post('/github-hook', function (req, res) {
             } catch(e) {
                 return;
             }
-            if (!filter.event(body, logger.info)) {
+            if (!filter.event(body, logger.info.bind(logger))) {
                 return;
             }
-            if (!filter.pullRequest(body.pull_request, logger.info)) {
+            if (!filter.pullRequest(body.pull_request, logger.info.bind(logger))) {
                 return;
             }
 
