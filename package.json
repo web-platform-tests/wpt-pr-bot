@@ -36,9 +36,5 @@
     "sinon": "^9.0.0"
   },
   "license": "Apache-2.0",
-  "author": "Tobie Langel",
-  "subdomain": "ganesh",
-  "engines": {
-    "node": "12.x.x"
-  }
+  "author": "Tobie Langel"
 }
