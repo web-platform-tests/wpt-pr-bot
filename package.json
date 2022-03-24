@@ -11,7 +11,7 @@
     "gcp-build": "node create-secrets.js",
     "deploy": "gcloud app deploy",
     "coverage": "nyc --all --check-coverage --per-file npm run test-unit",
-    "lint": "jshint index.js api.js lib test",
+    "lint": "jshint index.js lib test",
     "test": "npm run lint && npm run coverage",
     "test-unit": "mocha -u tdd ./test/setup.js ./test/*.js",
     "start": "node index.js"
