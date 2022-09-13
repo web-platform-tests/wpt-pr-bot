@@ -1,5 +1,5 @@
 POST /repos/web-platform-tests/wpt/issues/16783/labels
-accept: application/vnd.github.black-cat-preview+json
+accept: application/vnd.github.v3+json
 body: [\"status:needs-reviewers\"]
 
 HTTP/1.1 200 OK

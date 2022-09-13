@@ -1,5 +1,5 @@
 POST /repos/web-platform-tests/wpt/pulls/16780/reviews
-accept: application/vnd.github.black-cat-preview+json
+accept: application/vnd.github.v3+json
 body: {\"body\":\"The review process for this patch is being conducted in the Chromium project.\",\"event\":\"APPROVE\",\"comments\":[]}
 
 HTTP/1.1 200 Okay

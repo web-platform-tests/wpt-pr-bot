@@ -1,5 +1,5 @@
 POST /repos/web-platform-tests/wpt/pulls/16782/reviews
-accept: application/vnd.github.black-cat-preview+json
+accept: application/vnd.github.v3+json
 body: {\"body\":\"[Peer review is not required for CSS editors.](https://www.w3.org/2018/10/22-css-minutes.html#item20)\",\"event\":\"APPROVE\",\"comments\":[]}
 
 HTTP/1.1 200 OK
