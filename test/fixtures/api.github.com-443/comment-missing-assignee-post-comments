@@ -1,6 +1,6 @@
 POST /repos/web-platform-tests/wpt/issues/16784/comments
 accept: application/vnd.github.v3+json
-body: {\"body\":\"There are no reviewers for this pull request. Please reach out on W3C\'s irc server (irc.w3.org, port 6665) on channel #testing ([web client](http://irc.w3.org/?channels=testing)) to get help with this. Thank you!\"}
+body: {\"body\":\"There are no reviewers for this pull request. Please reach out on the [chat room](https://app.element.io/#/room/#wpt:matrix.org) to get help with this. Thank you!\"}
 
 HTTP/1.1 200 OK
 server: GitHub.com
