@@ -1,5 +1,5 @@
 GET /repos/web-platform-tests/wpt/contents/async-local-storage/META.yml
-accept: application/vnd.github.black-cat-preview+json
+accept: application/vnd.github.v3+json
 
 HTTP/1.1 200 OK
 server: GitHub.com

@@ -1,5 +1,5 @@
 POST /repos/web-platform-tests/wpt/issues/16781/comments
-accept: application/vnd.github.black-cat-preview+json
+accept: application/vnd.github.v3+json
 body: {\"body\":\"This patch has been exported from WebKit; it will be approved automatically once the downstream patch is r+.\"}
 
 HTTP/1.1 200 OK
