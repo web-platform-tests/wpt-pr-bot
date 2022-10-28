@@ -37,8 +37,10 @@ function funkLogErr(num, msg) {
 
 var currentlyRunning = {};
 
-// startServer establishes the routes for the express server.
-// Afterwards, the function starts it.
+/**
+ * startServer creates the routes for the express server and starts the server.
+ * @param {object} secrets The secrets needed for the server.
+ */
 function startServer(secrets) {
     app.post('/github-hook', function (req, res) {
         req.pipe(bl(function (err, body) {
@@ -166,22 +168,25 @@ async function pullRequestPoller() {
     pullRequestPoller();
 }
 
+/**
+ * The main entrypoint for the application.
+ */
 function main() {
     // To start we need the load the secrets.
     secretsManager.loadSecrets()
         .then((secrets) => {
-            logger.info("Received secrets succesfully");
+            logger.info('Received secrets succesfully');
             bugsWebkit.setToken(secrets.bugsWebkitToken);
             github.setToken(secrets.githubToken);
             // TODO(stephenmcgruer): Refactor code to avoid awkward global setter.
 
-            logger.info("Starting the server");
+            logger.info('Starting the server');
             startServer(secrets);
 
-            logger.info("Staring async pull request poller");
+            logger.info('Staring async pull request poller');
             pullRequestPoller();
         }).catch((reason) => {
-            logger.error("Unable to retrieve secrets." + reason);
+            logger.error('Unable to retrieve secrets.' + reason);
             process.exit(1);
         });
 }

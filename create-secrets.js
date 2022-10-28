@@ -1,21 +1,28 @@
 // istanbul ignore file
 
-'use strict'
+'use strict';
 
 const {SecretManagerServiceClient} = require('@google-cloud/secret-manager');
-const fs = require('fs');
 const client = new SecretManagerServiceClient();
-const secretPrefix = 'projects/wpt-pr-bot/secrets/';
-const secretSuffix = '/versions/latest';
-// fetchSecret retrieves the latest version of the secret from secret manager.
+const SECRET_PREFIX = 'projects/wpt-pr-bot/secrets/';
+const SECRET_SUFFIX = '/versions/latest';
+
+/**
+ * fetchSecret retrieves the latest version of the secret from secret manager.
+ * @param {string} tokenName The name of the secret in Secret Manager
+ * @return {string} The sensitive value stored in Secret Manager.
+ */
 async function fetchSecret(tokenName) {
     const [version] = await client.accessSecretVersion({
-        name: secretPrefix + tokenName + secretSuffix,
+        name: SECRET_PREFIX + tokenName + SECRET_SUFFIX,
     });
     return version.payload.data.toString();
 }
 
-// loadSecrets retrieves all the secrets needed for the program
+/**
+ * loadSecrets retrieves all the secrets needed for the program
+ * @return {object} The object with all of the secrets
+ */
 async function loadSecrets() {
     const secrets = {
         webhookSecret: await fetchSecret('github-webhook-secret'),
