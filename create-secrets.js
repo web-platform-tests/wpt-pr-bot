@@ -2,21 +2,27 @@
 
 'use strict'
 
-const {Datastore} = require('@google-cloud/datastore');
+const {SecretManagerServiceClient} = require('@google-cloud/secret-manager');
 const fs = require('fs');
-
+const client = new SecretManagerServiceClient();
+const secretPrefix = 'projects/wpt-pr-bot/secrets/';
+const secretSuffix = '/versions/latest';
+// fetchSecret retrieves the latest version of the secret from secret manager.
 async function fetchSecret(tokenName) {
-    const datastore = new Datastore({projectId: 'wpt-pr-bot'});
-    const key = datastore.key(['Token', tokenName]);
-    let entity = await datastore.get(key);
-    return entity[0].Secret;
+    const [version] = await client.accessSecretVersion({
+        name: secretPrefix + tokenName + secretSuffix,
+    });
+    return version.payload.data.toString();
 }
 
-(async () => {
+// loadSecrets retrieves all the secrets needed for the program
+async function loadSecrets() {
     const secrets = {
         webhookSecret: await fetchSecret('github-webhook-secret'),
         githubToken: await fetchSecret('wpt-pr-bot-github-token'),
         bugsWebkit: await fetchSecret('wpt-pr-bot-bugswebkit-token'),
     };
-    await fs.promises.writeFile('secrets.json', JSON.stringify(secrets), 'utf8');
-})().catch((reason) => { console.error(reason); process.exit(1) });
+    return secrets;
+}
+
+exports.loadSecrets = loadSecrets;

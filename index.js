@@ -15,6 +15,7 @@ const bl = require("bl"),
       github = require('./lib/github'),
       labelModel = require('./lib/label-model'),
       logger = require('./lib/logger'),
+      secretsManager = require('./create-secrets'),
       webkit = require('./lib/metadata/webkit');
 
 flags.defineBoolean('dry-run', false, 'Run in dry-run mode (no POSTs to GitHub)');
@@ -34,94 +35,83 @@ function funkLogErr(num, msg) {
     return function(err) { logger.error("#" + num + ": " + msg + "\n", err); };
 }
 
-// Load the secrets in.
-let secrets;
-try {
-    secrets = require('./secrets.json');
-} catch (err) {
-    logger.warn(`Unable to load secrets.json, falling back to env (error: ${err})`);
-    secrets = {
-        bugsWebkitToken: process.env.WEBKIT_BUGZILLA_TOKEN,
-        githubToken: process.env.GITHUB_TOKEN,
-        webhookSecret: process.env.GITHUB_SECRET,
-    };
-}
-// TODO(stephenmcgruer): Refactor code to avoid awkward global setter.
-bugsWebkit.setToken(secrets.bugsWebkitToken);
-github.setToken(secrets.githubToken);
-
 var currentlyRunning = {};
 
-app.post('/github-hook', function (req, res) {
-    req.pipe(bl(function (err, body) {
-        if (err) {
-            logger.error(err.message);
-        } else if (process.env.NODE_ENV != 'production' || checkRequest(body, req.headers["x-hub-signature"], secrets.webhookSecret)) {
-            res.send(new Date().toISOString());
+// startServer establishes the routes for the express server.
+// Afterwards, the function starts it.
+function startServer(secrets) {
+    app.post('/github-hook', function (req, res) {
+        req.pipe(bl(function (err, body) {
+            if (err) {
+                logger.error(err.message);
+            } else if (process.env.NODE_ENV != 'production' || checkRequest(body, req.headers["x-hub-signature"], secrets.webhookSecret)) {
+                res.send(new Date().toISOString());
 
-            try {
-                body = JSON.parse(body);
-            } catch(e) {
-                return;
-            }
-            if (!filter.event(body, logger.info.bind(logger))) {
-                return;
-            }
-            if (!filter.pullRequest(body.pull_request, logger.info.bind(logger))) {
-                return;
-            }
-
-            var action = body.action;
-            var pr = body.pull_request;
-            var n = pr.number;
-            var u = (pr.user && pr.user.login) || null;
-            var content = pr.body || "";
-            var title = pr.title || "";
-            if (action == "opened" || action == "synchronize" ||
-                action == "ready_for_review") {
-                if (n in currentlyRunning) {
-                    logger.info("#" + n + " is already being processed.");
+                try {
+                    body = JSON.parse(body);
+                } catch(e) {
                     return;
                 }
-                currentlyRunning[n] = true;
-                logger.info(`#${n}: handling action '${action}'`);
+                if (!filter.event(body, logger.info.bind(logger))) {
+                    return;
+                }
+                if (!filter.pullRequest(body.pull_request, logger.info.bind(logger))) {
+                    return;
+                }
 
-                waitFor(5 * 1000).then(function() { // Avoid race condition
-                    return get_metadata(n, u, title, content).then(function(metadata) {
-                        logger.info({metadata: metadata}, `#${n}: Retrieved metadata for pull request`);
-                        return labelModel.post(n, metadata.labels, flags.get('dry-run')).then(
-                            funkLogMsg(n, "Added missing LABELS if any."),
-                            funkLogErr(n, "Something went wrong while adding missing LABELS.")
-                        ).then(function() {
-                            return comment(n, metadata, flags.get('dry-run'));
-                        }).then(
-                            funkLogMsg(n, "Added missing REVIEWERS if any."),
-                            funkLogErr(n, "Something went wrong while adding missing REVIEWERS.")
-                        );
+                var action = body.action;
+                var pr = body.pull_request;
+                var n = pr.number;
+                var u = (pr.user && pr.user.login) || null;
+                var content = pr.body || "";
+                var title = pr.title || "";
+                if (action == "opened" || action == "synchronize" ||
+                    action == "ready_for_review") {
+                    if (n in currentlyRunning) {
+                        logger.info("#" + n + " is already being processed.");
+                        return;
+                    }
+                    currentlyRunning[n] = true;
+                    logger.info(`#${n}: handling action '${action}'`);
+
+                    waitFor(5 * 1000).then(function() { // Avoid race condition
+                        return get_metadata(n, u, title, content).then(function(metadata) {
+                            logger.info({metadata: metadata}, `#${n}: Retrieved metadata for pull request`);
+                            return labelModel.post(n, metadata.labels, flags.get('dry-run')).then(
+                                funkLogMsg(n, "Added missing LABELS if any."),
+                                funkLogErr(n, "Something went wrong while adding missing LABELS.")
+                            ).then(function() {
+                                return comment(n, metadata, flags.get('dry-run'));
+                            }).then(
+                                funkLogMsg(n, "Added missing REVIEWERS if any."),
+                                funkLogErr(n, "Something went wrong while adding missing REVIEWERS.")
+                            );
+                        });
+                    }).then(function() {
+                        delete currentlyRunning[n];
+                    }, function(err) {
+                        delete currentlyRunning[n];
+                        funkLogErr(n, "THIS SHOULDN'T EVER HAPPEN")(err);
                     });
-                }).then(function() {
-                    delete currentlyRunning[n];
-                }, function(err) {
-                    delete currentlyRunning[n];
-                    funkLogErr(n, "THIS SHOULDN'T EVER HAPPEN")(err);
-                });
+                } else {
+                    logger.debug(`#${n}: ignoring action '${action}'`);
+                }
             } else {
-                logger.debug(`#${n}: ignoring action '${action}'`);
+                // Not an error, since anyone can send requests to us.
+                logger.debug("Unverified request", req);
             }
-        } else {
-            // Not an error, since anyone can send requests to us.
-            logger.debug("Unverified request", req);
-        }
-    }));
-});
+        }));
+    });
 
-var port = process.env.PORT || 5000;
-app.listen(port, function() {
-    logger.info("Express server listening on port %d in %s mode", port, app.settings.env);
-    logger.info("App started in", (Date.now() - t0) + "ms.");
-    if (flags.get('dry-run'))
-        logger.info('Starting in DRY-RUN mode');
-});
+    var port = process.env.PORT || 5000;
+    app.listen(port, function() {
+        logger.info("Express server listening on port %d in %s mode", port, app.settings.env);
+        logger.info("App started in", (Date.now() - t0) + "ms.");
+        if (flags.get('dry-run'))
+            logger.info('Starting in DRY-RUN mode');
+    });
+}
+
 
 // In addition to listening for notifications from GitHub, we regularly poll the
 // set of PRs to keep WebKit exports synchronized with the upstream PR.
@@ -176,4 +166,24 @@ async function pullRequestPoller() {
     pullRequestPoller();
 }
 
-pullRequestPoller();
+function main() {
+    // To start we need the load the secrets.
+    secretsManager.loadSecrets()
+        .then((secrets) => {
+            logger.info("Received secrets succesfully");
+            bugsWebkit.setToken(secrets.bugsWebkitToken);
+            github.setToken(secrets.githubToken);
+            // TODO(stephenmcgruer): Refactor code to avoid awkward global setter.
+
+            logger.info("Starting the server");
+            startServer(secrets);
+
+            logger.info("Staring async pull request poller");
+            pullRequestPoller();
+        }).catch((reason) => {
+            logger.error("Unable to retrieve secrets." + reason);
+            process.exit(1);
+        });
+}
+
+main();
