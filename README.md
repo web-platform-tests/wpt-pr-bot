@@ -76,4 +76,4 @@ Deploying
      ```
 5. Monitor the "Recent Deliveries"
 [tab](https://github.com/web-platform-tests/wpt/settings/hooks/161784539?tab=deliveries)
-in wpt. If there are any failures, use the command in step 3 to tail the logs.
+in wpt. If there are any failures, use the command in step 2 to tail the logs.
