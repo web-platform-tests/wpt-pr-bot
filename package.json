@@ -19,7 +19,7 @@
   "dependencies": {
     "@google-cloud/logging-bunyan": "^4.2.2",
     "@google-cloud/secret-manager": "^5.0.1",
-    "bl": "^6.0.0",
+    "bl": "^6.0.10",
     "bunyan": "^1.8.15",
     "express": "^4.18.2",
     "flags": "^0.1.3",
