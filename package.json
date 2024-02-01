@@ -17,7 +17,7 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "@google-cloud/logging-bunyan": "^4.2.2",
+    "@google-cloud/logging-bunyan": "^5.0.1",
     "@google-cloud/secret-manager": "^5.0.1",
     "bl": "^6.0.0",
     "bunyan": "^1.8.15",
