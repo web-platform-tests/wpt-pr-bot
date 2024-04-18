@@ -56,7 +56,6 @@ suite('getMetadata', function() {
             ],
             rootReviewers: [ 'jgraham' ],
             filenames: [ 'WebIDL/interfaces.html', 'interfaces/WebIDL.idl' ],
-            paths: [ 'WebIDL', 'interfaces' ],
             labels: [ 'WebIDL', 'interfaces', 'wg-webplatform' ],
             isRoot: false,
             isWebKitVerified: false,
@@ -166,10 +165,6 @@ suite('getMetadata', function() {
               login: "AmeliaBR",
               permission: "write"
             }
-          ],
-          paths: [
-            "svg/coordinate-systems",
-            "svg/coordinate-systems/parsing",
           ],
           reviewedDownstream: null,
           reviewers: [
@@ -380,7 +375,6 @@ suite('getMetadata', function() {
                'media-source/webm/test-a-1s.webm-manifest.json',
                'media-source/webm/test-v-1s-blue.webm',
                'media-source/webm/test-v-1s-blue.webm-manifest.json' ],
-            paths: [ '', 'media-source', 'media-source/mp4', 'media-source/webm' ],
             isRoot: true,
             specs:
              { 'media-source':
