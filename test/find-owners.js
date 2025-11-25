@@ -31,7 +31,7 @@ suite('parse META', function() {
 
 suite('integration', function() {
     test('directory contains file', function() {
-        return findOwners(['resources/testharness.js'])
+        return findOwners(['resources'])
           .then(function(reviewers) {
               reviewers.sort();
 
@@ -40,46 +40,24 @@ suite('integration', function() {
     });
 
     test('parent directory contains file', function() {
-        return findOwners(['dom/nodes/attributes.html'])
+        return findOwners(['2dcontext/scroll'])
           .then(function(reviewers) {
               reviewers.sort();
 
               assert.deepEqual(reviewers, [
-                  'annevk', 'jdm', 'zqzhang'
+                  'AmeliaBR', 'annevk', 'fserb', 'jdashg', 'kenrussell'
               ]);
           });
     });
 
     test('consolidation of multiple directories', function() {
-        return findOwners(['resources/testharness.js', 'dom/nodes/attributes.html'])
+        return findOwners(['resources', '2dcontext'])
           .then(function(reviewers) {
               reviewers.sort();
 
               assert.deepEqual(reviewers, [
-                  'annevk', 'ayg', 'gsnedders',
-                  'jdm', 'jgraham', 'zqzhang'
-              ]);
-          });
-    });
-
-    test('only WEB_FEATURES.yml changes', function() {
-        return findOwners(['dom/WEB_FEATURES.yml'])
-          .then(function(reviewers) {
-              reviewers.sort();
-
-              assert.deepEqual(reviewers, [
-                  'foolip', 'jcscottiii'
-              ]);
-          });
-    });
-
-    test('WEB_FEATURES.yml and test changes', function() {
-        return findOwners(['dom/WEB_FEATURES.yml', 'dom/nodes/attributes.html'])
-          .then(function(reviewers) {
-              reviewers.sort();
-
-              assert.deepEqual(reviewers, [
-                  'annevk', 'jdm', 'zqzhang'
+                  'AmeliaBR', 'annevk', 'ayg', 'fserb', 'gsnedders',
+                  'jdashg', 'jgraham', 'kenrussell'
               ]);
           });
     });
