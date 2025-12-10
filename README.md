@@ -23,7 +23,7 @@ Development
 =====
 
 Requirements:
-- Node v18
+- Node v20
 
 ### Getting Started
 
