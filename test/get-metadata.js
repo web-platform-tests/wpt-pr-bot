@@ -425,7 +425,7 @@ suite('getMetadata', function() {
             reviewersExcludingAuthor: [],
             reviews: [],
             reviewers: [ 'jgraham', 'wolenetz' ],
-            webkit: { flags: { inCommit: true, reviewed: true }, issue: '201401' },
+            webkit: { flags: { inCommit: true }, issue: '201401' },
             isWebKitVerified: true,
             isMergeable: true,
             reviewedDownstream: 'WebKit',
