@@ -1,6 +1,7 @@
 'use strict';
 const assert = require('chai').assert,
       sinon = require('sinon'),
+      { disableThrottle } = require('./setup'),
       bugsWebkit = require('../lib/bugs-webkit'),
       webkit = require('../lib/metadata/webkit');
 
@@ -29,6 +30,8 @@ suite('webkit.bugIdFromTitle', function() {
 });
 
 suite('webkit.everFixed', function() {
+    disableThrottle(bugsWebkit._throttledFetch);
+
     test('empty bugIds returns empty map without network', async function() {
         var result = await webkit.everFixed([]);
         assert.deepEqual(result, new Map());
