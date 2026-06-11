@@ -116,28 +116,41 @@ function startServer(secrets) {
 
 
 // In addition to listening for notifications from GitHub, we regularly poll the
-// set of PRs to keep WebKit exports synchronized with the upstream PR.
+// set of PRs to keep WebKit exports synchronized once the upstream bug is FIXED.
 async function pullRequestPoller() {
-    // As currently written, the WebKit PR poller does a huge number of API
-    // requests and can cause us to hit the GitHub API limit. To mitigate this,
-    // we currently only run it every 15 minutes.
+    // The WebKit PR poller makes several GitHub API requests per processed PR
+    // and can cause us to hit the GitHub API limit. To mitigate this, it only
+    // processes PRs whose bug has ever been FIXED, and we only run it every 15
+    // minutes.
     // See https://github.com/web-platform-tests/wpt-pr-bot/issues/144
     await waitFor(15 * 60 * 1000);
 
     logger.info('Checking for changes to WebKit-exported pull requests');
     try {
         const pull_requests = await github.get("/repos/:owner/:repo/pulls", {});
-        for (const pull_request of pull_requests) {
-            if (!webkit.related(pull_request.title)) {
-                continue;
-            }
+
+        const bugToPRs = {};
+        pull_requests.forEach(function(pull_request) {
+            if (!webkit.related(pull_request.title)) return;
+            const bugId = webkit.bugIdFromTitle(pull_request.title);
+            if (bugId === null) return;
+            if (!bugToPRs[bugId]) bugToPRs[bugId] = [];
+            bugToPRs[bugId].push(pull_request);
+        });
+
+        const everFixedBugs = await webkit.everFixed(Object.keys(bugToPRs).map(Number));
+        const everFixedPRs = Object.keys(bugToPRs)
+            .filter(bugId => everFixedBugs.has(Number(bugId)))
+            .flatMap(bugId => bugToPRs[bugId].map(pull_request => ({pull_request, webkitBug: everFixedBugs.get(Number(bugId))})));
+
+        for (const {pull_request, webkitBug} of everFixedPRs) {
+            const prNumber = pull_request.number;
             const metadata = await get_metadata(
-                pull_request.number,
+                prNumber,
                 pull_request.user.login,
                 pull_request.title,
-                pull_request.body);
-
-            const n = pull_request.number;
+                pull_request.body,
+                webkitBug);
 
             logger.info({webkitExport: {
                 issue: metadata.issue,
@@ -147,16 +160,16 @@ async function pullRequestPoller() {
                 isMergeable: metadata.isMergeable,
                 reviewedDownstream: metadata.reviewedDownstream,
                 flags: metadata.webkit.flags || {},
-            }}, `#${n}: Labelling and approving WebKit issue, if necessary`);
+            }}, `#${prNumber}: Labelling and approving WebKit issue, if necessary`);
 
-            await labelModel.post(n, metadata.labels, flags.get('dry-run')).then(
-                 funkLogMsg(n, "Added missing LABELS if any."),
-                 funkLogErr(n, "Something went wrong while adding missing LABELS.")
+            await labelModel.post(prNumber, metadata.labels, flags.get('dry-run')).then(
+                 funkLogMsg(prNumber, "Added missing LABELS if any."),
+                 funkLogErr(prNumber, "Something went wrong while adding missing LABELS.")
             ).then(function() {
-                return comment(n, metadata, flags.get('dry-run'));
+                return comment(prNumber, metadata, flags.get('dry-run'));
             }).then(
-                funkLogMsg(n, "Added missing REVIEWERS if any."),
-                funkLogErr(n, "Something went wrong while adding missing REVIEWERS.")
+                funkLogMsg(prNumber, "Added missing REVIEWERS if any."),
+                funkLogErr(prNumber, "Something went wrong while adding missing REVIEWERS.")
             );
         }
     } catch (e) {
