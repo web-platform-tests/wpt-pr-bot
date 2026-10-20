@@ -1,6 +1,8 @@
 'use strict';
 var assert = require('chai').assert,
     sinon = require('sinon'),
+    bugsWebkit = require('../lib/bugs-webkit'),
+    commitsWebkit = require('../lib/commits-webkit'),
     getMetadata = require('../lib/metadata');
 
 suite('getMetadata', function() {
@@ -364,6 +366,24 @@ suite('getMetadata', function() {
     });
 
     test('retrieval and formatting of metadata for a WebKit related pull request', async function() {
+        // The bug was resolved FIXED by commit-queue, so the landing is
+        // verified against the bug's comments and the WebKit repository.
+        sandbox.stub(bugsWebkit, 'get').callThrough()
+            .withArgs('/rest/bug/:id/comment', { id: '201401' })
+            .resolves({ bugs: { '201401': { comments: [
+                {
+                    creator: 'commit-queue@webkit.org',
+                    text: 'Comment on attachment 381810\nPatch\n\nClearing flags on attachment: 381810\n\n' +
+                        'Committed r251544: <https://trac.webkit.org/changeset/251544>',
+                },
+            ] } } });
+        sandbox.stub(commitsWebkit, 'get').withArgs('r251544').resolves({
+            hash: '0000000000000000000000000000000000000000',
+            branch: 'main',
+            revision: 251544,
+            message: '[MSE][GStreamer] Fix video is not visible\n' +
+                'https://bugs.webkit.org/show_bug.cgi?id=201401\n\nReviewed by Philippe Normand.\n',
+        });
         var expected = {
             issue: 19538,
             title: 'WebKit export of https://bugs.webkit.org/show_bug.cgi?id=201401',
