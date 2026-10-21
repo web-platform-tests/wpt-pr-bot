@@ -145,32 +145,42 @@ async function pullRequestPoller() {
 
         for (const {pull_request, webkitBug} of everFixedPRs) {
             const prNumber = pull_request.number;
-            const metadata = await get_metadata(
-                prNumber,
-                pull_request.user.login,
-                pull_request.title,
-                pull_request.body,
-                webkitBug);
+            // A failure for one PR (e.g. get_metadata) mustn't skip the remaining PRs this cycle.
+            try {
+                const metadata = await get_metadata(
+                    prNumber,
+                    pull_request.user.login,
+                    pull_request.title,
+                    pull_request.body,
+                    webkitBug);
 
-            logger.info({webkitExport: {
-                issue: metadata.issue,
-                title: metadata.title,
-                labels: metadata.labels,
-                isWebKitVerified: metadata.isWebKitVerified,
-                isMergeable: metadata.isMergeable,
-                reviewedDownstream: metadata.reviewedDownstream,
-                flags: metadata.webkit.flags || {},
-            }}, `#${prNumber}: Labelling and approving WebKit issue, if necessary`);
+                logger.info({webkitExport: {
+                    issue: metadata.issue,
+                    title: metadata.title,
+                    labels: metadata.labels,
+                    isWebKitVerified: metadata.isWebKitVerified,
+                    isMergeable: metadata.isMergeable,
+                    reviewedDownstream: metadata.reviewedDownstream,
+                    flags: metadata.webkit.flags || {},
+                }}, `#${prNumber}: Labelling and approving WebKit issue, if necessary`);
 
-            await labelModel.post(prNumber, metadata.labels, flags.get('dry-run')).then(
-                 funkLogMsg(prNumber, "Added missing LABELS if any."),
-                 funkLogErr(prNumber, "Something went wrong while adding missing LABELS.")
-            ).then(function() {
-                return comment(prNumber, metadata, flags.get('dry-run'));
-            }).then(
-                funkLogMsg(prNumber, "Added missing REVIEWERS if any."),
-                funkLogErr(prNumber, "Something went wrong while adding missing REVIEWERS.")
-            );
+                // A failure to label shouldn't prevent commenting.
+                try {
+                    await labelModel.post(prNumber, metadata.labels, flags.get('dry-run'));
+                    funkLogMsg(prNumber, "Added missing LABELS if any.")();
+                } catch (e) {
+                    funkLogErr(prNumber, "Something went wrong while adding missing LABELS.")(e);
+                }
+
+                try {
+                    await comment(prNumber, metadata, flags.get('dry-run'));
+                    funkLogMsg(prNumber, "Added missing REVIEWERS if any.")();
+                } catch (e) {
+                    funkLogErr(prNumber, "Something went wrong while adding missing REVIEWERS.")(e);
+                }
+            } catch (e) {
+                funkLogErr(prNumber, "Something went wrong while processing WebKit export.")(e);
+            }
         }
     } catch (e) {
         // Assume that errors are likely recoverable, so log them and try again
