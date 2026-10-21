@@ -1,21 +1,22 @@
-GET /rest/bug/202311
+GET /rest/bug/999999?exclude_fields=update_token&Bugzilla_api_key=REDACTED
 accept: */*
 accept-encoding: gzip,deflate
 
-HTTP/1.1 400 Bad request
-date: Wed, 18 Dec 2019 13:41:46 GMT
-server: Apache/2.4
-x-xss-protection: 1; mode=block
-access-control-allow-headers: origin, content-type, accept, x-requested-with
-access-control-allow-origin: *, *
-x-frame-options: SAMEORIGIN
-x-content-type-options: nosniff
-set-cookie: Bugzilla_login_request_cookie=7X8Z1kQTXQ; path=/; secure; HttpOnly
-etag: wxMcU4mrz8kBlP4Ex1DNAw
-strict-transport-security: max-age=7776000
-connection: close
-transfer-encoding: chunked
+HTTP/1.1 404 Not Found
+date: Wed, 21 Oct 2026 15:16:20 GMT
 content-type: application/json; charset=UTF-8
+access-control-allow-headers: origin, content-type, accept, x-requested-with
+access-control-allow-origin: *
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+x-xss-protection: 1; mode=block
+etag: jpzbEf4+t15jc7gp1DVG9g
+strict-transport-security: max-age=31536000; includeSubDomains
+age: 2
+transfer-encoding: chunked
+connection: keep-alive
+via: https/1.1 uklon5-edge-fx-042.ts.apple.com (acdn/25.17695)
+x-cache: skipped
+cdnuuid: ecd7f82e-01d6-42c2-9883-4f28fe7ab909-1331366575
 
-
-{"documentation":"https://bugzilla.readthedocs.org/en/5.0/api/","error":true,"code":100,"message":"'202311' is not a valid bug number nor an alias to a bug."}
+{"error":true,"code":101,"documentation":"https://bugzilla.readthedocs.org/en/5.0/api/","message":"Bug #999999 does not exist."}
