@@ -127,9 +127,9 @@ async function pullRequestPoller() {
     logger.info('Checking for changes to WebKit-exported pull requests');
     try {
         const pull_requests = await github.get("/repos/:owner/:repo/pulls", {});
-        pull_requests.forEach(async function(pull_request) {
+        for (const pull_request of pull_requests) {
             if (!webkit.related(pull_request.title)) {
-                return;
+                continue;
             }
             const metadata = await get_metadata(
                 pull_request.number,
@@ -149,7 +149,7 @@ async function pullRequestPoller() {
                 flags: metadata.webkit.flags || {},
             }}, `#${n}: Labelling and approving WebKit issue, if necessary`);
 
-            return labelModel.post(n, metadata.labels, flags.get('dry-run')).then(
+            await labelModel.post(n, metadata.labels, flags.get('dry-run')).then(
                  funkLogMsg(n, "Added missing LABELS if any."),
                  funkLogErr(n, "Something went wrong while adding missing LABELS.")
             ).then(function() {
@@ -158,7 +158,7 @@ async function pullRequestPoller() {
                 funkLogMsg(n, "Added missing REVIEWERS if any."),
                 funkLogErr(n, "Something went wrong while adding missing REVIEWERS.")
             );
-        });
+        }
     } catch (e) {
         // Assume that errors are likely recoverable, so log them and try again
         // next time.
