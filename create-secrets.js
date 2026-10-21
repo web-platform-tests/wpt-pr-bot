@@ -27,7 +27,7 @@ async function loadSecrets() {
     const secrets = {
         webhookSecret: await fetchSecret('github-webhook-secret'),
         githubToken: await fetchSecret('wpt-pr-bot-github-token'),
-        bugsWebkit: await fetchSecret('wpt-pr-bot-bugswebkit-token'),
+        bugsWebkitToken: await fetchSecret('wpt-pr-bot-bugswebkit-token'),
     };
     return secrets;
 }

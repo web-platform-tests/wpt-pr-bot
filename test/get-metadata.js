@@ -441,12 +441,15 @@ suite('getMetadata', function() {
         expected.title = 'WebKit export of http://bugs.webkit.org/show_bug.cgi?id=201401';
         assert.deepEqual(expected, actual);
     });
-    test('retrieval and formatting of metadata for a WebKit related pull request with wrong bugzilla reference', function() {
-        var expected = "'202311' is not a valid bug number nor an alias to a bug.";
-        return getMetadata(19381, 'rwlbuis', 'WebKit export of https://bugs.webkit.org/show_bug.cgi?id=202311', '')
-            .then(function() {}, function(actual) {
-                assert.deepEqual(expected, actual.message);
-            });
+    test('retrieval and formatting of metadata for a WebKit related pull request with wrong bugzilla reference', async function() {
+        let error;
+        try {
+            await getMetadata(19381, 'rwlbuis', 'WebKit export of https://bugs.webkit.org/show_bug.cgi?id=999999', '');
+        } catch (e) {
+            error = e;
+        }
+        assert.isDefined(error, 'expected getMetadata to reject');
+        assert.equal(error.message, 'Bug #999999 does not exist.');
     });
     test('limiting labels for pull requests that modify many files', function() {
         var expected = ['infra', 'very-large'];
