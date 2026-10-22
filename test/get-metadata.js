@@ -1,13 +1,21 @@
 'use strict';
 var assert = require('chai').assert,
     sinon = require('sinon'),
-    getMetadata = require('../lib/metadata');
+    { disableThrottle } = require('./setup'),
+    getMetadata = require('../lib/metadata'),
+    bugsWebkit = require('../lib/bugs-webkit');
 
 suite('getMetadata', function() {
+    disableThrottle(bugsWebkit._throttledFetch);
+
     let sandbox;
     setup(() => {
         sandbox = sinon.createSandbox();
         sandbox.replace(Math, 'random', () => 0.5);
+    });
+
+    teardown(() => {
+        sandbox.restore();
     });
 
     test('retrieval and formatting of metadata', function() {
@@ -425,7 +433,7 @@ suite('getMetadata', function() {
             reviewersExcludingAuthor: [],
             reviews: [],
             reviewers: [ 'jgraham', 'wolenetz' ],
-            webkit: { flags: { inCommit: true, reviewed: true }, issue: '201401' },
+            webkit: { flags: { inCommit: true }, issue: '201401' },
             isWebKitVerified: true,
             isMergeable: true,
             reviewedDownstream: 'WebKit',
@@ -455,9 +463,5 @@ suite('getMetadata', function() {
             .then(function(actual) {
                 assert.sameMembers(expected, actual.labels);
             });
-    });
-
-    teardown(() => {
-        sandbox.restore();
     });
 });
