@@ -15,8 +15,8 @@ const bl = require("bl"),
       github = require('./lib/github'),
       labelModel = require('./lib/label-model'),
       logger = require('./lib/logger'),
-      secretsManager = require('./create-secrets'),
-      webkit = require('./lib/metadata/webkit');
+      pollWebKitExports = require('./lib/webkit-poller'),
+      secretsManager = require('./create-secrets');
 
 flags.defineBoolean('dry-run', false, 'Run in dry-run mode (no POSTs to GitHub)');
 flags.parse();
@@ -126,39 +126,7 @@ async function pullRequestPoller() {
 
     logger.info('Checking for changes to WebKit-exported pull requests');
     try {
-        const pull_requests = await github.get("/repos/:owner/:repo/pulls", {});
-        pull_requests.forEach(async function(pull_request) {
-            if (!webkit.related(pull_request.title)) {
-                return;
-            }
-            const metadata = await get_metadata(
-                pull_request.number,
-                pull_request.user.login,
-                pull_request.title,
-                pull_request.body);
-
-            const n = pull_request.number;
-
-            logger.info({webkitExport: {
-                issue: metadata.issue,
-                title: metadata.title,
-                labels: metadata.labels,
-                isWebKitVerified: metadata.isWebKitVerified,
-                isMergeable: metadata.isMergeable,
-                reviewedDownstream: metadata.reviewedDownstream,
-                flags: metadata.webkit.flags || {},
-            }}, `#${n}: Labelling and approving WebKit issue, if necessary`);
-
-            return labelModel.post(n, metadata.labels, flags.get('dry-run')).then(
-                 funkLogMsg(n, "Added missing LABELS if any."),
-                 funkLogErr(n, "Something went wrong while adding missing LABELS.")
-            ).then(function() {
-                return comment(n, metadata, flags.get('dry-run'));
-            }).then(
-                funkLogMsg(n, "Added missing REVIEWERS if any."),
-                funkLogErr(n, "Something went wrong while adding missing REVIEWERS.")
-            );
-        });
+        await pollWebKitExports(flags.get('dry-run'));
     } catch (e) {
         // Assume that errors are likely recoverable, so log them and try again
         // next time.
